@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>AYA Cancer HRQoL: Tri-Layer Hybrid Model (Joe Blochberger)</title>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<style>
+  /* Local names map onto the shared tokens in tokens.css (single source of truth). */
+  :root{
+    color-scheme: dark;
+    --sans: var(--font-body);
+    --serif: var(--font-display);
+    --mono: var(--font-mono);
+    --bg: var(--bg-primary);
+    --bg-elev: var(--bg-elevated);
+    --bg-elev2: var(--bg-elevated);
+    --code: var(--code-surface);
+    --ink: var(--text-primary);
+    --muted: var(--text-secondary);
+    --line: var(--border-strong);
+    --accent: var(--accent-green);   /* primary accent: links, highlights */
+    --accent2: var(--accent-blue);   /* secondary accent for callouts (Spirit Blue, AA as text) */
+    --good: var(--accent-green);
+    --warn: var(--accent-yellow);
+    --radius: var(--radius-card);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{margin:0;font-family:var(--serif);color:var(--ink);background:var(--bg);
+    line-height:1.62;font-size:18px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  a{color:var(--accent)}
+  b,strong{color:var(--ink);font-weight:700}
+
+  h1,h2,h3,nav,th,.pill,.tag,.btn,figcaption,.codecap,.refs,.lede,.meta,sup.cite,.ablabel{font-family:var(--sans)}
+
+  header{background:
+      radial-gradient(1100px 400px at 82% -12%, color-mix(in srgb, var(--accent-green) 16%, transparent), transparent 60%),
+      linear-gradient(135deg,var(--bg-elevated) 0%,var(--bg-primary) 64%);
+    color:var(--ink);padding:58px 0 48px;border-bottom:1px solid var(--line)}
+  header h1{margin:0 0 12px;font-size:33px;line-height:1.2;font-weight:700;letter-spacing:.2px}
+  header .lede{font-size:18px;color:var(--ink);max-width:790px;margin:6px 0}
+  header .meta{color:var(--muted);font-size:15px;font-weight:700;margin:10px 0 0}
+  .pill{display:inline-block;background:color-mix(in srgb, var(--accent-green) 14%, transparent);border:1px solid color-mix(in srgb, var(--accent-green) 50%, transparent);
+    color:var(--ink);padding:4px 12px;border-radius:999px;font-size:12.5px;
+    font-weight:700;margin:10px 7px 0 0}
+
+  nav{position:sticky;top:0;background:color-mix(in srgb, var(--bg-primary) 92%, transparent);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);z-index:10}
+  nav .wrap{display:flex;gap:6px 20px;flex-wrap:wrap;padding:12px 22px}
+  nav a{color:var(--muted);text-decoration:none;font-size:14.5px;font-weight:700;padding:4px 0}
+  nav a:hover{color:var(--ink)}
+
+  section{padding:48px 0;border-bottom:1px solid var(--line);scroll-margin-top:64px}
+  h2{font-size:25px;margin:0 0 16px;font-weight:700;letter-spacing:.2px}
+  h3{font-size:13.5px;margin:28px 0 8px;color:var(--accent);text-transform:uppercase;
+    letter-spacing:.7px;font-weight:700}
+  p,li{color:var(--ink)}
+  .muted{color:var(--muted)}
+  ul{margin:12px 0;padding-left:22px}
+  li{margin:7px 0}
+  li::marker{color:var(--accent)}
+
+  /* structured-abstract labels */
+  .ablabel{font-weight:700;color:var(--ink);letter-spacing:.2px}
+  #abstract p{margin:10px 0}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .figs{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+
+  .card{background:var(--bg-elev);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;margin:14px 0}
+  .obj{border-left:4px solid var(--accent2)}
+  .obj b{color:var(--accent2)}
+  .ok{border-left:4px solid var(--good)}
+  .open{border-left:4px solid var(--warn)}
+
+  figure{margin:0;background:var(--figure-mount);border:1px solid var(--bg-primary);border-radius:var(--radius);
+    padding:14px;box-shadow:0 10px 26px rgba(0,0,0,.5)}
+  figure img{width:100%;height:auto;border-radius:8px;display:block}
+  figure video{width:100%;height:auto;border-radius:8px;display:block;background:var(--bg-primary)}
+  figcaption{font-size:13.5px;color:var(--figure-muted);margin-top:10px;line-height:1.5;font-weight:400}
+  figcaption b{color:var(--figure-ink)}
+  #animations figure{margin:16px 0}
+  figcaption ul.find{margin:9px 0 2px;padding-left:18px}
+  figcaption ul.find li{color:var(--figure-muted);margin:4px 0;font-size:12.5px;line-height:1.45}
+  figcaption ul.find li::marker{color:var(--figure-muted)}
+  figcaption sup.cite a{color:var(--figure-link)}
+
+  /* A long identifier, file name, or URL is one unbreakable token and would
+     otherwise push a paragraph past the viewport on a phone. */
+  p,li,h1,h2,h3,h4,figcaption,td,th,summary{overflow-wrap:break-word}
+
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;
+    border:1px solid var(--line);border-radius:10px}
+  table{border-collapse:collapse;width:100%;font-size:15px;min-width:540px}
+  th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);
+    padding:10px 13px;text-align:left;vertical-align:top}
+  tr td:last-child,tr th:last-child{border-right:none}
+  tr:last-child td{border-bottom:none}
+  th{background:var(--bg-elev2);color:var(--ink);font-weight:700;font-size:13.5px;
+    text-transform:uppercase;letter-spacing:.4px}
+
+  pre.code{background:var(--code);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:10px;padding:14px 16px;overflow-x:auto;margin:10px 0;
+    font-family:var(--mono);font-size:13.5px;line-height:1.6;color:var(--ink)}
+  pre.code .cm{color:var(--accent-green)}
+  pre.code .kw{color:color-mix(in srgb, var(--accent-pink) 62%, var(--text-primary));font-weight:700}
+  pre.code .str{color:var(--accent-yellow)}
+  .codecap{font-size:13px;color:var(--muted);margin:0 0 4px;font-weight:700}
+
+  sup.cite{font-size:11px;font-weight:700;line-height:0}
+  sup.cite a{color:var(--accent);text-decoration:none}
+  sup.cite a:hover{text-decoration:underline}
+
+  .tag{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;letter-spacing:.4px;
+    white-space:nowrap}
+  .tag.done{background:color-mix(in srgb, var(--accent-green) 16%, transparent);color:color-mix(in srgb, var(--accent-green) 60%, var(--text-primary));border:1px solid color-mix(in srgb, var(--accent-green) 45%, transparent)}
+  .tag.open{background:color-mix(in srgb, var(--accent-yellow) 16%, transparent);color:color-mix(in srgb, var(--accent-yellow) 60%, var(--text-primary));border:1px solid color-mix(in srgb, var(--accent-yellow) 50%, transparent)}
+
+  /* layer + provenance-tier chips for the parameters/equations tables */
+  .chip{display:inline-block;font-family:var(--sans);font-size:11px;font-weight:700;
+    padding:2px 8px;border-radius:6px;letter-spacing:.3px;white-space:nowrap}
+  .chip.abm{background:color-mix(in srgb, var(--accent-blue) 18%, transparent);color:color-mix(in srgb, var(--accent-blue) 60%, var(--text-primary));border:1px solid color-mix(in srgb, var(--accent-blue) 55%, transparent)}
+  .chip.net{background:color-mix(in srgb, var(--accent-pink) 18%, transparent);color:color-mix(in srgb, var(--accent-pink) 60%, var(--text-primary));border:1px solid color-mix(in srgb, var(--accent-pink) 55%, transparent)}
+  .chip.sd{background:color-mix(in srgb, var(--accent-green) 18%, transparent);color:color-mix(in srgb, var(--accent-green) 60%, var(--text-primary));border:1px solid color-mix(in srgb, var(--accent-green) 55%, transparent)}
+  .chip.cited{background:color-mix(in srgb, var(--accent-green) 16%, transparent);color:color-mix(in srgb, var(--accent-green) 60%, var(--text-primary));border:1px solid color-mix(in srgb, var(--accent-green) 50%, transparent)}
+  .chip.derived{background:color-mix(in srgb, var(--accent-blue) 16%, transparent);color:color-mix(in srgb, var(--accent-blue) 60%, var(--text-primary));border:1px solid color-mix(in srgb, var(--accent-blue) 50%, transparent)}
+  .chip.assume{background:color-mix(in srgb, var(--text-secondary) 16%, transparent);color:var(--text-secondary);border:1px solid color-mix(in srgb, var(--text-secondary) 45%, transparent)}
+  td code,code.eq{font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+  code.eq{white-space:nowrap}
+  details.fold{background:var(--bg-elev);border:1px solid var(--line);border-radius:10px;margin:12px 0}
+  details.fold>summary{cursor:pointer;padding:12px 16px;font-family:var(--sans);font-weight:700;
+    font-size:14px;color:var(--muted);list-style:none}
+  details.fold>summary::-webkit-details-marker{display:none}
+  details.fold>summary:before{content:"\25B8";margin-right:9px;color:var(--accent)}
+  details.fold[open]>summary:before{content:"\25BE"}
+  details.fold .tablewrap{margin:0;border:none;border-top:1px solid var(--line);border-radius:0 0 10px 10px}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:10px 0 4px;font-family:var(--sans);font-size:12.5px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+
+  a.btn{display:inline-block;background:var(--accent);color:var(--bg-primary);text-decoration:none;
+    padding:12px 20px;border-radius:10px;font-weight:700;font-size:15px}
+  a.btn:hover{background:color-mix(in srgb, var(--accent-green) 70%, var(--text-primary))}
+
+  ol.refs{font-size:14.5px;line-height:1.55;padding-left:26px}
+  ol.refs li{margin:9px 0;color:var(--muted);scroll-margin-top:70px}
+  ol.refs li b{color:var(--ink)}
+
+  footer{padding:34px 0 52px;color:var(--muted);font-size:13.5px}
+
+  @media(max-width:760px){
+    body{font-size:17px}
+    .wrap{padding:0 18px}
+    header{padding:42px 0 36px}
+    header h1{font-size:27px}
+    section{padding:38px 0}
+    h2{font-size:22px}
+    .grid2,.figs{grid-template-columns:1fr}
+    nav .wrap{gap:4px 16px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Health-Related Quality of Life Modeling of Adolescent &amp; Young (AYA) Adult Cancer Patients</h1>
+    <p class="lede">A tri-layer hybrid simulation of health-related quality of life (HRQoL) from diagnosis
+       through survivorship in adolescent and young adult (AYA) cancer patients, ages 15&ndash;39, coupling an
+       agent-based model of patients, an evolving social-support network, and a system-dynamics model of
+       population and services.</p>
+    <p class="meta">Principal Investigator: Joseph Blochberger, MSME, PE. Active PhD research with a methodological focus. Currently seeking collaborators across Johns Hopkins Medicine,
+       Public Health, Nursing, and Social Work.</p>
+    <span class="pill">Agent-Based Modeling</span><span class="pill">Network Modeling and Analysis</span>
+    <span class="pill">System Dynamics</span><span class="pill">Hybrid Modeling</span>
+    <span class="pill">MATLAB, reproducible</span><span class="pill">Open to Collaboration</span>
+    <span class="pill">AYA Cancer</span><span class="pill">Quality of Life</span>
+  </div>
+</header>
+
+<nav><div class="wrap">
+  <a href="index.html" style="font-weight:800">&#8962; Home</a>
+  <a href="#abstract">Abstract</a>
+  <a href="#modelcard">Model card</a>
+  <a href="#background">Background</a>
+  <a href="#evidence">Evidence</a>
+  <a href="#methods">Methods</a>
+  <a href="#network">Network</a>
+  <a href="#data">Data sources</a>
+  <a href="#equations">Parameters</a>
+  <a href="#code">Implementation</a>
+  <a href="#diagrams">Diagrams</a>
+  <a href="#results">Results</a>
+  <a href="#animations">Dynamics</a>
+  <a href="#validation">Validation</a>
+  <a href="#comparison">Comparison</a>
+  <a href="#future">Future work</a>
+  <a href="#collab">Collaboration</a>
+  <a href="#references">References</a>
+</div></nav>
+
+<section id="abstract"><div class="wrap">
+  <h2>Abstract</h2>
+  <p><span class="ablabel">Background.</span> Health-related quality of life (HRQoL) in adolescent and
+     young adult (AYA) cancer patients is worse than population norms, with the largest deficits in
+     physical and emotional functioning, and persists for years after
+     diagnosis<sup class="cite">[<a href="#r1">1</a>, <a href="#r2">2</a>]</sup> Clinical and
+     observational studies capture HRQoL at limited time points and cannot represent the joint, evolving
+     influence of patient heterogeneity, social support, and service-system feedback.</p>
+  <p><span class="ablabel">Methods.</span> A tri-layer hybrid simulation model couples an agent-based
+     model of individual patients, an evolving social-support network, and a system-dynamics model of
+     population and services. The three layers exchange information through six explicit interfaces, each
+     of which can be disabled independently to measure the contribution of each interface. No prior model is known to couple
+     all three layers for AYA HRQoL<sup class="cite">[<a href="#r16">16</a>, <a href="#r17">17</a>]</sup></p>
+  <p><span class="ablabel">Results.</span> Over 20 simulation seeds and a 24-month horizon, the model
+     reproduces patterns it was not fitted to, including a treatment nadir, persistent emotional deficits,
+     and a durable-remission fraction near 78% among treated agents, within the band anchored to AYA
+     5-year relative survival<sup class="cite">[<a href="#r1">1</a>, <a href="#r5">5</a>]</sup>
+     Each interface acts in the direction predicted by the governing mechanism, with effect sizes that differ sharply:
+     social support dominates the outcome while the population-feedback loop is near-dormant under baseline
+     parameters. All interface verification checks pass, including a no-leak test, a structural verification method used to ensure that stocks (accumulations) do not gain or lose material spontaneously. It checks that all inflows and outflows are properly accounted for and that no hidden or "leaking" flows exist<sup class="cite">[<a href="#r9">9</a>]</sup></p>
+  <p><span class="ablabel">Conclusions.</span> The model stands as an exploratory scaffold for theory and
+     decision support. Predictive validation against a longitudinal AYA cohort remains
+     open. <span class="tag open">OPEN</span></p>
+</div></section>
+
+<section id="modelcard"><div class="wrap">
+  <h2>Model card</h2>
+  <p class="muted">Purpose, anchoring evidence, and stated limitations, each expanded in the sections
+     that follow.</p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Purpose</th><td>Theory development and decision-support scaffold for AYA HRQoL trajectories and
+      candidate interventions, for example NCCN distress screening and financial navigation.</td></tr>
+    <tr><th>Intended users</th><td>Researchers and clinician-scientists in AYA oncology, survivorship, and
+      health-systems modeling.</td></tr>
+    <tr><th>Not for</th><td>Individual prognosis or clinical decisions for a specific patient.</td></tr>
+    <tr><th>Population</th><td>AYA cancer patients, ages 15&ndash;39, diagnosis through about 24 months
+      (extensible).</td></tr>
+    <tr><th>Empirical anchors</th><td>AYA HOPE,<sup class="cite">[<a href="#r1">1</a>]</sup>
+      SURVAYA,<sup class="cite">[<a href="#r3">3</a>]</sup> SEER survival,<sup class="cite">[<a href="#r5">5</a>]</sup>
+      EORTC QLQ-C30<sup class="cite">[<a href="#r15">15</a>]</sup> reference values,<sup class="cite">[<a href="#r4">4</a>]</sup> and pooled intervention
+      effect sizes including nulls.</td></tr>
+    <tr><th>Key limitations</th><td>Predictive validation open; long-term heterogeneity under-dispersed;
+      several parameters flagged for provenance; the population-feedback layer is near-dormant under baseline
+      parameters and activates only under stress; single network, with the psychometric/social distinction
+      left to future work.</td></tr>
+    <tr><th>Reproducibility</th><td>MATLAB R2024b, no toolboxes; fixed seeds; one-command figure
+      regeneration.</td></tr>
+    <tr><th>Status</th><td>Verified prototype; iterative validation in progress.</td></tr>
+  </table>
+  </div>
+</div></section>
+
+<section id="background"><div class="wrap">
+  <h2>Background</h2>
+  <p>Understanding how HRQoL evolves after an AYA cancer diagnosis is essential to improving survivorship
+     care. Three findings define the burden this work addresses:</p>
+  <ul>
+    <li>HRQoL is worse than population norms, with the largest deficits in physical and emotional
+       functioning<sup class="cite">[<a href="#r1">1</a>]</sup></li>
+    <li>These deficits persist for years after diagnosis, not only during
+       treatment<sup class="cite">[<a href="#r2">2</a>]</sup></li>
+    <li>Most computational models of cancer represent tumor biology or care logistics<sup class="cite">[<a href="#r18">18</a>, <a href="#r19">19</a>]</sup>, not the joint
+       effect of individual heterogeneity, an evolving support network, and population/service feedback</li>
+  </ul>
+  <p>Clinical and observational studies capture HRQoL at limited time points and cannot represent these
+     factors as they interact and evolve. Simulation can. Most simulation work, however, couples only one
+     or two paradigms; the difficulty, and the contribution here, is the interfaces between three. This
+     work develops a tri-layer hybrid model and tests whether each layer earns inclusion.</p>
+
+  <div class="card">
+    <h3 style="margin-top:0">Scope</h3>
+    <p style="margin-bottom:0">This model explores which mechanisms and interventions plausibly shape AYA
+       HRQoL; it does not predict outcomes for an individual patient. Predictive validation remains open.</p>
+  </div>
+</div></section>
+
+<section id="evidence"><div class="wrap">
+  <h2>Empirical basis: incidence, age, and diagnosis</h2>
+  <p>The model targets the adolescent and young adult (AYA) population and distinguishes outcomes by
+     diagnosis. The first three figures give the empirical basis from published evidence. The fourth is a
+     model output: cancer type enters the verified simulation only through cited inputs (5-year survival
+     and treatment intensity), and HRQoL emerges by diagnosis. Inputs taken from the project AYA dataset
+     are literature-informed estimates flagged for provenance verification, so these figures are
+     exploratory; comparisons across pediatric and older-adult groups stay empirical, since the simulation
+     spans ages 15-39.</p>
+
+  <figure><img src="assets/aya/evidence_incidence.png" alt="AYA cancer incidence rising over time" loading="lazy">
+    <figcaption><b>AYA cancer incidence is rising.</b> Age-adjusted incidence in ages 15-39 trends upward at
+    the SEER-reported annual percent change<sup class="cite">[<a href="#r5">5</a>, <a href="#r26">26</a>]</sup>
+    <ul class="find">
+      <li>AYA (15-39) age-adjusted incidence is about 76 per 100,000 and rising at roughly +0.3% per year</li>
+      <li>About 85,480 new AYA cancer cases are projected for 2025</li>
+      <li>The upward trend motivates a population-level, longitudinal modeling focus on AYA survivorship</li>
+      <li>The plotted line applies the published annual percent change and does not show raw year-by-year counts</li>
+    </ul></figcaption></figure>
+
+  <figure><img src="assets/aya/evidence_below_norm.png" alt="AYA HRQoL below population norms" loading="lazy">
+    <figcaption><b>AYA HRQoL is below population norms.</b> SF-12 physical and mental scores at diagnosis sit
+    well under the general-population norm<sup class="cite">[<a href="#r1">1</a>]</sup>
+    <ul class="find">
+      <li>At diagnosis, AYA physical (PCS 38.7) and mental (MCS 42.9) scores fall far below the norms (52.8 / 48.9)<sup class="cite">[<a href="#r1">1</a>]</sup></li>
+      <li>The deficit persists to 24 months rather than resolving after treatment<sup class="cite">[<a href="#r2">2</a>]</sup></li>
+      <li>AYAs score lower than pediatric and older-adult survivors with the same diagnoses (the AYA paradox)</li>
+      <li>The below-norm pattern holds across diagnoses, which is the empirical case for an AYA-specific model</li>
+    </ul></figcaption></figure>
+
+  <figure><img src="assets/aya/evidence_age_groups.png" alt="HRQoL by age group" loading="lazy">
+    <figcaption><b>HRQoL is lowest in AYA across age groups.</b> EORTC-domain scores for AYA, pediatric, and
+    older-adult survivors<sup class="cite">[<a href="#r1">1</a>]</sup>
+    <ul class="find">
+      <li>AYA survivors score below both pediatric and older-adult survivors on every domain shown</li>
+      <li>The gap is largest for emotional functioning and future perspective, the AYA-specific domains</li>
+      <li>Older adults score near or above pediatric on emotional and social, which isolates the AYA dip</li>
+      <li>Values are the project AYA dataset (EORTC-based; AYA HOPE [1]), flagged for provenance verification</li>
+    </ul></figcaption></figure>
+
+  <figure><img src="assets/aya/evidence_model_by_diagnosis.png" alt="Model HRQoL by diagnosis" loading="lazy">
+    <figcaption><b>Model output: HRQoL emerges by diagnosis.</b> Cancer type enters the verified model only
+    through 5-year survival and treatment intensity. The 24-month HRQoL emerges from those inputs rather
+    than from a fitted target<sup class="cite">[<a href="#r5">5</a>, <a href="#r30">30</a>]</sup>
+    <ul class="find">
+      <li>High-survival, lower-intensity cancers (thyroid, testicular, melanoma) reach the highest HRQoL</li>
+      <li>Low-survival or intensive-treatment cancers (leukemia, colorectal, sarcoma) reach the lowest</li>
+      <li>The ordering emerges directly from the cited inputs, survival and treatment</li>
+      <li>Inputs are flagged estimates and survival stands in for durable remission, so the figure supports exploration rather than forecasting</li>
+    </ul></figcaption></figure>
+</div></section>
+
+<section id="methods"><div class="wrap">
+  <h2>Methods: three autonomous layers, six interfaces</h2>
+  <p>The model comprises three layers, each with a separate state and separate update rules. The layers exchange
+     information through six explicit interfaces, and each interface can be disabled independently, which
+     allows the contribution of each one to be measured.</p>
+
+  <h3>Conceptual framing: how this differs from the usual hybrid</h3>
+  <p>Hybrid simulation most often nests system dynamics <i>inside</i> agents: each agent
+     carries an internal set of continuous dynamics, and the agents interact, often over a network.
+     Population structure and finite shared services are then implicit in the aggregate of
+     agent states. This model retains per-agent dynamics but also promotes the support
+     network and a finite-capacity services subsystem to <b>peer layers</b>, coupled through
+     six explicit, switchable interfaces, so the contribution of each can be isolated and
+     measured. A fuller treatment is in <code>docs/CONCEPTUAL_FRAMING.md</code>.</p>
+  <figure><img src="assets/aya/fig_coupling_taxonomy.png" alt="Conventional SD-in-agents hybrid versus the three peer layers of this model" loading="lazy">
+    <figcaption><b>Conventional hybrid (A) versus this model (B).</b> Conventional hybrid designs nest
+    system dynamics inside networked agents and leave population or service structure implicit. This
+    model instead runs patient dynamics, the support network, and a system-dynamics services layer as
+    peer subsystems, coupled through six independently switchable interfaces.
+    <ul class="find">
+      <li>System dynamics, networks, and agents are each established individually; the novelty is the verified, switchable coupling of all three as peer layers</li>
+      <li>Elevating finite services to a peer layer is what lets the population-feedback effect be isolated, switched off, and measured</li>
+      <li>The per-agent wellbeing core is itself a small SD system, so the model both embeds dynamics in agents and couples them to an aggregate services layer</li>
+    </ul></figcaption></figure>
+
+  <ul>
+    <li><b>SW_NA</b>: social support buffers psychological wellbeing (network to
+       patient)<sup class="cite">[<a href="#r6">6</a>]</sup></li>
+    <li><b>SW_AN</b>: patient withdrawal dissolves ties (patient to network)</li>
+    <li><b>SW_AS</b>: patient distress raises referral demand (patient to services)</li>
+    <li><b>SW_SA</b>: service access and population stress feed back to wellbeing (services to patient)</li>
+    <li><b>SW_SN</b>: program capacity creates new ties (services to network)</li>
+    <li><b>SW_NS</b>: ties diffuse referrals (network to services)</li>
+  </ul>
+
+  <div class="card" style="text-align:center">
+  <svg viewBox="0 0 760 430" width="100%" style="max-width:760px" role="img"
+       aria-label="Diagram of three coupled layers with six interfaces">
+    <defs>
+      <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+              orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#95a8c0"/>
+      </marker>
+    </defs>
+    <line x1="322" y1="108" x2="150" y2="298" stroke="#6c7f96" stroke-width="2"
+          marker-start="url(#arw)" marker-end="url(#arw)"/>
+    <line x1="438" y1="108" x2="618" y2="298" stroke="#6c7f96" stroke-width="2"
+          marker-start="url(#arw)" marker-end="url(#arw)"/>
+    <line x1="232" y1="335" x2="528" y2="335" stroke="#6c7f96" stroke-width="2"
+          marker-start="url(#arw)" marker-end="url(#arw)"/>
+    <g font-size="11" fill="#d4deea" font-family="Arial, sans-serif">
+      <rect x="58" y="178" width="220" height="42" rx="6" fill="#0d141d" stroke="#33404f"/>
+      <text x="68" y="194">SW_NA: support &#8594; psychological buffer</text>
+      <text x="68" y="210">SW_AN: withdrawal &#8594; ties dissolve</text>
+      <rect x="486" y="178" width="220" height="42" rx="6" fill="#0d141d" stroke="#33404f"/>
+      <text x="496" y="194">SW_AS: distress &#8594; referral demand</text>
+      <text x="496" y="210">SW_SA: stress / access &#8594; psychological</text>
+      <rect x="270" y="350" width="220" height="42" rx="6" fill="#0d141d" stroke="#33404f"/>
+      <text x="280" y="366">SW_SN: program capacity &#8594; ties form</text>
+      <text x="280" y="382">SW_NS: ties &#8594; referral diffusion</text>
+    </g>
+    <g font-family="Arial, sans-serif">
+      <rect x="300" y="40" width="160" height="68" rx="10" fill="#3f7fd6"/>
+      <text x="380" y="72" fill="#fff" font-size="17" font-weight="700" text-anchor="middle">ABM</text>
+      <text x="380" y="92" fill="#e3edfb" font-size="12" text-anchor="middle">individual patients</text>
+
+      <rect x="55" y="300" width="180" height="68" rx="10" fill="#c95ca2"/>
+      <text x="145" y="332" fill="#fff" font-size="17" font-weight="700" text-anchor="middle">NETWORK</text>
+      <text x="145" y="352" fill="#fbe4f1" font-size="12" text-anchor="middle">evolving social ties</text>
+
+      <rect x="525" y="300" width="195" height="68" rx="10" fill="#27a36a"/>
+      <text x="622" y="328" fill="#fff" font-size="16" font-weight="700" text-anchor="middle">SYSTEM DYNAMICS</text>
+      <text x="622" y="348" fill="#dcf3e7" font-size="12" text-anchor="middle">population &amp; services</text>
+    </g>
+  </svg>
+  <div class="muted" style="font-size:13.5px">All six interfaces are implemented and pass verification,
+     including a no-leak test confirming that a disabled interface transfers
+     nothing<sup class="cite">[<a href="#r9">9</a>]</sup></div>
+  </div>
+
+  <h3>What each layer owns</h3>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Layer</th><th>State it owns</th><th>Autonomy</th></tr>
+    <tr><td><b>ABM</b> (patients)</td><td>physical and psychological wellbeing, tumor burden, side effects,
+       financial toxicity, adaptation</td><td>runs standalone</td></tr>
+    <tr><td><b>Network</b> (ties)</td><td>who supports whom; ties form and dissolve over time</td>
+       <td>evolves under independent rules</td></tr>
+    <tr><td><b>System dynamics</b></td><td>referral-queue stock, service capacity, population stress</td>
+       <td>integrates genuine stock-flow state</td></tr>
+  </table>
+  </div>
+
+  <h3>Feedback structure (causal loop diagram)</h3>
+  <p>The feedback structure is the essential part of the coupling. The causal loop diagram
+     below renders it in the convention used by system-dynamics articles: named variables,
+     causal links carrying a plus or minus polarity, and labeled balancing (B) and
+     reinforcing (R) loops. A stock-and-flow view of the services layer is in the
+     <a href="#diagrams">diagrams</a> section, and a guide to constructing such interfaces is
+     in <code>docs/CONSTRUCTING_INTERFACES.md</code>.</p>
+  <figure><img src="assets/aya/fig_causal_loop_diagram.png" alt="Causal loop diagram of the coupled patient, network, and service feedback" loading="lazy">
+    <figcaption><b>Causal loop diagram of the coupled feedback.</b> Plus and minus signs give
+    the polarity of each causal link; B and R mark balancing and reinforcing loops.
+    <ul class="find">
+      <li><b>B1 (backlog).</b> Serving patients drains the referral queue, a self-correcting balancing loop</li>
+      <li><b>R1 (overload).</b> A full queue lowers service availability, which raises stress and distress, which raises demand, which fills the queue further: a reinforcing loop that is latent at baseline and activates under stress</li>
+      <li><b>R2 (support erosion).</b> Falling wellbeing raises withdrawal, which dissolves ties and lowers support, which lowers wellbeing further: the social vicious or virtuous cycle</li>
+      <li>Wellbeing stocks are also goal-seeking (homeostatic balancing) toward the reference levels of those stocks, which is what produces the recovery after the treatment nadir</li>
+    </ul></figcaption></figure>
+</div></section>
+
+<section id="network"><div class="wrap">
+  <h2>Network model and node definition</h2>
+
+  <h3>What the nodes are</h3>
+  <p>Each node is an AYA patient-agent, the same agents as the ABM layer; an edge is a peer support tie
+     between two patients. Support reaches a patient through the single N&rarr;A operator, built from two
+     literature-grounded parts. The first is <b>structural emotional support set by network closure</b>: the
+     local clustering coefficient of a patient sets how much emotional and esteem support that position
+     affords, since closure (densely interconnected contacts) predicts emotional and esteem support, while
+     brokerage predicts informational support<sup class="cite">[<a href="#r59">59</a>, <a href="#r60">60</a>, <a href="#r61">61</a>]</sup>
+     The term is weighted by tie strength, since strong, multiplex ties carry emotional
+     aid,<sup class="cite">[<a href="#r62">62</a>]</sup> and saturates with connectedness, the
+     diminishing returns implied by the dose-response between network size and
+     outcomes<sup class="cite">[<a href="#r6">6</a>]</sup> The second, smaller part is
+     <b>complex-contagion reinforcement</b>: wellbeing lifts only when several neighbors are
+     thriving, so the effect travels along clustered, wide-bridge ties rather than single shortcuts, the form social
+     reinforcement takes for behavioral and psychosocial
+     spread<sup class="cite">[<a href="#r58">58</a>, <a href="#r63">63</a>]</sup> Referral diffusion runs the
+     opposite direction through brokerage: the N&rarr;S interface routes help-seeking along non-redundant broker ties,
+     since brokerage carries informational support while closure carries emotional
+     support<sup class="cite">[<a href="#r59">59</a>, <a href="#r60">60</a>]</sup> An isolated patient
+     (degree zero) carries a small penalty.</p>
+  <p>The simplification is deliberate. Real AYA support systems are heterogeneous and ego-centric, but
+     small: a typical support network holds roughly 2 to 10 members (mean about 6), about 40% family and 60%
+     non-family, alongside 3 to 5 clinicians<sup class="cite">[<a href="#r70">70</a>, <a href="#r6">6</a>, <a href="#r20">20</a>]</sup>
+     Each run draws a network size from this distribution (mean 6, SD 2.2, range 2 to 10), so the simulated
+     cohort spans sparsely to well connected patients rather than sharing one fixed degree. The current model
+     collapses family, peer, clinician, navigator, and digital ties into one homogeneous patient-peer tie
+     type. Peer structure is the AYA-distinct, intervention-relevant channel, through peer-mentoring
+     programs,<sup class="cite">[<a href="#r21">21</a>]</sup> so it is modeled first; a typed support network
+     is identified as future work.</p>
+
+  <h3>Why a small-world (Watts-Strogatz) network</h3>
+  <p>The default initial topology is a Watts-Strogatz small-world graph<sup class="cite">[<a href="#r55">55</a>]</sup>
+     Real social networks combine high local clustering with short global path lengths, the small-world
+     signature, which neither a regular lattice (clustered but distant) nor an Erdos-Renyi random graph
+     (short but unclustered) reproduces<sup class="cite">[<a href="#r57">57</a>]</sup> Because emotional
+     support here is driven by network closure and the wellbeing-contagion term is a complex, reinforcement
+     contagion, both of which reward clustering, the choice of topology now changes the
+     outcome<sup class="cite">[<a href="#r59">59</a>, <a href="#r63">63</a>]</sup> Both mechanisms favor more
+     clustering, so the ring lattice, the most clustered graph, scores highest. The small-world topology is
+     used regardless, because it matches the realistic structure of human social networks, high clustering
+     with short paths<sup class="cite">[<a href="#r55">55</a>]</sup> The comparison below holds mean degree
+     constant across topologies to isolate the effect of network structure.</p>
+
+  <figure><img src="assets/aya/fig_network_comparison.png" alt="Degree-matched network-model comparison" loading="lazy">
+    <figcaption><b>Degree-matched comparison of network models.</b> Four initial topologies at mean degree
+    near 6, injected into the full model; emergent HRQoL with structural metrics
+    alongside<sup class="cite">[<a href="#r55">55</a>, <a href="#r56">56</a>, <a href="#r57">57</a>]</sup>
+    <ul class="find">
+      <li>The structural metrics recover the textbook signatures; the small-world graph keeps high clustering (C = 0.39) with a short path length (L = 3.4), while the random graph has near-zero clustering (C = 0.07)</li>
+      <li>Emergent HRQoL tracks clustering: ring (C = 0.60) reaches 0.723, small-world (0.39) 0.719, scale-free (0.16) 0.713, and random (0.07) 0.712, so the outcome is sensitive to which topology is chosen</li>
+      <li>Closure carries emotional support<sup class="cite">[<a href="#r59">59</a>]</sup> and complex contagion travels on wide bridges;<sup class="cite">[<a href="#r63">63</a>]</sup> both reward clustering, which is why clustered topologies deliver more support</li>
+      <li>Every topology still lifts HRQoL above the no-network baseline; closure adds a further, ordered increment on top of that social-structure contribution</li>
+    </ul></figcaption></figure>
+
+  <h3>Extension: a typed support network <span class="tag open">EXPLORATORY</span></h3>
+  <p>The verified model uses one homogeneous patient-peer tie. A typed-support extension replaces it with an
+     ego-network of providers for which tie strength and support profile are set by relationship type: family and
+     partners are the strongest emotional sources for AYAs, clinicians carry informational support, and social
+     workers and navigators carry instrumental support<sup class="cite">[<a href="#r59">59</a>, <a href="#r62">62</a>]</sup>
+     Provider nodes have no HRQoL and are colored by type; patients are colored by HRQoL. The tie-type weights
+     are literature-informed estimates flagged for provenance, so this extension is exploratory and is not part
+     of the calibrated core.</p>
+
+  <figure><img src="assets/aya/fig_typed_network.png" alt="Typed support network with providers colored by relationship type" loading="lazy">
+    <figcaption><b>Tie strength grounded in relationship type.</b> Sample typed ego-networks (left) with a
+    provider-type legend (center) and the population HRQoL distribution that emerges when emotional support is
+    the type-weighted sum over the ties of a patient (right).
+    <ul class="find">
+      <li>Tie strength now depends on relationship type rather than a single random weight: family (0.90) and partner (0.95) ties carry the most emotional support, clinician ties (0.45) the least</li>
+      <li>Well-supported patients (more family, partner, and peer ties) reach HRQoL near 0.85; under-supported patients (few emotional ties, mostly clinicians) fall to about 0.48</li>
+      <li>Across a simulated population, support composition alone produces a wide HRQoL distribution with about 10% below the Poor threshold, concentrated among under-supported patients</li>
+      <li>Typed ties point to a concrete next step for intervention design: target the specific support type a patient lacks, instead of adding undifferentiated connections</li>
+    </ul></figcaption></figure>
+</div></section>
+
+<section id="data"><div class="wrap">
+  <h2>Data sources feeding the model</h2>
+  <p>Model parameters, the observation layer, and the validation targets are anchored to published evidence
+     and public datasets. The diagram below traces each source to the model component it informs, the table
+     lists what each one contributes, and full citations appear in the references section.</p>
+
+  <div class="card" style="text-align:center">
+  <svg viewBox="0 0 760 460" width="100%" style="max-width:760px" role="img"
+       aria-label="Diagram of data sources feeding into the three-layer model">
+    <defs>
+      <marker id="arw2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+              orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#95a8c0"/>
+      </marker>
+    </defs>
+    <g stroke="#6c7f96" stroke-width="2" fill="none">
+      <line x1="326" y1="62"  x2="466" y2="59"  marker-end="url(#arw2)"/>
+      <line x1="326" y1="62"  x2="466" y2="214" marker-end="url(#arw2)"/>
+      <line x1="326" y1="132" x2="466" y2="70"  marker-end="url(#arw2)"/>
+      <line x1="326" y1="202" x2="466" y2="139" marker-end="url(#arw2)"/>
+      <line x1="326" y1="202" x2="466" y2="84"  marker-end="url(#arw2)"/>
+      <line x1="326" y1="272" x2="466" y2="219" marker-end="url(#arw2)"/>
+      <line x1="326" y1="342" x2="466" y2="299" marker-end="url(#arw2)"/>
+      <line x1="326" y1="412" x2="466" y2="379" marker-end="url(#arw2)"/>
+    </g>
+    <g font-family="Arial, sans-serif" font-size="11.5" fill="#d4deea">
+      <rect x="14" y="34"  width="312" height="56" rx="7" fill="#11161e" stroke="#33404f"/>
+      <text x="26" y="58">SEER: AYA incidence, 5-yr survival (~86%)</text>
+      <text x="26" y="76" fill="#9fb0c6">5-year relative survival   [5]</text>
+      <rect x="14" y="104" width="312" height="56" rx="7" fill="#11161e" stroke="#33404f"/>
+      <text x="26" y="128">AYA HOPE (Smith 2013) + NHANES</text>
+      <text x="26" y="146" fill="#9fb0c6">baseline HRQoL &amp; depression   [1] [54]</text>
+      <rect x="14" y="174" width="312" height="56" rx="7" fill="#11161e" stroke="#33404f"/>
+      <text x="26" y="198">Social support (Pinquart); response shift</text>
+      <text x="26" y="216" fill="#9fb0c6">(Sprangers, Bellizzi)   [6] [10] [11]</text>
+      <rect x="14" y="244" width="312" height="56" rx="7" fill="#11161e" stroke="#33404f"/>
+      <text x="26" y="268">NCCN AYA guidelines</text>
+      <text x="26" y="286" fill="#9fb0c6">screening, financial navigation   [30]</text>
+      <rect x="14" y="314" width="312" height="56" rx="7" fill="#11161e" stroke="#33404f"/>
+      <text x="26" y="338">EORTC QLQ-C30 + reference values</text>
+      <text x="26" y="356" fill="#9fb0c6">PROMIS, MMQL instruments   [15] [4] [29]</text>
+      <rect x="14" y="384" width="312" height="56" rx="7" fill="#11161e" stroke="#33404f"/>
+      <text x="26" y="408">SURVAYA (Janssen), Husson 2017</text>
+      <text x="26" y="426" fill="#9fb0c6">long-term HRQoL targets   [3] [2]</text>
+    </g>
+    <g font-family="Arial, sans-serif">
+      <rect x="466" y="30"  width="280" height="58" rx="9" fill="#3f7fd6"/>
+      <text x="606" y="56" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">ABM</text>
+      <text x="606" y="74" fill="#e3edfb" font-size="11" text-anchor="middle">individual patients</text>
+      <rect x="466" y="110" width="280" height="58" rx="9" fill="#c95ca2"/>
+      <text x="606" y="136" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">NETWORK</text>
+      <text x="606" y="154" fill="#fbe4f1" font-size="11" text-anchor="middle">evolving support ties</text>
+      <rect x="466" y="190" width="280" height="58" rx="9" fill="#27a36a"/>
+      <text x="606" y="216" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">SYSTEM DYNAMICS</text>
+      <text x="606" y="234" fill="#dcf3e7" font-size="11" text-anchor="middle">population &amp; services</text>
+      <rect x="466" y="270" width="280" height="58" rx="9" fill="#b8862f"/>
+      <text x="606" y="296" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">MEASUREMENT LAYER</text>
+      <text x="606" y="314" fill="#f6e6c8" font-size="11" text-anchor="middle">instrument scales</text>
+      <rect x="466" y="350" width="280" height="58" rx="9" fill="#566372"/>
+      <text x="606" y="376" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">VALIDATION TARGETS</text>
+      <text x="606" y="394" fill="#e6ecf3" font-size="11" text-anchor="middle">held-out bands</text>
+    </g>
+  </svg>
+  <div class="muted" style="font-size:13px">Source evidence (left) feeds the agent, network, and
+     system-dynamics layers, the measurement layer, and the held-out validation targets (right).</div>
+  </div>
+
+  <h3>How the evidence was aggregated</h3>
+  <p>Six categories of evidence, spanning public datasets, longitudinal cohort studies,
+     mechanism and theory literature, validated instruments, care guidelines, and reference
+     models, feed the model components they inform. The map below shows the relative
+     contribution of each category. The breakdown that follows adds the provenance-tier
+     composition, the source counts, and a worked example of how several sources reconcile
+     into model terms.</p>
+  <figure><img src="assets/aya/fig_data_aggregation.png" alt="Evidence aggregation map: source categories flowing into model components" loading="lazy">
+    <figcaption><b>Evidence aggregation map.</b> Six evidence categories (left, with source
+    counts) feed the five model components (right). Ribbon width scales with the relative
+    contribution of each category to each component.
+    <ul class="find">
+      <li>Mechanism and theory literature is the broadest input, informing the patient, network, and service layers</li>
+      <li>Datasets and cohort studies anchor patient initialization and the held-out validation targets</li>
+      <li>Instruments feed the measurement layer; reference models (including Q-PRIMA) inform structure across all layers</li>
+    </ul></figcaption></figure>
+  <figure><img src="assets/aya/fig_provenance_breakdown.png" alt="Provenance tier composition, source-category counts, and a triangulation example" loading="lazy">
+    <figcaption><b>Provenance breakdown.</b> Tier composition of the roughly fifty traced
+    parameter values, the number of anchor sources per category, and a triangulation example
+    for financial toxicity.
+    <ul class="find">
+      <li>About 28% of values are Cited, 28% Derived, and 44% disclosed assumptions, each justified in writing</li>
+      <li>Triangulation example: a prevalence range, an effect size, and a care standard from three separate sources are reconciled into three model terms</li>
+      <li>Six candidate sources were retrieved and checked from full text (author, year, and value confirmed) in the 2026-06 cycle</li>
+    </ul></figcaption></figure>
+
+  <div class="tablewrap">
+  <table>
+    <tr><th>Data source</th><th>What it provides</th><th>Feeds</th><th>Ref.</th></tr>
+    <tr><td>SEER (NCI)</td><td>AYA incidence; 5-year relative survival (~86%)</td><td>ABM remission; SD population</td><td>[<a href="#r5">5</a>]</td></tr>
+    <tr><td>AYA HOPE (Smith 2013)</td><td>Baseline HRQoL; ~20% vulnerable subgroup at diagnosis</td><td>ABM initialization</td><td>[<a href="#r1">1</a>]</td></tr>
+    <tr><td>NHANES (CDC)</td><td>AYA depression prevalence</td><td>ABM psychological baseline</td><td>[<a href="#r54">54</a>]</td></tr>
+    <tr><td>Social-network meta-analysis (Pinquart &amp; Duberstein)</td><td>Direction and magnitude of the social-support effect</td><td>Network to patient (N&rarr;A)</td><td>[<a href="#r6">6</a>]</td></tr>
+    <tr><td>Response-shift theory (Sprangers; Bellizzi)</td><td>Adaptation / recalibration mechanism</td><td>ABM adaptation</td><td>[<a href="#r10">10</a>][<a href="#r11">11</a>]</td></tr>
+    <tr><td>EORTC QLQ-C30 (Aaronson) + reference values (Hinz)</td><td>Instrument scales; normative values</td><td>Measurement layer</td><td>[<a href="#r15">15</a>][<a href="#r4">4</a>]</td></tr>
+    <tr><td>PROMIS (Siembida); MMQL (Bhatia; Goodman)</td><td>AYA-validated HRQoL instruments</td><td>Measurement layer</td><td>[<a href="#r29">29</a>][<a href="#r27">27</a>][<a href="#r28">28</a>]</td></tr>
+    <tr><td>SURVAYA (Janssen); Husson</td><td>Long-term and 24-month HRQoL distributions</td><td>Validation targets</td><td>[<a href="#r3">3</a>][<a href="#r2">2</a>]</td></tr>
+    <tr><td>NCCN AYA guidelines</td><td>Distress-screening and financial-navigation care processes</td><td>SD scenarios</td><td>[<a href="#r30">30</a>]</td></tr>
+    <tr><td>AYA HRQoL review (Sodergren); SD-in-cancer precedents (Williams; Homer &amp; Hirsch)</td><td>Parameter ranges; design precedent</td><td>Model structure</td><td>[<a href="#r20">20</a>][<a href="#r37">37</a>][<a href="#r32">32</a>]</td></tr>
+    <tr><td>Reference models: Q-PRIMA (Hasgul); CLD (Beaulieu)</td><td>Structure and docking comparison</td><td>Whole model</td><td>[<a href="#r16">16</a>][<a href="#r17">17</a>]</td></tr>
+  </table>
+  </div>
+
+  <h3 style="margin-top:28px">Parameter provenance</h3>
+  <p>Beyond the data sources above, every model parameter and embedded constant is traced to a data source, a
+     paper, or an explicit assumption in the provenance register
+     (<code>docs/PARAMETER_PROVENANCE.md</code>); the model code carries inline
+     <code>[Cited]</code> / <code>[Derived]</code> / <code>[Assumption]</code> tags that point to it. Values
+     fall into three tiers.</p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Tier</th><th>Meaning</th><th>Approx. count</th><th>Examples</th></tr>
+    <tr><td><span class="chip cited">Cited</span></td><td>Value or narrow range taken from a data source or paper</td><td>~14</td>
+        <td>AYA age 15&ndash;39 [SEER]; 20% vulnerable subgroup [Smith 2013]; ~86% 5-year survival [SEER];
+        complex-contagion threshold &ge;2 [Centola &amp; Macy 2007]; closure to emotional support [Meng 2016]</td></tr>
+    <tr><td><span class="chip derived">Derived</span></td><td>Calibration value for which the mechanism or range is cited</td><td>~14</td>
+        <td>financial-toxicity ceiling at ~55% prevalence [<a href="#r65">65</a>] and the effect on wellbeing
+        [<a href="#r64">64</a>]; distress threshold within 19.6&ndash;61.6% prevalence [<a href="#r66">66</a>];
+        tie formation as networks expand after diagnosis [<a href="#r68">68</a>]; symptom trajectory
+        [<a href="#r69">69</a>]; service capacity [<a href="#r67">67</a>]</td></tr>
+    <tr><td><span class="chip assume">Assumption</span></td><td>Structural, computational, or calibration choice with no direct empirical anchor</td><td>~22</td>
+        <td>tumor kinetics; the wellbeing-equation coefficients; <code>beta_social</code>; <code>alpha_macro</code>;
+        equal weighting of physical and psychological HRQoL</td></tr>
+  </table>
+  </div>
+  <p class="muted" style="font-size:13.5px">The full parameter table, the stock / flow /
+     auxiliary equation listing, and a written justification for every assumption are in the
+     <a href="#equations">Parameters &amp; equations</a> section below.</p>
+  <p class="muted" style="font-size:13.5px">About half of the values are calibration or structural assumptions,
+      and several are swept in the sensitivity and stress experiments. The
+     Derived sources were retrieved and checked (author, year, and the cited value or finding confirmed). One
+     parameter is flagged as weakest-supported: the tie-dissolution rate rests on qualitative
+     withdrawal reports,<sup class="cite">[<a href="#r31">31</a>]</sup> whereas the strongest longitudinal
+     evidence finds networks net-expand after diagnosis,<sup class="cite">[<a href="#r68">68</a>]</sup> a
+     pattern the model in fact reproduces. The equal-weight composite is a known simplification relative to
+     the regression-weighted SF-12 summary scores.</p>
+</div></section>
+
+<section id="equations"><div class="wrap">
+  <h2>Parameters &amp; equations</h2>
+  <p>The model is specified in the stock / flow / auxiliary form used by published
+     system-dynamics models, so the structure can be read and audited directly. The
+     temporal design is <b>diagnosis-anchored</b> (the clock starts at diagnosis) over a
+     <b>24-month</b> horizon, with fast patient dynamics integrated every half day and the
+     service queue and network restructuring resolved monthly. Every parameter traces to a
+     source or a flagged assumption, and each assumption carries a written justification. A
+     workbook in a four-sheet layout available: <a href="assets/aya/AYA_parameters_and_equations.xlsx">AYA_parameters_and_equations.xlsx</a>.</p>
+
+  <h3>Run specifications</h3>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Setting</th><th>Value</th><th>Unit</th><th>Note</th></tr>
+    <tr><td>Initial time</td><td>0</td><td>day</td><td>Anchored at diagnosis / cohort enrollment</td></tr>
+    <tr><td>Final time</td><td>730</td><td>day</td><td>24-month horizon</td></tr>
+    <tr><td>Time step (patient layer)</td><td>0.5</td><td>day</td><td>Explicit Euler step for the agent-based layer</td></tr>
+    <tr><td>Structural cadence</td><td>30</td><td>day</td><td>Monthly service queue and network restructuring</td></tr>
+    <tr><td>Treatment window</td><td>30 to 120</td><td>day</td><td>Active-treatment block; nadir near month 4</td></tr>
+    <tr><td>Population</td><td>100</td><td>agents</td><td>Inference at the run level, not the agent</td></tr>
+  </table>
+  </div>
+
+  <h3>How the timeline compares with other SD models</h3>
+  <p>The diagnosis-anchored, population-level, hybrid design departs deliberately from an
+     event-anchored single-patient pure-SD model such as Q-PRIMA
+     (Hasgul 2024)<sup class="cite">[<a href="#r16">16</a>]</sup> Full discussion and the
+     complete equation listing are in <code>docs/MODEL_TIMELINE_AND_EQUATIONS.md</code>.</p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Dimension</th><th>This model</th><th>Q-PRIMA (Hasgul 2024)</th></tr>
+    <tr><td>Paradigm</td><td>Hybrid: ABM + network + SD</td><td>Pure system dynamics</td></tr>
+    <tr><td>Time anchor</td><td>Diagnosis (t = 0)</td><td>Infusion event (t = 0)</td></tr>
+    <tr><td>Time span</td><td>0 to +730 days (24 months)</td><td>&minus;60 to +180 days (~8 months)</td></tr>
+    <tr><td>Unit of analysis</td><td>100 heterogeneous agents</td><td>1 representative patient</td></tr>
+    <tr><td>Stocks</td><td>1 service stock + per-agent states + network</td><td>14 continuous stocks</td></tr>
+    <tr><td>Feedback</td><td>6 switchable cross-layer interfaces</td><td>7 reinforcing + 2 balancing loops</td></tr>
+  </table>
+  </div>
+
+  <h3>State variables (stocks)</h3>
+  <p class="legend">
+    <span><span class="chip abm">ABM</span> patient layer</span>
+    <span><span class="chip net">NET</span> network layer</span>
+    <span><span class="chip sd">SD</span> services layer</span>
+  </p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Layer</th><th>Stock</th><th>Units</th><th>Integral form</th></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>Physical wellbeing <code>P</code></td><td>Dmnl [0.2,1]</td><td><code class="eq">&int; (P adjustment) dt + P(0)</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>Psychological wellbeing <code>&Psi;</code></td><td>Dmnl [0.2,1]</td><td><code class="eq">&int; (&Psi; adjustment) dt + &Psi;(0)</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>Tumor burden</td><td>Dmnl [0.001,1]</td><td><code class="eq">&int; (growth &minus; removal) dt + Tumor(0)</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>Side-effect severity <code>SE</code></td><td>Dmnl [0,1]</td><td><code class="eq">&int; (development &minus; removal) dt</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>Financial toxicity <code>Fin</code></td><td>Dmnl [0,1]</td><td><code class="eq">&int; (accrual) dt</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>Adaptation <code>Adapt</code></td><td>Dmnl [0,1]</td><td><code class="eq">&int; (adaptation rate) dt</code></td></tr>
+    <tr><td><span class="chip net">NET</span></td><td>Support ties <code>A&#8202;<sub>ij</sub></code></td><td>Dmnl {0,1}</td><td><code class="eq">formation &minus; dissolution (monthly)</code></td></tr>
+    <tr><td><span class="chip net">NET</span></td><td>Tie weights <code>W&#8202;<sub>ij</sub></code></td><td>Dmnl [0,1]</td><td><code class="eq">assigned on formation</code></td></tr>
+    <tr><td><span class="chip sd">SD</span></td><td>Referral queue <code>Wq</code></td><td>persons</td><td><code class="eq">&int; (demand &minus; served) dt</code></td></tr>
+  </table>
+  </div>
+  <p class="muted" style="font-size:13.5px">Derived (not integrated): HRQoL
+     <code>Q = (P + &Psi;)/2</code>; closure <code>Ci</code> (recomputed monthly);
+     <code>in_remission</code> (a latch).</p>
+
+  <h3>Flows (rates)</h3>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Layer</th><th>Flow</th><th>Cadence</th><th>Equation</th></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>tumor growth</td><td>0.5 d</td><td><code class="eq">g &middot; Tumor &middot; (1 &minus; Tumor)</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>tumor removal</td><td>0.5 d</td><td><code class="eq">treated: tx_resp &middot; Tumor; remission: remission_decay &middot; Tumor</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>SE development</td><td>0.5 d</td><td><code class="eq">in treatment: se_dev_rate &middot; (1 &minus; SE)</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>SE removal</td><td>0.5 d</td><td><code class="eq">se_rem_rate &middot; SE</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>financial accrual</td><td>0.5 d</td><td><code class="eq">fin_accrual &middot; [day &gt; tx_start] &middot; (fin_cap &minus; Fin)</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>adaptation rate</td><td>0.5 d</td><td><code class="eq">adapt_rate &middot; (1 &minus; Adapt)</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>P adjustment</td><td>0.5 d</td><td><code class="eq">(target_P &minus; P) / adjustT</code></td></tr>
+    <tr><td><span class="chip abm">ABM</span></td><td>&Psi; adjustment</td><td>0.5 d</td><td><code class="eq">(target_&Psi; &minus; &Psi;) / 21</code></td></tr>
+    <tr><td><span class="chip sd">SD</span></td><td>referral demand (inflow)</td><td>30 d</td><td><code class="eq">see auxiliaries (SW_AS, SW_NS)</code></td></tr>
+    <tr><td><span class="chip sd">SD</span></td><td>served (outflow)</td><td>30 d</td><td><code class="eq">min(Wq, Cpsy)</code></td></tr>
+    <tr><td><span class="chip net">NET</span></td><td>tie formation</td><td>30 d</td><td><code class="eq">round(formation_rate &middot; served)  (SW_SN)</code></td></tr>
+    <tr><td><span class="chip net">NET</span></td><td>tie dissolution</td><td>30 d</td><td><code class="eq">prob = dissolve_rate &middot; 0.5 &middot; (withdrawal_i + withdrawal_j)  (SW_AN)</code></td></tr>
+  </table>
+  </div>
+
+  <details class="fold">
+    <summary>Auxiliaries and the six interfaces (show 16)</summary>
+    <div class="tablewrap">
+    <table>
+      <tr><th>Layer / interface</th><th>Auxiliary</th><th>Equation</th></tr>
+      <tr><td><span class="chip abm">ABM</span></td><td>HRQoL <code>Q</code></td><td><code class="eq">(P + &Psi;) / 2</code></td></tr>
+      <tr><td><span class="chip abm">ABM</span></td><td><code>target_P</code></td><td><code class="eq">clip(0.90 &minus; 0.5&middot;Tumor &minus; 0.4&middot;SE + ben_phys, 0, 1)</code></td></tr>
+      <tr><td><span class="chip abm">ABM</span></td><td><code>target_&Psi;</code></td><td><code class="eq">clip(0.75 + support + ben_psy &minus; stress &minus; 0.30&middot;SE &minus; eff_chronic, 0, 1)</code></td></tr>
+      <tr><td><span class="chip abm">ABM</span></td><td><code>eff_chronic</code></td><td><code class="eq">(identity_pen + fertility_pen + fin_weight&middot;Fin) &middot; (1 &minus; adapt_efficacy&middot;Adapt)</code></td></tr>
+      <tr><td><span class="chip net">NET</span> <b>N&rarr;A</b></td><td>structural support</td><td><code class="eq">beta_social &middot; closure_gain &middot; conn</code></td></tr>
+      <tr><td><span class="chip net">NET</span> <b>N&rarr;A</b></td><td>connectedness <code>conn</code></td><td><code class="eq">1 &minus; exp(&minus;strength / support_scale)</code></td></tr>
+      <tr><td><span class="chip net">NET</span> <b>N&rarr;A</b></td><td>closure gain</td><td><code class="eq">(1 &minus; closure_share) + closure_share &middot; (Ci / clustering_ref)</code></td></tr>
+      <tr><td><span class="chip net">NET</span> <b>N&rarr;A</b></td><td>contagion</td><td><code class="eq">beta_social &middot; cont_w &middot; logistic((n_supp &minus; 2)/reinforce_width)</code></td></tr>
+      <tr><td><span class="chip sd">SD</span> <b>S&rarr;A</b></td><td>service-mediated stress</td><td><code class="eq">macro_stressor &middot; (1 &minus; min(1, service_avail))</code></td></tr>
+      <tr><td><span class="chip sd">SD</span></td><td>macro stressor</td><td><code class="eq">alpha_macro &middot; max(0, poor_prev &minus; 0.1)</code></td></tr>
+      <tr><td><span class="chip abm">ABM</span> <b>A&rarr;S</b></td><td>self-referral demand</td><td><code class="eq">sum_i [Q_i &lt; distress_threshold] &middot; self_referral_rate</code></td></tr>
+      <tr><td><span class="chip net">NET</span> <b>N&rarr;S</b></td><td>brokerage <code>ES</code> (Burt)</td><td><code class="eq">deg &minus; 2&middot;tri / max(deg, 1)</code></td></tr>
+      <tr><td><span class="chip net">NET</span> <b>N&rarr;S</b></td><td>brokered demand</td><td><code class="eq">sum_i distressed_i &middot; (0.5 + 0.5&middot;reach_i)</code></td></tr>
+      <tr><td><span class="chip sd">SD</span></td><td>service availability</td><td><code class="eq">served / max(demand, 1)</code></td></tr>
+      <tr><td><span class="chip abm">ABM</span> <b>A&rarr;N</b></td><td>withdrawal</td><td><code class="eq">max(0, withdraw_thresh &minus; &Psi;)</code></td></tr>
+      <tr><td><span class="chip sd">SD</span> <b>S&rarr;N</b></td><td>served &rarr; tie formation</td><td><code class="eq">round(formation_rate &middot; served)</code></td></tr>
+    </table>
+    </div>
+  </details>
+  <p class="muted" style="font-size:13.5px">The six switchable interfaces are the
+     cross-layer auxiliaries in <b>bold</b>: N&rarr;A support, S&rarr;A stress,
+     A&rarr;S demand, N&rarr;S brokerage, S&rarr;N formation, A&rarr;N dissolution.
+     Setting a switch to 0 removes exactly one of these, which is the basis of the
+     ablation ladder.</p>
+
+  <h3>Parameters and provenance</h3>
+  <p class="legend">
+    <span><span class="chip cited">Cited</span> value or narrow range from a source</span>
+    <span><span class="chip derived">Derived</span> mechanism/range cited, value calibrated</span>
+    <span><span class="chip assume">Assumption</span> no direct anchor; each value carries a written justification</span>
+  </p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Parameter</th><th>Value</th><th>Tier</th><th>Source / basis</th></tr>
+    <tr><td><code>age_range</code></td><td>[15, 39]</td><td><span class="chip cited">Cited</span></td><td>Standard AYA definition (SEER / NCI)</td></tr>
+    <tr><td><code>T</code> (horizon)</td><td>730 d</td><td><span class="chip derived">Derived</span></td><td>24-month follow-up (Smith 2013; Husson 2017)</td></tr>
+    <tr><td>vulnerable fraction</td><td>0.20</td><td><span class="chip cited">Cited</span></td><td>Lowest baseline HRQoL quartile (Smith 2013)</td></tr>
+    <tr><td><code>responder_fraction</code></td><td>0.86</td><td><span class="chip cited">Cited</span></td><td>SEER AYA 5-year relative survival ~86%</td></tr>
+    <tr><td><code>intervention_effect</code></td><td>0.13</td><td><span class="chip cited">Cited</span></td><td>Pooled AYA psychosocial intervention SMD</td></tr>
+    <tr><td><code>k_neighbors</code></td><td>2&ndash;10 (mean 6)</td><td><span class="chip cited">Cited</span></td><td>AYA support-network size, drawn per run (Cloyes 2022)</td></tr>
+    <tr><td><code>p_rewire</code></td><td>0.15</td><td><span class="chip cited">Cited</span></td><td>Small-world regime (Watts &amp; Strogatz 1998)</td></tr>
+    <tr><td><code>reinforce_count</code></td><td>2</td><td><span class="chip cited">Cited</span></td><td>Complex contagion &ge;2 contacts (Centola &amp; Macy 2007)</td></tr>
+    <tr><td><code>adapt_efficacy</code></td><td>0.60</td><td><span class="chip derived">Derived</span></td><td>A-priori from benefit-finding theory; swept (Bellizzi 2012)</td></tr>
+    <tr><td><code>closure_share</code></td><td>0.5</td><td><span class="chip derived">Derived</span></td><td>Closure predicts emotional support (Meng 2016)</td></tr>
+    <tr><td><code>formation_rate</code></td><td>0.5</td><td><span class="chip derived">Derived</span></td><td>Networks expand after diagnosis (Lehto 2024)</td></tr>
+    <tr><td><code>fin_weight</code></td><td>0.20</td><td><span class="chip derived">Derived</span></td><td>Financial toxicity worsens symptoms (Thom &amp; Benedict 2019)</td></tr>
+    <tr><td><code>distress_threshold</code></td><td>0.5</td><td><span class="chip derived">Derived</span></td><td>Distress prevalence band (Kirk 2021; NCCN)</td></tr>
+    <tr><td><code>psy_capacity</code> (Cpsy)</td><td>8 / mo</td><td><span class="chip derived">Derived</span></td><td>Finite, variable psycho-oncology staffing (Melton 2020)</td></tr>
+    <tr><td><code>Q = (P+&Psi;)/2</code></td><td>equal weight</td><td><span class="chip assume">Assumption</span></td><td>Same HRQoL definition as Q-PRIMA; flagged simplification</td></tr>
+    <tr><td><code>tumor_growth_base</code></td><td>0.045</td><td><span class="chip assume">Assumption</span></td><td>Logistic form as in Q-PRIMA; rate calibrated</td></tr>
+    <tr><td><code>beta_social</code></td><td>0.04</td><td><span class="chip assume">Assumption</span></td><td>Dose-response (Pinquart 2010); calibrated to ablation; swept</td></tr>
+    <tr><td><code>alpha_macro</code></td><td>0.4</td><td><span class="chip assume">Assumption</span></td><td>Latent-amplifier gain; swept in stress scenarios</td></tr>
+  </table>
+  </div>
+  <p class="muted" style="font-size:13.5px">Full table (~50 values) and the inline
+     <code>prov:</code> code tags are in <code>docs/PARAMETER_PROVENANCE.md</code>.</p>
+
+  <h3>Assumption justifications</h3>
+  <p>An assumption marks a value with no source for the exact number. Each one is justified
+     in writing and classified by the type of support behind it. Several wellbeing-core
+     choices inherit structure directly from the
+     published Q-PRIMA model<sup class="cite">[<a href="#r16">16</a>]</sup></p>
+  <details class="fold">
+    <summary>Justification for every assumption-tier parameter (show 15)</summary>
+    <div class="tablewrap">
+    <table>
+      <tr><th>Parameter</th><th>Category</th><th>Basis</th></tr>
+      <tr><td><code>dt</code> = 0.5 d</td><td>Numerical / Model precedent</td><td>Explicit Euler, as in Q-PRIMA; step well below the fastest time constant</td></tr>
+      <tr><td><code>N</code> = 100</td><td>Computational</td><td>Monte Carlo sample; inference at run level, seed-averaged</td></tr>
+      <tr><td><code>treated_fraction</code> = 0.85</td><td>Literature mechanism</td><td>Most AYA cancers treated with curative intent; value illustrative</td></tr>
+      <tr><td><code>tx_start</code>/<code>tx_duration</code></td><td>Pattern-oriented</td><td>~3-month block placed so the nadir lands near month 4 (Husson 2017)</td></tr>
+      <tr><td><code>tumor_growth_base</code> = 0.045</td><td>Model precedent / Pattern-oriented</td><td>Logistic form as in Q-PRIMA; rate calibrated with tx_resp</td></tr>
+      <tr><td><code>tx_resp</code> = 0.06</td><td>Pattern-oriented</td><td>Set with responder_fraction 0.86 so ~86% reach remission</td></tr>
+      <tr><td><code>Q = (P+&Psi;)/2</code></td><td>Model precedent</td><td>Identical HRQoL definition published in Q-PRIMA; equal weighting flagged</td></tr>
+      <tr><td>target-seeking forms, 21-d lag</td><td>Model precedent / Lit. mechanism</td><td>Homeostatic restoring (gap / adjustment time) as in Q-PRIMA</td></tr>
+      <tr><td><code>target_P</code>, <code>target_&Psi;</code> coeffs</td><td>Pattern-oriented / Lit. mechanism</td><td>Calibrated to SF-12 PCS/MCS anchors; emotional deficit (Smith 2013)</td></tr>
+      <tr><td><code>fin_accrual</code> = 0.02</td><td>Lit. mechanism / Pattern-oriented</td><td>Financial toxicity accrues over treatment (Thom 2019)</td></tr>
+      <tr><td><code>beta_social</code> = 0.04</td><td>Lit. mechanism / Swept</td><td>Support dose-response (Pinquart 2010); calibrated to ablation; swept</td></tr>
+      <tr><td><code>W</code> tie weights</td><td>Flagged limitation</td><td>Random placeholder; should be type-based (Wellman &amp; Wortley 1990)</td></tr>
+      <tr><td><code>withdraw_thresh</code> = 0.55</td><td>Pattern-oriented</td><td>Just above the 0.5 distress threshold</td></tr>
+      <tr><td><code>alpha_macro</code> = 0.4</td><td>Swept / Pattern-oriented</td><td>Latent amplifier; swept in stress scenarios</td></tr>
+      <tr><td>poor-fraction trigger = 0.1</td><td>Literature mechanism</td><td>10% floor below cancer distress prevalence 20&ndash;50% (Kirk 2021)</td></tr>
+    </table>
+    </div>
+  </details>
+  <p class="muted" style="font-size:13.5px"><b>Pattern-oriented</b> means a value is not free
+     but jointly constrained with others to reproduce several observed patterns at once
+     (baseline distribution, nadir timing, recovery plateau, persistent tail), the standard
+     defense in pattern-oriented modeling<sup class="cite">[<a href="#r7">7</a>]</sup>
+     <b>Swept</b> parameters carry a further protection: the conclusions hold across a range
+     of values rather than resting on one tuned number. Full write-up:
+     <code>docs/ASSUMPTION_JUSTIFICATIONS.md</code>.</p>
+</div></section>
+
+<section id="code"><div class="wrap">
+  <h2>Model implementation</h2>
+  <p>The model is implemented in plain MATLAB (R2024b, no toolboxes). Four excerpts show the design
+     decisions that keep the layers separable and the validation sound.</p>
+
+  <p class="codecap">1. Each interface is a binary switch, so the ablation experiment can turn any one of
+     them off in isolation (<code>coupling_switches.m</code>).</p>
+  <pre class="code"><span class="cm">% {name, abm_on, AS, SA, AN, NA, SN, NS, description}</span>
+<span class="str">'C1'</span>,  true, 0,0,0,0,0,0, <span class="str">'ABM-only (heterogeneity baseline)'</span>
+<span class="str">'C3'</span>,  true, 0,0,1,1,0,0, <span class="str">'ABM + Network'</span>
+<span class="str">'C4'</span>,  true, 1,1,1,1,1,1, <span class="str">'Full model (all six interfaces on)'</span></pre>
+
+  <p class="codecap">2. Social support reaches a patient through exactly one channel, so disabling that
+     channel removes the effect completely (<code>AYA_MVP_Coupled.m</code>).</p>
+  <pre class="code"><span class="cm">% N-&gt;A : social support (THE ONLY support channel; no leak)</span>
+support = zeros(N,1);
+<span class="kw">if</span> sw.SW_NA
+    deg = sum(A,2);  WA = A .* W;
+    support = baseline_sup + contagion + buffer;   <span class="cm">% connection, contagion, buffering</span>
+    support(deg==0) = -0.01;                        <span class="cm">% isolation penalty</span>
+<span class="kw">end</span></pre>
+
+  <p class="codecap">3. System dynamics holds a real integrated stock, a referral queue, rather than a
+     simple count of agents in a category.</p>
+  <pre class="code">Wq = Wq + demand;                       <span class="cm">% inflow: referrals from distressed agents</span>
+served = min(Wq, Cpsy);                  <span class="cm">% outflow bounded by service capacity</span>
+Wq = max(0, Wq - served);
+service_avail = served / max(demand,1); <span class="cm">% feeds back to patients via SW_SA</span></pre>
+
+  <p class="codecap">4. Verification: turning a coupling off must change the outcome, proving no hidden
+     proxy leaks (<code>verify_interfaces.m</code>)<sup class="cite">[<a href="#r9">9</a>]</sup></p>
+  <pre class="code">cOff = cOn;  cOff.SW_NA = false;
+v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% PASS = separable</span></pre>
+</div></section>
+
+<section id="diagrams"><div class="wrap">
+  <h2>Model diagrams</h2>
+  <p>Three UML views document the implementation at the level a reader needs to reproduce or audit it: an
+     activity diagram for control flow within one run, a sequence diagram for the order in which the six
+     interfaces fire over a monthly cycle, and a component diagram for the static structure of the code. A
+     fourth view, a stock-and-flow diagram, documents the internal mechanics of the system-dynamics layer.
+     All are rendered from editable sources in
+     <code>website/diagrams/</code> (provided as both <code>.drawio</code> and <code>.xml</code>) and use a
+     fixed layer color key: blue for the ABM (patient) layer, green for the network (support) layer, and
+     orange for the system-dynamics (services) layer.</p>
+
+  <figure style="margin-top:8px"><img src="assets/aya/model_activity.png" alt="Activity diagram of one simulation run" loading="lazy">
+    <figcaption><b>Activity diagram: control flow of one run.</b> A single run initializes the agents, the
+    Watts-Strogatz support network,<sup class="cite">[<a href="#r55">55</a>]</sup> and the system-dynamics stocks, then
+    loops over time steps. Patient-layer updates run every step; the system-dynamics queue and network
+    rewiring resolve on month boundaries before the loop stores outputs and advances.
+    <ul class="find">
+      <li>Patient clinical and wellbeing updates run every time step; service and network updates resolve only on month boundaries, which fixes the order of operations within a step</li>
+      <li>The month-boundary branch is where the system-dynamics referral queue and network tie formation and dissolution enter, keeping slow population processes separate from fast individual ones</li>
+      <li>HRQoL Q is computed from wellbeing and the support buffer inside the loop, so the trajectory emerges from the simulation instead of following a scripted curve</li>
+      <li>One exit packages trajectories, stocks, and the network, which matches the single output structure the figure and animation scripts read</li>
+      <li>A box-by-box walkthrough of every activity (what it does, the cadence, and the equation it maps to) is in <code>docs/ACTIVITY_DIAGRAM_WALKTHROUGH.md</code></li>
+      <li>Editable source: <a href="assets/aya/diagrams/model_activity.drawio">model_activity.drawio</a> / <a href="assets/aya/diagrams/model_activity.xml">.xml</a></li>
+    </ul></figcaption></figure>
+
+  <figure><img src="assets/aya/model_sequence.png" alt="Sequence diagram of one monthly coupling cycle" loading="lazy">
+    <figcaption><b>Sequence diagram: one monthly coupling cycle.</b> Four lifelines (ABM, network,
+    system dynamics, measurement) exchange nine messages. Each cross-lifeline message is one of the six
+    switchable interfaces, so disabling a switch removes exactly one arrow.
+    <ul class="find">
+      <li>Every cross-layer arrow maps to a named switch (SW_AS, SW_SA, SW_AN, SW_NA, SW_SN, SW_NS), which is what makes the ablation experiment a one-to-one test of each coupling</li>
+      <li>Support reaches the patient through a single message (SW_NA), matching the no-leak design that lets the verification check separate the channels<sup class="cite">[<a href="#r9">9</a>]</sup></li>
+      <li>The referral queue integrates as a self-message on the system-dynamics lifeline (served = min of waiting and capacity): the stock lives inside the system-dynamics layer itself, rather than relabeling an agent count</li>
+      <li>Measurement is the last message: the latent state is projected onto QLQ-C30, SF-12, and PROMIS scales rather than read off directly<sup class="cite">[<a href="#r15">15</a>]</sup></li>
+      <li>Editable source: <a href="assets/aya/diagrams/model_sequence.drawio">model_sequence.drawio</a> / <a href="assets/aya/diagrams/model_sequence.xml">.xml</a></li>
+    </ul></figcaption></figure>
+
+  <figure><img src="assets/aya/model_component.png" alt="Component diagram of the model codebase" loading="lazy">
+    <figcaption><b>Component diagram: static structure.</b> The <code>AYA_MVP_Coupled</code> engine holds the
+    three layer sub-components and is configured by <code>coupling_switches</code>, driven by the experiment
+    and verification harness, observed through the measurement layer, and read by the visualization code.
+    <ul class="find">
+      <li>The tri-layer engine is one component with three internal parts, so the paradigms are coupled in a single integrator rather than chained as separate models</li>
+      <li><code>coupling_switches</code> configures the engine and the experiment harness drives it, which keeps experiment definitions out of the model code</li>
+      <li>The measurement layer reads instrument specifications and validates against held-out empirical targets, separating observation from dynamics</li>
+      <li>The visualization component (<code>figure_code</code>) depends only on engine outputs, which is why every site figure regenerates from one master script without touching the model</li>
+      <li>Editable source: <a href="assets/aya/diagrams/model_component.drawio">model_component.drawio</a> / <a href="assets/aya/diagrams/model_component.xml">.xml</a></li>
+    </ul></figcaption></figure>
+
+  <figure><img src="assets/aya/sd_stock_flow.png" alt="Stock-and-flow diagram of the system-dynamics services layer" loading="lazy">
+    <figcaption><b>Stock-and-flow diagram: the system-dynamics (services) layer.</b> The services layer is a
+    single integrated stock, the referral queue Wq. Inflow is referral demand (fed by the A&rarr;S and N&rarr;S
+    interfaces); outflow is the number served, capped by a fixed psychological-service capacity
+    (Cpsy, about 8 per month, a flagged assumption). Service availability (served over demand) and a
+    population macro-stressor feed back to patient psychological wellbeing through the S&rarr;A interface.
+    <ul class="find">
+      <li>Wq is a true integrated stock: it accumulates unmet demand and drains only as fast as capacity allows, which is what makes this a system-dynamics layer rather than a per-step counter</li>
+      <li>A balancing loop (B) governs the backlog (serving reduces the queue); a reinforcing loop (R) is the overload feedback (a full queue lowers availability, which raises patient stress and distress, which raises demand)</li>
+      <li>At baseline the layer is near-dormant: the poor-fraction barely exceeds the 0.1 macro-stressor threshold and capacity is ample, so the R loop stays latent until a stress or low-capacity scenario activates it</li>
+      <li>Capacity-bounded service is the one channel by which population-level load feeds back to individual wellbeing, matching the single S&rarr;A arrow in the sequence diagram</li>
+      <li>Editable source: <a href="assets/aya/diagrams/sd_stock_flow.drawio">sd_stock_flow.drawio</a> / <a href="assets/aya/diagrams/sd_stock_flow.xml">.xml</a></li>
+    </ul></figcaption></figure>
+</div></section>
+
+<section id="results"><div class="wrap">
+  <h2>Results</h2>
+  <p class="muted">The model was run over 20 simulation seeds and a 24-month horizon. Inference operates
+     at the level of the simulation run rather than the individual agent.</p>
+
+  <div class="card">
+    <b>How to read these results:</b>
+    <ul style="margin:8px 0 4px">
+      <li><b>Baseline</b> is the reference a result is compared against (a reduced configuration in the ablation, or the value at month 0 in a trajectory)</li>
+      <li><b>Emergent</b> is a pattern that arises from the rules of the model itself, rather than a value entered by hand or a target used in fitting</li>
+      <li><b>Held-out band</b> is a literature target range withheld from calibration, used afterward as an out-of-sample check</li>
+      <li><b>Population norm</b> is where a healthy general population scores on the same instrument, drawn as a reference line</li>
+    </ul>
+    The headline result is the <b>HRQoL distribution</b> (the violin plot, a shape that shows the full spread):
+    the population stays split into two groups (a higher-faring resilient group and a distinct lower-faring
+    vulnerable group), so the mean recovers yet represents neither group. The <a href="#animations">animations</a> are the second headline. A fuller plot-by-plot guide is
+    in <code>docs/READING_THE_RESULTS.md</code>.
+  </div>
+
+  <div class="figs">
+    <figure><img src="assets/aya/fig1_ablation_ladder.png" alt="Ablation ladder">
+      <figcaption><b>Each interface has a measurable, sign-interpretable effect.</b> Switching couplings on
+      and off shifts population HRQoL in directions the mechanisms predict. The ablation ladder is the core
+      methodological evidence; effect sizes differ sharply across interfaces.
+      <ul class="find">
+        <li>Social support (N&rarr;A) carries the largest effect: removing it lowers 20-seed mean HRQoL by about 0.020, and adding the network is what raises HRQoL above the agent-only baseline</li>
+        <li>The population-feedback loop (S&rarr;A) shifts baseline HRQoL by under 0.002, because the poor-fraction barely exceeds the population-stress threshold; ABM-only and ABM+SD nearly coincide until stress or intervention scenarios activate it</li>
+        <li>Structural feedback (A&rarr;N tie dissolution) and the network-population loop move the mean by about 0.001, within seed variation at baseline but mechanistically active during the distress peak</li>
+        <li>The ladder makes the contribution of each layer measurable, including where the baseline effect of a layer is small, which is itself a reported model finding rather than a hidden assumption</li>
+      </ul></figcaption></figure>
+    <figure><img src="assets/aya/fig2_trajectory_nadir.png" alt="HRQoL trajectory">
+      <figcaption><b>Trajectory shape.</b> HRQoL falls to a low point near month 4, then recovers
+      partially to a 24-month plateau that stays below full health.
+      <ul class="find">
+        <li>HRQoL reaches a low point near month 4, then recovers only partially</li>
+        <li>The 24-month plateau stays below full health, matching persistent AYA deficits<sup class="cite">[<a href="#r2">2</a>]</sup></li>
+        <li>The coupled dynamics produce the fall-then-recover shape independently; nothing in the model scripts it directly</li>
+        <li>Between-person spread widens during treatment: patients vary in vulnerability and in response to it</li>
+      </ul></figcaption></figure>
+    <figure><img src="assets/aya/fig3_instrument_trajectory.png" alt="Instrument trajectory">
+      <figcaption><b>On instrument scales (EORTC QLQ-C30<sup class="cite">[<a href="#r15">15</a>]</sup>).</b> Physical functioning recovers toward the
+      norm. Emotional functioning stays the deeper, persistent deficit, matching the AYA
+      literature<sup class="cite">[<a href="#r1">1</a>, <a href="#r2">2</a>]</sup>
+      <ul class="find">
+        <li>Physical functioning recovers toward the population norm by 24 months</li>
+        <li>Emotional functioning stays the deeper, persistent deficit<sup class="cite">[<a href="#r1">1</a>, <a href="#r2">2</a>]</sup></li>
+        <li>The physical-over-emotional ordering emerges independently rather than being fitted, which supports behavioral validity</li>
+        <li>Reporting on a real instrument makes the simulation directly comparable to published cohorts</li>
+      </ul></figcaption></figure>
+    <figure><img src="assets/aya/fig4_calibration_validation_v2.png" alt="Calibration and validation">
+      <figcaption><b>One simulation, several questionnaires.</b> The green bands are literature target ranges set aside from calibration; the emergent 24-month scores land inside them for QLQ-C30, SF-12, and
+      PROMIS<sup class="cite">[<a href="#r1">1</a>, <a href="#r3">3</a>, <a href="#r4">4</a>]</sup>
+      <ul class="find">
+        <li>All four held-out 24-month instrument targets fall inside literature-derived bands (4/4)</li>
+        <li>One internal (not directly measured) trajectory reconciles the different United States and European questionnaires through the observation layer</li>
+        <li>The targets are excluded from calibration, so agreement functions as a validity check rather than a fit</li>
+        <li>The one early failure (emotional functioning) localized the missing adaptation mechanism</li>
+      </ul></figcaption></figure>
+  </div>
+  <figure style="margin-top:24px"><img src="assets/aya/fig5_adaptation_sensitivity.png" alt="Adaptation sensitivity">
+    <figcaption><b>Not a narrowly tuned (i.e. knife-edge) fit.</b> The response-shift adaptation mechanism holds emotional
+    functioning in range across a wide parameter span, with the a-priori default near the middle of that
+    band<sup class="cite">[<a href="#r10">10</a>, <a href="#r11">11</a>]</sup>
+    <ul class="find">
+      <li>A response-shift adaptation mechanism brings emotional functioning from 1/4 to 4/4 targets in range<sup class="cite">[<a href="#r10">10</a>, <a href="#r11">11</a>]</sup></li>
+      <li>The result holds across a wide range of the adaptation strength, so it does not depend on one finely tuned value</li>
+      <li>Theory set the parameters; the bands played no part in tuning them, which keeps the result non-circular</li>
+      <li>Because the mechanism answered a failure, the bands are now development targets; predictive validation needs new data</li>
+    </ul></figcaption></figure>
+
+  <figure style="margin-top:24px"><img src="assets/aya/fig_stress_scenarios.png" alt="Stress-scenario ablation of the system-dynamics layer" loading="lazy">
+    <figcaption><b>Where the third layer earns inclusion.</b> The ablation ladder shows the system-dynamics
+    population-feedback interface (S&rarr;A) is near-dormant at baseline. This experiment varies the
+    population-stress strength and the service capacity and measures the paired S&rarr;A ablation effect, so the
+    contribution of the SD layer is shown to depend on the scenario rather than being fixed.
+    <ul class="find">
+      <li>At baseline the S&rarr;A interface accounts for under 0.001 HRQoL: the population-feedback loop sits genuinely dormant</li>
+      <li>As the population-stress strength rises from 0.4 to 4.0, the same interface accounts for up to about 0.32 HRQoL at baseline capacity</li>
+      <li>Constraining service capacity (8 to 4) amplifies the effect at every stress level, reaching about 0.35 HRQoL, because the referral queue backs up and service availability falls</li>
+      <li>The SD layer is therefore a dormant amplifier that switches on under population stress and scarce capacity, the situations where decision support is most needed</li>
+      <li>Model output: paired SW_SA ablation (full model minus SW_SA), common random seeds, 20 seeds</li>
+    </ul></figcaption></figure>
+
+  <figure style="margin-top:24px"><img src="assets/aya/fig_hrqol_distribution.png" alt="Individual HRQoL distribution over time" loading="lazy">
+    <figcaption><b>The mean hides the distribution.</b> Per-agent HRQoL pooled over 20 seeds, shown as split
+    violins (resilient left, vulnerable right) at four months. Reporting the full distribution, not just the
+    mean, exposes spread and a persistent low-HRQoL subgroup.
+    <ul class="find">
+      <li>The spread is widest at the month-4 low point, when the fraction doing poorly peaks near 15%, so the mean understates how many agents are doing badly mid-treatment</li>
+      <li>A vulnerable subgroup (~20%) forms a distinct lower mode that persists to 24 months, even as the population mean recovers to about 0.72</li>
+      <li>By 24 months the resilient subgroup concentrates near 0.80 while the vulnerable subgroup stays lower and separate, a difference invisible in any mean trajectory</li>
+      <li>Differences in vulnerability and support produce this two-group split independently; no fixed split is imposed after initialization</li>
+    </ul></figcaption></figure>
+
+  <h3>Headline results</h3>
+  <ul>
+    <li>8 of 8 macro trend bands in range, with bands derived from the AYA HRQoL
+       literature<sup class="cite">[<a href="#r1">1</a>, <a href="#r2">2</a>, <a href="#r6">6</a>]</sup></li>
+    <li>4 of 4 held-out instrument targets in range across QLQ-C30, SF-12, and
+       PROMIS;<sup class="cite">[<a href="#r1">1</a>, <a href="#r3">3</a>, <a href="#r4">4</a>]</sup> the PROMIS band
+       rests on a low-confidence anchor flagged for source verification, so that one target is the weakest of the four</li>
+    <li>About 78% of treated agents reach durable remission by 24 months (20-seed mean), near the lower
+       bound of the band anchored to AYA 5-year relative survival (~86%)<sup class="cite">[<a href="#r5">5</a>]</sup></li>
+    <li>The social-support interface dominates the outcome (about 0.020 HRQoL); the population-feedback
+       interface is dormant at baseline but accounts for up to 0.35 HRQoL under population stress and
+       constrained capacity</li>
+    <li>All interface verification checks pass, including the no-leak
+       test<sup class="cite">[<a href="#r9">9</a>]</sup></li>
+  </ul>
+</div></section>
+
+<section id="animations"><div class="wrap">
+  <h2>Simulation dynamics (animated)</h2>
+  <p>The animations are rendered directly from a single full-model run (cell C4, all six interfaces on,
+     seed 42) over the 24-month horizon. The first depicts the whole simulation; the rest isolate each
+     layer and the interfaces.</p>
+
+  <h3>The coupled tri-layer model</h3>
+  <figure><video autoplay loop muted playsinline preload="metadata" poster="assets/aya/anim/anim_model_full.png"><source src="assets/aya/anim/anim_model_full.mp4" type="video/mp4"><img src="assets/aya/anim/anim_model_full.png" alt="Full tri-layer model simulation"></video>
+    <figcaption><b>Full tri-layer simulation.</b> Four synchronized panels: the support network colored
+    by HRQoL (top left), population mean HRQoL (top right), the system-dynamics referral queue and service
+    availability (bottom left), and the six interface flows for the current month (bottom right). Support
+    (N&rarr;A) is active throughout; the referral, service, and tie-dynamics interfaces switch on as
+    treatment-era distress rises.
+    <ul class="find">
+      <li>The four panels move together as one coupled system rather than as four independent views</li>
+      <li>The referral queue fills during the treatment-era distress peak and drains as distress subsides</li>
+      <li>Support (N&rarr;A) runs throughout; referral, service, and tie interfaces switch on only when distress rises</li>
+      <li>Population HRQoL and the SD queue move in opposition, exposing the population-stress feedback loop</li>
+    </ul></figcaption></figure>
+
+  <h3>The three layers over time</h3>
+  <figure><video autoplay loop muted playsinline preload="metadata" poster="assets/aya/anim/anim_layer_abm.png"><source src="assets/aya/anim/anim_layer_abm.mp4" type="video/mp4"><img src="assets/aya/anim/anim_layer_abm.png" alt="Agent-based layer simulation"></video>
+    <figcaption><b>Agent-based layer.</b> Left: the patient cloud in (physical, psychological) space,
+    colored by HRQoL; psychological wellbeing trails physical through treatment. Right: the Good /
+    Moderate / Poor population fractions shifting over time.
+    <ul class="find">
+      <li>The patient cloud stays below the equal-wellbeing diagonal: psychological wellbeing lags physical</li>
+      <li>During treatment the cloud descends, then recovers faster on the physical axis than the psychological</li>
+      <li>Compartments shift toward Moderate and Poor at the low point, then back, but not fully to baseline</li>
+      <li>A vulnerable subgroup (~20%) persists in the Poor compartment, reproducing the two-group AYA pattern<sup class="cite">[<a href="#r1">1</a>]</sup></li>
+    </ul></figcaption></figure>
+  <figure><video autoplay loop muted playsinline preload="metadata" poster="assets/aya/anim/anim_layer_network.png"><source src="assets/aya/anim/anim_layer_network.mp4" type="video/mp4"><img src="assets/aya/anim/anim_layer_network.png" alt="Network layer simulation"></video>
+    <figcaption><b>Network layer.</b> The support graph (left): every node is an AYA patient colored by
+    HRQoL, every edge a peer support tie; there are no separate support agents. The right panel tracks mean
+    closure (local clustering), the structural quantity that sets emotional support, alongside mean degree
+    for scale.
+    <ul class="find">
+      <li>Closure, not degree, is the quantity the support mechanism keys on, so it is plotted as the primary metric</li>
+      <li>Closure falls over the run (about 0.39 to 0.31) as withdrawal dissolves ties and peer-program formation adds non-clustering ties, so emotional-support capacity declines even as the network stays active</li>
+      <li>Mean degree rises slightly (about 6 to 6.5), moving opposite to closure, which is exactly why mean degree alone is a misleading summary of this network</li>
+      <li>Isolated nodes carry a support penalty: structural position affects individual outcome</li>
+    </ul></figcaption></figure>
+  <figure><video autoplay loop muted playsinline preload="metadata" poster="assets/aya/anim/anim_typed_network.png"><source src="assets/aya/anim/anim_typed_network.mp4" type="video/mp4"><img src="assets/aya/anim/anim_typed_network.png" alt="Typed support network spokewheel animation"></video>
+    <figcaption><b>Network layer, typed-support extension (exploratory).</b> The same support idea drawn as a
+    single patient spokewheel: the hub is one AYA (color = HRQoL), and each spoke is a typed support tie
+    (family, partner, peer, peer-mentor, clinician, social worker, navigator, digital), with width set by tie
+    strength. Emotional support is the type-weighted sum over active ties, and it drives HRQoL through the
+    same exploratory map used by the static figure<sup class="cite">[<a href="#r62">62</a>]</sup>
+    <ul class="find">
+      <li>Support is specialized by relationship type: family and partner carry the most emotional weight; clinician and navigator carry instrumental weight</li>
+      <li>Ties form over the run (a referral adds a social worker, a peer-support program adds a peer-mentor, a navigator and a partner join) and one peer tie lapses, so the wheel gains and sheds spokes</li>
+      <li>As stronger emotional ties accumulate, type-weighted support rises and HRQoL recovers from the distressed band (about 0.45 to 0.68), with a recovery lag</li>
+      <li>The typed-tie layer is an exploratory extension, not the verified core: tie-type weights are literature-informed estimates and the formation/lapse timeline is illustrative</li>
+    </ul></figcaption></figure>
+  <figure><video autoplay loop muted playsinline preload="metadata" poster="assets/aya/anim/anim_layer_sd.png"><source src="assets/aya/anim/anim_layer_sd.mp4" type="video/mp4"><img src="assets/aya/anim/anim_layer_sd.png" alt="System-dynamics layer simulation"></video>
+    <figcaption><b>System-dynamics layer.</b> The referral queue as an integrated stock, with inflow
+    (demand) and outflow (served, bounded by capacity) arrows scaled by magnitude, a service-availability
+    gauge, and the queue level over time.
+    <ul class="find">
+      <li>The referral queue is a real integrated stock with explicit inflow and capacity-bounded outflow</li>
+      <li>Demand outruns capacity during the distress peak, so the queue builds and service availability drops</li>
+      <li>As distress subsides, served catches up and the queue drains, restoring availability toward one</li>
+      <li>Capacity-bounded service is the channel by which population load feeds back to individual wellbeing</li>
+    </ul></figcaption></figure>
+
+  <h3>The six interfaces over time</h3>
+  <figure><video autoplay loop muted playsinline preload="metadata" poster="assets/aya/anim/anim_interfaces.png"><source src="assets/aya/anim/anim_interfaces.mp4" type="video/mp4"><img src="assets/aya/anim/anim_interfaces.png" alt="Six interfaces over time"></video>
+    <figcaption><b>Coupling between layers.</b> Each directed arrow is one of the six interfaces; the
+    width of each arrow tracks the normalized flow carried that month, and the bars give the same six magnitudes. The
+    order in which the interfaces activate emerges from the coupled dynamics; no fixed schedule drives it.
+    <ul class="find">
+      <li>N&rarr;A (support) carries flow from the start; the other five interfaces stay dormant until distress appears</li>
+      <li>Referral, service, and tie-dynamics interfaces activate together around the treatment low point</li>
+      <li>Interface magnitudes rise and fall with the distress wave, then quiet as the system recovers</li>
+    </ul></figcaption></figure>
+</div></section>
+
+<section id="validation"><div class="wrap">
+  <h2>Validation and credibility</h2>
+  <p>With sparse, non-equivalent data, a model like this cannot be validated the way a prediction model is.
+     The argument separates four claims and states which are established and which remain open.</p>
+
+  <div class="grid2">
+    <div class="card ok"><b>Verification (established).</b> Every interface passes runnable checks,
+      including a no-leak proof that disabling a coupling removes the associated
+      influence<sup class="cite">[<a href="#r9">9</a>]</sup> <span class="tag done">DONE</span></div>
+    <div class="card ok"><b>Behavioral validity (partial).</b> The model reproduces several patterns it was
+      not fitted to: baseline deficits, the treatment nadir, durable remission near 78%, and a small
+      intervention effect. The approach is pattern-oriented modeling<sup class="cite">[<a href="#r7">7</a>]</sup>
+      <span class="tag done">PARTIAL</span></div>
+    <div class="card ok"><b>Docking against other models (partial).</b> Reduced to the scope of those models, the model
+      reproduces the population-feedback behavior of published system-dynamics HRQoL
+      models<sup class="cite">[<a href="#r16">16</a>, <a href="#r17">17</a>]</sup> and the direction of
+      social-support effects<sup class="cite">[<a href="#r6">6</a>]</sup>, following the model-alignment
+      (docking) method of Axtell et al<sup class="cite">[<a href="#r8">8</a>]</sup>
+      <span class="tag done">PARTIAL</span></div>
+    <div class="card open"><b>Predictive validity (open).</b> No single longitudinal, multidomain,
+      multi-instrument AYA cohort exists to test against. The page states this plainly and gives a roadmap.
+      <span class="tag open">OPEN</span></div>
+  </div>
+
+  <h3>Iterative validation: an informative failure</h3>
+  <p>An early held-out instrument test failed on emotional functioning, passing 1 of 4 targets. The failure
+     was diagnostic: it located a missing response-shift adaptation
+     mechanism<sup class="cite">[<a href="#r10">10</a>, <a href="#r11">11</a>]</sup> Adding that one
+     theory-grounded mechanism brought the test to 4 of 4 across a wide parameter range. Because the
+     mechanism was added in response to the failure, those bands now serve as development targets rather
+     than independent validation. Genuine predictive validation requires new external data.</p>
+
+  <h3>Objections and responses</h3>
+  <div class="card obj"><b>"Predictive validation is impossible here, so the work is storytelling."</b><br>
+    Validity is purpose-relative<sup class="cite">[<a href="#r13">13</a>, <a href="#r14">14</a>]</sup>
+    Verification, pattern reproduction, and docking are the near-term claim. Predictive validity
+    is scoped as future work with a concrete plan.</div>
+  <div class="card obj"><b>"The network is just an ABM term; the SD is just aggregation."</b><br>
+    Each layer meets explicit autonomy criteria. The network evolves by independent rules, and the SD layer
+    integrates a real queue stock. The no-leak test shows the contributions are
+    separable<sup class="cite">[<a href="#r9">9</a>]</sup></div>
+  <div class="card obj"><b>"The parameters are not all sourced."</b><br>
+    Every value has a provenance entry. Unsourced values are flagged openly, then handled through
+    sensitivity analysis and an exploratory-modeling stance<sup class="cite">[<a href="#r12">12</a>]</sup></div>
+  <div class="card obj"><b>"The instruments are not equivalent."</b><br>
+    For that reason the model includes an explicit observation layer with measurement error and a
+    calibration/validation split across United States (SF-12, PROMIS) and European (EORTC QLQ-C30)
+    instruments<sup class="cite">[<a href="#r4">4</a>]</sup></div>
+  <p class="muted">Full argument, all objections, and references:
+     <code>MODEL_CREDIBILITY_AND_VALIDATION.md</code>.</p>
+</div></section>
+
+<section id="comparison"><div class="wrap">
+  <h2>Comparison to pre-existing models</h2>
+  <p>The exercise below is comparative validation by <b>docking</b>: the novel hybrid is placed alongside pre-existing
+     system-dynamics and agent-based models from the AYA HRQoL literature and reduced to the scope of those models. It
+     is a confidence check, <b>not</b> a change to the model. The model code and every result elsewhere on
+     this page are unchanged; the benchmark only reads the model and compares it.</p>
+
+  <p>Five arms were run over the same diagnosis-anchored 24-month horizon, each at a separately documented
+     initialization: an <b>SD-only</b> model (with a common-initialization variant), an <b>ABM-only</b>
+     ablation, an older <b>ABM + static-network</b> hybrid, and the <b>full hybrid</b>. Two literature
+     models are structural comparators only: Q-PRIMA (the published implementation is incomplete and will
+     not run as shipped) and Beaulieu (2022), which is a causal loop diagram rather than a runnable model.</p>
+
+  <p><b>Where this sits in the field.</b> A 2025 PRISMA systematic review of system-dynamics cancer models
+     (Chen et al., <i>Journal of Medical Economics</i>) identified sixteen studies. All are single-paradigm
+     system dynamics, most addressing screening, prevention, or treatment operations at the population level,
+     and produce cases, deaths, quality-adjusted life years, and costs rather than an individual
+     health-related quality-of-life trajectory. None couples an agent-based patient layer, an evolving
+     support network, and a finite-service subsystem, and none tracks HRQoL across survivorship. This
+     architecture addresses that gap. Because those models compute different quantities, they serve
+     as structural comparators only; the graph above does not plot them as additional lines.</p>
+
+  <figure><img src="assets/aya/bench_trajectory_comparison.png" alt="HRQoL trajectories: novel hybrid versus pre-existing models against the empirical anchor" loading="lazy">
+    <figcaption><b>Trajectories against the empirical AYA envelope.</b> The pre-existing SD-only and
+    static-network models sit at 0.83&ndash;0.90 for the whole horizon, above the empirical AYA range; the
+    novel hybrid and the corresponding ABM-only ablation show the treatment low point and recover to a below-norm plateau near
+    the matched EORTC baseline (0.6375).
+    <ul class="find">
+      <li>Pre-existing designs overshoot because they start high and uniform and lack the two-group
+          initialization and the identity and financial penalties</li>
+      <li>The SD-only overshoot persists even when it is started at the baseline value of the hybrid, so the
+          dynamics themselves produce it, independent of the initial condition</li>
+    </ul></figcaption></figure>
+
+  <figure><img src="assets/aya/bench_validation_error.png" alt="Distance from the empirical HRQoL anchor by model" loading="lazy">
+    <figcaption><b>Distance from the empirical anchor.</b> Lower is closer. The novel model family is
+    5&ndash;7% from the anchor; the pre-existing models are 31&ndash;40%.</figcaption></figure>
+
+  <div class="tablewrap">
+  <table>
+    <tr><th>Model</th><th>Time-avg HRQoL</th><th>Distance from empirical anchor 0.6375</th></tr>
+    <tr><td>SD-only (documented init 0.85)</td><td>0.892</td><td>39.9%</td></tr>
+    <tr><td>SD-only (common init)</td><td>0.889</td><td>39.5%</td></tr>
+    <tr><td>ABM + static-network</td><td>0.835</td><td>30.9%</td></tr>
+    <tr><td>ABM-only (C1)</td><td>0.668</td><td>4.8%</td></tr>
+    <tr><td>Full hybrid (novel, C4)</td><td>0.683</td><td>7.2%</td></tr>
+  </table>
+  </div>
+
+  <figure><video autoplay loop muted playsinline preload="metadata" poster="assets/aya/bench_network_final.png"><source src="assets/aya/bench_network_evolution.mp4" type="video/mp4"></video>
+    <figcaption><b>Support network over 24 months (benchmark run).</b> The evolving adjacency captured by
+    the benchmark, nodes colored by HRQoL. The full N&times;N adjacency at each month is saved to
+    <code>benchmark_comparison/mat/adjacency_over_time.mat</code>.</figcaption></figure>
+
+  <div class="card">
+    <b>Read with care.</b> The docking supports the model <i>family</i> over the pre-existing designs. It
+    does not establish the full hybrid over the ABM-only ablation on this single mean-fit metric (ABM-only
+    4.8% versus full 7.2%); the added value of the full model stays with the ablation and distributional evidence in
+    the Results and Validation sections. The empirical anchor is a construct-matched EORTC value that
+    remains provenance-flagged, so the percentage column functions as a relative yardstick rather than a
+    settled fit. The
+    conclusion does not hinge on the exact anchor: the pre-existing models spend the whole horizon above
+    the empirical AYA envelope while the novel family stays within it.
+  </div>
+
+  <p class="muted">Reproducible as a standalone folder: <code>benchmark_comparison/</code> with
+     <code>run_benchmark(20)</code>. Details in <code>benchmark_comparison/README.md</code>, the anchor
+     trace in <code>ANCHOR_RECONCILIATION.md</code>, and the structural comparison in
+     <code>tables/structural_docking.csv</code>.</p>
+</div></section>
+
+<section id="future"><div class="wrap">
+  <h2>Future work</h2>
+  <p>The model is a verified prototype with an open predictive-validation claim and several scoped
+     limitations. The priorities below would close those gaps, ordered from the most decisive (external
+     validation) to incremental refinements.</p>
+
+  <h3>Predictive validation</h3>
+  <ul>
+    <li>Secure a longitudinal, multidomain, multi-instrument AYA HRQoL cohort, or a harmonized AYA HOPE to
+       SURVAYA crosswalk, for a pre-registered held-out predictive test<sup class="cite">[<a href="#r1">1</a>, <a href="#r3">3</a>]</sup></li>
+    <li>Test measurement invariance across age, sex, tumor group, country, and survivorship phase, and
+       split calibration from validation by source, domain, and horizon<sup class="cite">[<a href="#r4">4</a>]</sup></li>
+    <li>Report interval coverage and distributional metrics alongside point trajectories</li>
+  </ul>
+
+  <h3>Diagnosis and age</h3>
+  <ul>
+    <li>Replace the flagged project-dataset estimates (per-type survival, treatment mix, age-group HRQoL)
+       with certified SEER and EORTC extractions, which would remove the exploratory label from the
+       diagnosis figure<sup class="cite">[<a href="#r5">5</a>, <a href="#r15">15</a>]</sup></li>
+    <li>Encode diagnosis-specific late-effect burden, for example brain/CNS neurocognitive effects and
+       anthracycline cardiotoxicity, so that high-late-effect cancers separate from survival alone</li>
+    <li>Add pediatric (under 15) and older-adult comparator arms, so the AYA paradox becomes a model output
+       rather than an empirical comparison</li>
+  </ul>
+
+  <h3>Model structure and scope</h3>
+  <ul>
+    <li>Restore long-term between-person dispersion, which is currently narrower than the SURVAYA long-term
+       distributions<sup class="cite">[<a href="#r3">3</a>]</sup></li>
+    <li>Add a dual-network extension: an intrapersonal HRQoL-domain network alongside the interpersonal
+       support network</li>
+    <li>Ground the typed support network (an exploratory version is shown above) in data: replace the
+       literature-informed tie-type weights for family, peer, clinician, social worker, navigator, and digital
+       ties with values estimated from longitudinal AYA ego-network data, and integrate it into the calibrated
+       core<sup class="cite">[<a href="#r6">6</a>, <a href="#r20">20</a>, <a href="#r62">62</a>]</sup></li>
+    <li>Implement NCCN-concordant counterfactuals (distress screening, financial navigation) as
+       capacity-constrained service scenarios<sup class="cite">[<a href="#r30">30</a>]</sup></li>
+    <li>Extend the horizon from 24 months to 5 to 10 years of survivorship</li>
+  </ul>
+
+  <h3>Verification, docking, and uncertainty</h3>
+  <ul>
+    <li>Add extreme-condition and conservation tests to the verification harness<sup class="cite">[<a href="#r9">9</a>]</sup></li>
+    <li>Conduct formal quantitative docking against a published system-dynamics HRQoL model and a published
+       network result<sup class="cite">[<a href="#r8">8</a>, <a href="#r16">16</a>, <a href="#r17">17</a>]</sup></li>
+    <li>Run global sensitivity and identifiability analysis on the coupling parameters<sup class="cite">[<a href="#r12">12</a>]</sup></li>
+    <li>Resolve the flagged provenance parameters and expand the provenance register</li>
+  </ul>
+</div></section>
+
+<section id="collab"><div class="wrap">
+  <h2>Collaboration</h2>
+  <p>A model of this scope needs data and domain expertise that no single project holds. The project seeks:</p>
+  <ul>
+    <li><b>Longitudinal AYA HRQoL data</b>, any instrument, to enable genuine predictive validation</li>
+    <li><b>Domain expertise</b> in AYA psycho-oncology, survivorship care, social work, and financial
+       toxicity, to refine mechanisms and face validity</li>
+    <li><b>Measurement expertise</b> for harmonizing United States and EORTC instruments through crosswalks and
+       invariance testing</li>
+    <li><b>Health-systems partners</b> to ground the NCCN distress-screening and financial-navigation
+       scenarios in real capacity constraints</li>
+  </ul>
+
+  <h3>Studies traced, and the specific data requested</h3>
+  <p>The figure traces the studies and datasets this project already relies on (due diligence,
+     each tied to the parameter-provenance register) and identifies the one dataset requested
+     to close the open validation question: individual-level EORTC QLQ-C30 longitudinal data
+     in AYA patients. An <b>EORTC data-request</b> has been placed to compare individual-level, longitudinal quality-of-life data against the tri-layer model.</p>
+  <figure><img src="assets/aya/fig_studies_datasets.png" alt="Studies, the datasets they hold, and what is already in the model versus requested from EORTC" loading="lazy">
+    <figcaption><b>Studies, datasets, and the EORTC request.</b> Green rows are anchors
+    or targets in the model; the orange row is the individual-level EORTC AYA QLQ-C30 dataset
+    requested for external validation.
+    <ul class="find">
+      <li>Each in-model source is traced to a specific role: an initialization anchor, a validation target, an instrument, or a population norm</li>
+      <li>Requested EORTC data is read on the same QLQ-C30 scales the model already emits, so the external test needs no additional crosswalk assumptions</li>
+      <li>Usage is confirmatory: the model is locked, the compared quantities and acceptance criteria are registered before the data are seen</li>
+    </ul></figcaption></figure>
+
+  <p style="margin-top:20px"><a class="btn" href="mailto:jblochb2@jhu.edu?subject=AYA%20HRQoL%20model%20collaboration">Questions? Contact: jblochb2@jhu.edu</a></p>
+</div></section>
+
+<section id="references"><div class="wrap">
+  <h2>References</h2>
+  <ol class="refs">
+    <li id="r1">A. W. Smith <i>et al.</i>, "Health-related quality of life of adolescent and young adult
+      patients with cancer in the United States: the Adolescent and Young Adult Health Outcomes and Patient
+      Experience study," <b>Journal of Clinical Oncology</b>, vol. 31, no. 17, pp. 2136&ndash;2145, 2013</li>
+    <li id="r2">O. Husson <i>et al.</i>, "Health-related quality of life in adolescent and young adult
+      patients with cancer: a longitudinal study," <b>Journal of Clinical Oncology</b>, vol. 35, no. 6,
+      pp. 652&ndash;659, 2017</li>
+    <li id="r3">Janssen <i>et al.</i>, "Health-related quality of life of long-term adolescent and young
+      adult cancer survivors: the SURVAYA study," <b>Journal of Cancer Survivorship</b>, 2025</li>
+    <li id="r4">A. Hinz <i>et al.</i>, "European reference values for the quality of life questionnaire
+      EORTC QLQ-C30," <b>Acta Oncologica</b>, vol. 53, no. 7, pp. 958&ndash;965, 2014</li>
+    <li id="r5">Surveillance, Epidemiology, and End Results (SEER) Program, National Cancer Institute,
+      "Cancer stat facts: adolescent and young adult (AYA) cancers (ages 15&ndash;39),"
+      <b>https://seer.cancer.gov/</b> (5-year relative survival)</li>
+    <li id="r6">M. Pinquart and P. R. Duberstein, "Associations of social networks with cancer mortality:
+      a meta-analysis," <b>Critical Reviews in Oncology/Hematology</b>, vol. 75, no. 2, pp. 122&ndash;137,
+      2010</li>
+    <li id="r7">V. Grimm <i>et al.</i>, "Pattern-oriented modeling of agent-based complex systems: lessons
+      from ecology," <b>Science</b>, vol. 310, no. 5750, pp. 987&ndash;991, 2005</li>
+    <li id="r8">R. Axtell, R. Axelrod, J. M. Epstein, and M. D. Cohen, "Aligning simulation models: a case
+      study and results," <b>Computational and Mathematical Organization Theory</b>, vol. 1, no. 2,
+      pp. 123&ndash;141, 1996</li>
+    <li id="r9">R. G. Sargent, "Verification and validation of simulation models," <b>Journal of
+      Simulation</b>, vol. 7, no. 1, pp. 12&ndash;24, 2013</li>
+    <li id="r10">M. A. G. Sprangers and C. E. Schwartz, "Integrating response shift into health-related
+      quality of life research: a theoretical model," <b>Social Science &amp; Medicine</b>, vol. 48,
+      no. 11, pp. 1507&ndash;1515, 1999</li>
+    <li id="r11">K. M. Bellizzi <i>et al.</i>, "Positive and negative psychosocial impact of being diagnosed
+      with cancer as an adolescent or young adult," <b>Cancer</b>, vol. 118, no. 20, pp. 5155&ndash;5162,
+      2012</li>
+    <li id="r12">S. Bankes, "Exploratory modeling for policy analysis," <b>Operations Research</b>, vol. 41,
+      no. 3, pp. 435&ndash;449, 1993</li>
+    <li id="r13">Y. Barlas, "Formal aspects of model validity and validation in system dynamics,"
+      <b>System Dynamics Review</b>, vol. 12, no. 3, pp. 183&ndash;210, 1996</li>
+    <li id="r14">G. E. P. Box, "Science and statistics," <b>Journal of the American Statistical
+      Association</b>, vol. 71, no. 356, pp. 791&ndash;799, 1976</li>
+    <li id="r15">N. K. Aaronson, S. Ahmedzai, B. Bergman, <i>et al.</i>, "The European Organization for
+      Research and Treatment of Cancer QLQ-C30: a quality-of-life instrument for use in international
+      clinical trials in oncology," <b>Journal of the National Cancer Institute</b>, vol. 85, no. 5,
+      pp. 365&ndash;376, 1993</li>
+    <li id="r16">Z. Hasgul, A. Spanjaart, S. Javed, A. Akhavan, M. J. Kersten, and M. S. Jalali,
+      "Health-related quality of life dynamics: modeling insights from immunotherapy," <b>Quality of Life
+      Research</b>, vol. 34, no. 1, pp. 273&ndash;286, 2025</li>
+    <li id="r17">E. Beaulieu, A. Spanjaart, A. Roes, B. Rachet, S. Dalle, M. J. Kersten, D. Maucort-Boulch,
+      and M. S. Jalali, "Health-related quality of life in cancer immunotherapy: a systematic perspective,
+      using causal loop diagrams," <b>Quality of Life Research</b>, vol. 31, pp. 2357&ndash;2366, 2022</li>
+    <li id="r18">E. S. Kenzie, M. Seater, W. Wakeland, G. D. Coronado, and M. M. Davis, "System dynamics
+      modeling for cancer prevention and control: a systematic review," <b>PLOS ONE</b>, vol. 18, no. 12,
+      art. e0294912, 2023</li>
+    <li id="r19">A. Gjerloev, S. Crowe, C. Pagel, Y. Jani, and L. Grieco, "A systematic review of simulation
+      methods applied to cancer care services," <b>Health Systems</b>, vol. 13, no. 4, pp. 274&ndash;294,
+      2024</li>
+  </ol>
+
+  <h3 style="margin-top:28px">Data sources and model-building bibliography</h3>
+  <p class="muted" style="font-size:14px">References grounding the parameters, instruments, methodology, and
+     validation of the model, drawn from the project literature review and the source papers used to
+     build the model.</p>
+
+  <p class="ablabel" style="margin:14px 0 2px">AYA cancer HRQoL: field, outcomes, and policy</p>
+  <ul class="refs">
+    <li id="r20">S. C. Sodergren <i>et al.</i>, "Systematic review of the health-related quality of life
+      issues facing adolescents and young adults with cancer," <b>Quality of Life Research</b>, vol. 26,
+      no. 7, pp. 1659&ndash;1672, 2017</li>
+    <li id="r21">B. Zebrack <i>et al.</i>, "Quality cancer care for adolescents and young adults: a position
+      statement," <b>Journal of Clinical Oncology</b>, vol. 28, no. 32, pp. 4862&ndash;4867, 2010</li>
+    <li id="r22">J. M. Yeh <i>et al.</i>, "Life expectancy of adult survivors of childhood cancer over 3
+      decades," <b>JAMA Oncology</b>, 2020</li>
+    <li id="r23">A. W. Smith <i>et al.</i>, "Next steps for adolescent and young adult oncology workshop: an
+      update on progress and recommendations for the future," <b>Cancer</b>, vol. 122, no. 7,
+      pp. 988&ndash;999, 2016</li>
+    <li id="r24">S. J. Nass <i>et al.</i>, "Identifying and addressing the needs of adolescents and young
+      adults with cancer: summary of an Institute of Medicine workshop," <b>The Oncologist</b>, vol. 20,
+      no. 2, pp. 186&ndash;195, 2015</li>
+    <li id="r25">Adolescent and Young Adult Oncology Progress Review Group, "Closing the gap: research and
+      care imperatives for adolescents and young adults with cancer," <b>U.S. DHHS, NIH, NCI</b>, NIH Pub.
+      No. 06-6067, 2006</li>
+    <li id="r26">A. Bleyer <i>et al.</i>, Eds., <b>Cancer Epidemiology in Older Adolescents and Young Adults
+      15 to 29 Years of Age, Including SEER Incidence and Survival</b>, NCI, NIH Pub. No. 06-5767, 2006</li>
+  </ul>
+
+  <p class="ablabel" style="margin:14px 0 2px">HRQoL measurement instruments and care guidelines</p>
+  <ul class="refs">
+    <li id="r27">S. Bhatia <i>et al.</i>, "The Minneapolis-Manchester Quality of Life Instrument: reliability
+      and validity of the Adolescent Form," <b>Journal of Clinical Oncology</b>, vol. 20, no. 24,
+      pp. 4692&ndash;4698, 2002</li>
+    <li id="r28">E. L. Goodman <i>et al.</i>, "The Minneapolis-Manchester Quality of Life Instrument:
+      reliability and validity of the Adult Form in cancer survivors," <b>Quality of Life Research</b>,
+      vol. 27, no. 1, pp. 93&ndash;102, 2018</li>
+    <li id="r29">E. J. Siembida <i>et al.</i>, "Measuring health-related quality of life in adolescent and
+      young adult cancer survivors with the NIH PROMIS," <b>Psycho-Oncology</b>, vol. 30, no. 3,
+      pp. 303&ndash;311, 2021</li>
+    <li id="r30">S. Bhatia, A. S. Pappo, <i>et al.</i>, "Adolescent and young adult (AYA) oncology, NCCN
+      clinical practice guidelines in oncology," <b>Journal of the National Comprehensive Cancer
+      Network</b>, vol. 21, no. 8, pp. 851&ndash;880, 2023</li>
+  </ul>
+
+  <p class="ablabel" style="margin:14px 0 2px">Social, psychological, and survivorship mechanisms</p>
+  <ul class="refs">
+    <li id="r31">Zhao <i>et al.</i>, "Loneliness and mortality risk among cancer survivors," <b>Journal of
+      the National Comprehensive Cancer Network</b>, 2024</li>
+  </ul>
+
+  <p class="ablabel" style="margin:14px 0 2px">System-dynamics and hybrid simulation of cancer and health</p>
+  <ul class="refs">
+    <li id="r32">J. B. Homer and G. B. Hirsch, "System dynamics modeling for public health: background and
+      opportunities," <b>American Journal of Public Health</b>, vol. 96, no. 3, pp. 452&ndash;458, 2006</li>
+    <li id="r33">M. Hosking <i>et al.</i>, "Investigating interventions for increasing colorectal cancer
+      screening: insights from a simulation model," <b>Socio-Economic Planning Sciences</b>, vol. 47,
+      no. 2, pp. 142&ndash;155, 2013</li>
+    <li id="r34">L. W. Kivuti-Bitok <i>et al.</i>, "System dynamics model of cervical cancer vaccination and
+      screening interventions in Kenya," <b>Cost Effectiveness and Resource Allocation</b>, vol. 12,
+      art. 26, 2014</li>
+    <li id="r35">O. İrsoy <i>et al.</i>, "Dynamic trade-offs in granulocyte colony-stimulating factor
+      administration during chemotherapy," <b>System Dynamics Review</b>, vol. 36, pp. 397&ndash;446, 2020</li>
+    <li id="r36">M. Heshmat and A. Eltawil, "A system dynamics-based decision support model for chemotherapy
+      planning," <b>Journal of Simulation</b>, 2018</li>
+    <li id="r37">F. Williams <i>et al.</i>, "Combining community-engaged research with group model building to
+      address racial disparities in breast cancer mortality and treatment," <b>Journal of Health
+      Disparities Research and Practice</b>, vol. 11, pp. 160&ndash;178, 2018</li>
+    <li id="r38">Ö. Karanfil and J. Sterman, "Saving lives or harming the healthy? Overuse and fluctuations
+      in routine medical screening," <b>System Dynamics Review</b>, vol. 36, pp. 294&ndash;329, 2020</li>
+    <li id="r39">C. Swinerd and K. R. McNaught, "Design classes for hybrid simulations involving agent-based
+      and system dynamics models," <b>Simulation Modelling Practice and Theory</b>, vol. 25,
+      pp. 118&ndash;133, 2012</li>
+    <li id="r40">D. A. Marshall <i>et al.</i>, "Selecting a dynamic simulation modeling method for health
+      care delivery research, Part 2," <b>Value in Health</b>, vol. 18, no. 2, pp. 147&ndash;160, 2015</li>
+    <li id="r41">"Applying dynamic simulation modeling methods in health care delivery research: the SIMULATE
+      checklist," <b>Value in Health</b>, vol. 18, no. 1, pp. 5&ndash;16, 2015</li>
+    <li id="r42">A. Jalali <i>et al.</i>, "Strengthening a weak link: transparency of causal loop diagrams,"
+      <b>System Dynamics Review</b>, 2024</li>
+  </ul>
+
+  <p class="ablabel" style="margin:14px 0 2px">Agent-based and computational oncology</p>
+  <ul class="refs">
+    <li id="r43">N. Cogno <i>et al.</i>, "Agent-based modeling in cancer biomedicine: applications and tools
+      for calibration and validation," <b>Cancer Biology &amp; Therapy</b>, vol. 25, no. 1, 2024</li>
+    <li id="r44">J. Metzcar <i>et al.</i>, "A review of cell-based computational modeling in cancer biology,"
+      <b>JCO Clinical Cancer Informatics</b>, vol. 3, pp. 1&ndash;13, 2019</li>
+    <li id="r45">J. West <i>et al.</i>, "Agent-based methods facilitate integrative science in cancer,"
+      <b>Trends in Cell Biology</b>, 2022</li>
+    <li id="r46">L. K. Leykum <i>et al.</i>, "Use of an agent-based model to understand clinical systems,"
+      <b>Journal of Artificial Societies and Social Simulation</b>, vol. 15, no. 3, art. 2, 2012</li>
+    <li id="r47">A. Moskalewicz <i>et al.</i>, "Development of a microsimulation model to project the future
+      prevalence of childhood cancer in Ontario, Canada," <b>Medical Decision Making</b>, 2025</li>
+    <li id="r48">S. F. Railsback and V. Grimm, <b>Agent-Based and Individual-Based Modeling</b>, 2nd ed.
+      Princeton University Press, 2019</li>
+  </ul>
+
+  <p class="ablabel" style="margin:14px 0 2px">Simulation verification and validation methodology</p>
+  <ul class="refs">
+    <li id="r49">J. W. Forrester and P. M. Senge, "Tests for building confidence in system dynamics models,"
+      <b>TIMS Studies in the Management Sciences</b>, vol. 14, pp. 209&ndash;228, 1980</li>
+    <li id="r50">E. J. Rykiel, "Testing ecological models: the meaning of validation," <b>Ecological
+      Modelling</b>, vol. 90, pp. 229&ndash;244, 1996</li>
+    <li id="r51">J. S. Hodges and J. A. Dewar, <b>Is It You or Your Model Talking? A Framework for Model
+      Validation</b>, RAND, R-4114, 1992</li>
+    <li id="r52">J. P. C. Kleijnen, "Verification and validation of simulation models," <b>European Journal
+      of Operational Research</b>, vol. 82, pp. 145&ndash;162, 1995</li>
+    <li id="r53">V. Grimm <i>et al.</i>, "Towards better modelling and decision support: documenting model
+      development, testing, and analysis using TRACE," <b>Ecological Modelling</b>, vol. 280,
+      pp. 129&ndash;139, 2014</li>
+  </ul>
+
+  <p class="ablabel" style="margin:14px 0 2px">Network science and social contagion</p>
+  <ul class="refs">
+    <li id="r55">D. J. Watts and S. H. Strogatz, "Collective dynamics of 'small-world' networks,"
+      <b>Nature</b>, vol. 393, no. 6684, pp. 440&ndash;442, 1998</li>
+    <li id="r56">A.-L. Barab&aacute;si and R. Albert, "Emergence of scaling in random networks,"
+      <b>Science</b>, vol. 286, no. 5439, pp. 509&ndash;512, 1999</li>
+    <li id="r57">M. E. J. Newman, "The structure and function of complex networks," <b>SIAM Review</b>,
+      vol. 45, no. 2, pp. 167&ndash;256, 2003</li>
+    <li id="r58">J. H. Fowler and N. A. Christakis, "Dynamic spread of happiness in a large social network:
+      longitudinal analysis over 20 years in the Framingham Heart Study," <b>BMJ</b>, vol. 337, art. a2338,
+      2008</li>
+    <li id="r59">J. Meng, "Linking network structure to support messages: effects of brokerage and closure on
+      received social support," <b>Journal of Communication</b>, vol. 66, no. 6, 2016</li>
+    <li id="r60">R. S. Burt, <b>Structural Holes: The Social Structure of Competition</b>. Cambridge, MA:
+      Harvard University Press, 1992</li>
+    <li id="r61">J. S. Coleman, "Social capital in the creation of human capital," <b>American Journal of
+      Sociology</b>, vol. 94, pp. S95&ndash;S120, 1988</li>
+    <li id="r62">B. Wellman and S. Wortley, "Different strokes from different folks: community ties and social
+      support," <b>American Journal of Sociology</b>, vol. 96, no. 3, pp. 558&ndash;588, 1990</li>
+    <li id="r63">D. Centola and M. Macy, "Complex contagions and the weakness of long ties," <b>American
+      Journal of Sociology</b>, vol. 113, no. 3, pp. 702&ndash;734, 2007</li>
+  </ul>
+
+  <p class="ablabel" style="margin:14px 0 2px">Parameter-provenance sources (verified)</p>
+  <ul class="refs">
+    <li id="r64">B. Thom and C. Benedict, "The impact of financial toxicity on psychological well-being,
+      coping self-efficacy, and cost-coping behaviors in young adults with cancer," <b>Journal of Adolescent
+      and Young Adult Oncology</b>, vol. 8, no. 3, pp. 236&ndash;242, 2019</li>
+    <li id="r65">L. V. Ghazal, R. Terrell, D. Rodriguez, <i>et al.</i>, "Adolescent and young adult cancer
+      survivor experiences of financial toxicity: a scoping review," <b>Journal of Cancer Survivorship</b>,
+      2026</li>
+    <li id="r66">D. Kirk, I. Kabdebo, and L. Whitehead, "Prevalence of distress, its associated factors and
+      referral to support services in people with cancer," <b>Journal of Clinical Nursing</b>, vol. 30,
+      no. 19&ndash;20, pp. 2873&ndash;2885, 2021</li>
+    <li id="r67">L. Melton, D. Krause, and J. Sugalski, "Psychology staffing at cancer centers: data from
+      National Comprehensive Cancer Network member institutions," <b>JCO Oncology Practice</b>, 2020</li>
+    <li id="r68">U.-S. Lehto, M. Ojanen, S. L&auml;&auml;peri, <i>et al.</i>, "Cancer patients' social
+      relationships during 3 years after diagnosis: generic and cancer-specific social networks,"
+      <b>International Journal of Behavioral Medicine</b>, vol. 32, no. 3, pp. 325&ndash;340, 2024</li>
+    <li id="r69">S. Ameringer, R. K. Elswick Jr., D. P. Shockey, and R. Dillon, "A pilot exploration of
+      symptom trajectories in adolescents with cancer during chemotherapy," <b>Cancer Nursing</b>, vol. 36,
+      no. 1, pp. 60&ndash;71, 2013</li>
+    <li id="r70">K. G. Cloyes, J.-W. Guo, K. E. Tennant, <i>et al.</i>, "Exploring social support networks and
+      interactions of young adult and LGBTQIA+ cancer survivors and care partners," <b>Frontiers in
+      Oncology</b>, vol. 12, art. 1058411, 2022. (AYA support-network size: mean 6, SD 2.22, range 2&ndash;10.)</li>
+  </ul>
+
+  <p class="ablabel" style="margin:14px 0 2px">Public datasets</p>
+  <ul class="refs">
+    <li id="r54">National Center for Health Statistics, "National Health and Nutrition Examination Survey
+      (NHANES)," <b>Centers for Disease Control and Prevention</b>, https://www.cdc.gov/nchs/nhanes/</li>
+  </ul>
+</div></section>
+
+<footer><div class="wrap">
+  Disclaimer: This AYA Cancer HRQoL hybrid model is a product of Doctor of Philosophy (PhD) research at Johns Hopkins University as a methodological contribution to oncology, systems science, and modeling.
+  All figures and site content rights belong to Joseph Blochberger. The model is a research prototype;
+  predictive validation is ongoing.
+</div></footer>
+
+</body>
+</html>

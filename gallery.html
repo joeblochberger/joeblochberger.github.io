@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | AYA Cancer HRQoL</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/research-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="research-nav">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="aya-hrqol-model.html">AYA Model</a>
+        <a href="abm-gallery.html">ABM Models</a>
+        <a href="dissertation-progress.html">Progress</a>
+        <a href="publications.html">Publications</a>
+        <a href="code.html">Code</a>
+        <a href="gallery.html" class="active">Gallery</a>
+        <a href="blog.html">Blog</a>
+    </nav>
+
+    <main class="research-main">
+        <section class="progress-hero">
+            <h1><i class="fas fa-images"></i> Figure Gallery</h1>
+            <p class="subtitle">Model figures, reproducible from code with fixed seeds</p>
+        </section>
+
+        <!-- FILTER TABS -->
+        <section class="view-tabs" style="margin-bottom: 2rem;">
+            <button class="tab-btn active" data-filter="all">All</button>
+            <button class="tab-btn" data-filter="architecture">Architecture</button>
+            <button class="tab-btn" data-filter="results">Results</button>
+            <button class="tab-btn" data-filter="validation">Validation</button>
+            <button class="tab-btn" data-filter="scenarios">Scenarios</button>
+        </section>
+
+        <!-- GALLERY GRID -->
+        <section>
+            <div class="gallery-grid">
+                <!-- Architecture -->
+                <div class="gallery-item" data-category="architecture" onclick="openLightbox(this)">
+                    <img src="assets/aya/fig_typed_network.png" alt="Typed support network" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Typed Support Network</h4>
+                        <p>Peer, family, and clinical ties in the network layer</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="architecture" onclick="openLightbox(this)">
+                    <img src="assets/aya/fig_causal_loop_diagram.png" alt="Causal loop diagram" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Causal Loop Diagram</h4>
+                        <p>Feedback structure across the three layers</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="architecture" onclick="openLightbox(this)">
+                    <img src="assets/aya/sd_stock_flow.png" alt="SD stock and flow diagram" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>System-Dynamics Stock &amp; Flow</h4>
+                        <p>Service layer stocks, flows, and constraints</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="architecture" onclick="openLightbox(this)">
+                    <img src="assets/aya/model_component.png" alt="Component diagram" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Component Diagram (UML)</h4>
+                        <p>The three layers and six coupling interfaces</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="architecture" onclick="openLightbox(this)">
+                    <img src="assets/aya/fig_coupling_taxonomy.png" alt="Coupling taxonomy" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Coupling Taxonomy</h4>
+                        <p>Where this peer-layer architecture sits among hybrid designs</p>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="gallery-item" data-category="results" onclick="openLightbox(this)">
+                    <img src="assets/aya/fig2_trajectory_nadir.png" alt="HRQoL trajectory and nadir" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>HRQoL Trajectory &amp; Treatment Nadir</h4>
+                        <p>Population trajectory from diagnosis through survivorship</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="results" onclick="openLightbox(this)">
+                    <img src="assets/aya/fig_hrqol_distribution.png" alt="HRQoL distribution" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>HRQoL Distribution</h4>
+                        <p>Between-patient heterogeneity at key time points</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="results" onclick="openLightbox(this)">
+                    <img src="assets/aya/fig3_instrument_trajectory.png" alt="Instrument trajectory" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Instrument-Space Trajectory</h4>
+                        <p>Model state mapped through the observation layer</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="results" onclick="openLightbox(this)">
+                    <img src="assets/aya/evidence_model_by_diagnosis.png" alt="Model by diagnosis" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Trajectories by Diagnosis Group</h4>
+                        <p>Model output across AYA diagnosis mixes</p>
+                    </div>
+                </div>
+
+                <!-- Validation -->
+                <div class="gallery-item" data-category="validation" onclick="openLightbox(this)">
+                    <img src="assets/aya/fig4_calibration_validation_v2.png" alt="Calibration and validation" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Calibration / Validation Split</h4>
+                        <p>Held-out validation against empirical anchors</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="validation" onclick="openLightbox(this)">
+                    <img src="assets/aya/fig1_ablation_ladder.png" alt="Ablation ladder" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Ablation Ladder</h4>
+                        <p>The contribution of each layer, coupling cell by cell</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="validation" onclick="openLightbox(this)">
+                    <img src="assets/aya/bench_trajectory_comparison.png" alt="Benchmark trajectory comparison" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Benchmark: Trajectory Comparison</h4>
+                        <p>Hybrid vs SD-only vs Q-PRIMA arms</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="validation" onclick="openLightbox(this)">
+                    <img src="assets/aya/bench_compartment_comparison.png" alt="Benchmark compartment comparison" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Benchmark: Compartment Comparison</h4>
+                        <p>Structural docking across model arms</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="validation" onclick="openLightbox(this)">
+                    <img src="assets/aya/bench_network_final.png" alt="Final network state" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Benchmark: Final Network State</h4>
+                        <p>Support network at 24 months (representative run)</p>
+                    </div>
+                </div>
+
+                <!-- Scenarios -->
+                <div class="gallery-item" data-category="scenarios" onclick="openLightbox(this)">
+                    <img src="assets/aya/fig_stress_scenarios.png" alt="Stress scenarios" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Network Stress Scenarios</h4>
+                        <p>Isolation and reduced-tie conditions</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="scenarios" onclick="openLightbox(this)">
+                    <img src="assets/aya/fig5_adaptation_sensitivity.png" alt="Adaptation sensitivity" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Adaptation Sensitivity</h4>
+                        <p>Anti-overfitting sweep over adaptation parameters</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="scenarios" onclick="openLightbox(this)">
+                    <img src="assets/aya/fig_network_comparison.png" alt="Network topology comparison" loading="lazy">
+                    <div class="gallery-caption">
+                        <h4>Network Topology Comparison</h4>
+                        <p>Ring / Watts-Strogatz / Barab&aacute;si-Albert / Erd&#337;s-R&eacute;nyi</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOWNLOAD / REPRODUCE SECTION -->
+        <section style="margin-top: 3rem;">
+            <h2>Reproduce or Download</h2>
+            <p style="margin-bottom: 1rem; color: var(--text-muted);">
+                Every figure is regenerated deterministically from code (fixed seeds) by
+                <code>make_all_website_assets.m</code>. Animations and the full figure set, with captions
+                and context, live on the model site.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="aya-hrqol-model.html#animations" class="btn btn-primary">
+                    <i class="fas fa-film"></i> Animations on the Model Site
+                </a>
+                <a href="assets/aya/AYA_parameters_and_equations.xlsx" class="btn btn-secondary" download>
+                    <i class="fas fa-file-excel"></i> Parameters &amp; Equations Workbook
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <footer class="research-footer">
+        <p>&copy; 2026 Joseph Blochberger | PhD Research | Johns Hopkins University</p>
+        <div class="footer-links">
+            <a href="https://github.com/joeblochberger" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/josephblochberger/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.view-tabs .tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.view-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('.gallery-item').forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Lightbox functionality
+        function openLightbox(item) {
+            const img = item.querySelector('img');
+            const caption = item.querySelector('.gallery-caption h4').textContent;
+
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox-caption').textContent = caption;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Close on click outside image
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+    </script>
+</body>
+</html>

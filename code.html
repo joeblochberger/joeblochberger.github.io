@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code | AYA Cancer HRQoL</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/research-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="research-nav">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="aya-hrqol-model.html">AYA Model</a>
+        <a href="abm-gallery.html">ABM Models</a>
+        <a href="dissertation-progress.html">Progress</a>
+        <a href="publications.html">Publications</a>
+        <a href="code.html" class="active">Code</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+    </nav>
+
+    <main class="research-main">
+        <!-- REPO HEADER -->
+        <section class="repo-header">
+            <div class="repo-badges">
+                <img src="https://img.shields.io/badge/MATLAB-R2024b-orange?style=flat-square" alt="MATLAB R2024b">
+                <img src="https://img.shields.io/badge/toolboxes-none-success?style=flat-square" alt="No toolboxes">
+                <img src="https://img.shields.io/badge/status-research%20prototype-blue?style=flat-square" alt="Status">
+                <img src="https://img.shields.io/badge/reproducible-deterministic-success?style=flat-square" alt="Reproducible">
+                <img src="https://img.shields.io/badge/license-pending-lightgrey?style=flat-square" alt="License pending">
+            </div>
+            <h1><i class="fas fa-code"></i> AYA HRQoL Tri-Layer Hybrid Model</h1>
+            <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                Hybrid ABM + Network + System Dynamics model of quality of life after adolescent
+                and young adult cancer. MATLAB R2024b, no toolboxes, deterministic under fixed seeds.
+            </p>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                <i class="fas fa-info-circle"></i> The repository is private during the dissertation;
+                public release (with license) is pending. Contact for access.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="aya-hrqol-model.html#code" class="btn btn-primary">
+                    <i class="fas fa-diagram-project"></i> Implementation Details
+                </a>
+                <a href="mailto:jblochb2@jhu.edu?subject=AYA%20HRQoL%20model%20code%20access" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i> Request Access
+                </a>
+            </div>
+        </section>
+
+        <!-- QUICK START -->
+        <section>
+            <h2>Quickstart</h2>
+            <div class="code-structure">
+<pre style="margin: 0;">
+% MATLAB R2024b, no toolboxes
+cd model_v2/coupling_mvp
+verify_interfaces                 % interface checks (incl. no-leak)
+Run_Ablation_Ladder(20)           % ablation ladder + macro trend check
+Run_Measurement_Validation(20)    % observation layer: calibrate/validate split
+make_figures(20)                  % regenerate the figure pack -> figures/
+recreate_preprint_figures(20)     % regenerate the EORTC preprint figures
+
+% Standalone benchmark vs pre-existing SD / ABM models:
+cd ../benchmark_comparison
+run_benchmark                     % one command reproduces every output
+</pre>
+            </div>
+        </section>
+
+        <!-- FOLDER STRUCTURE -->
+        <section>
+            <h2>Repository Structure</h2>
+            <div class="code-structure">
+<pre style="margin: 0;">
+.
+&#9500;&#9472;&#9472; README.md
+&#9500;&#9472;&#9472; CITATION.cff                               machine-readable citation
+&#9500;&#9472;&#9472; docs/
+&#9474;   &#9500;&#9472;&#9472; INTERFACE_SPECIFICATION_TEMPLATE.md    the formal six-interface spec
+&#9474;   &#9500;&#9472;&#9472; MODEL_TIMELINE_AND_EQUATIONS.md        timeline, SD-model comparison, equations
+&#9474;   &#9500;&#9472;&#9472; AYA_parameters_and_equations.xlsx      parameters / equations workbook
+&#9474;   &#9500;&#9472;&#9472; PARAMETER_PROVENANCE.md                every parameter traced to source
+&#9474;   &#9492;&#9472;&#9472; MODEL_CREDIBILITY_AND_VALIDATION.md    verification vs validation
+&#9500;&#9472;&#9472; model_v2/
+&#9474;   &#9500;&#9472;&#9472; coupling_mvp/                          the coupled model (no toolboxes)
+&#9474;   &#9474;   &#9500;&#9472;&#9472; AYA_MVP_Coupled.m                  six-interface coupled model
+&#9474;   &#9474;   &#9500;&#9472;&#9472; coupling_switches.m                interface switches + ablation cells
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Run_Ablation_Ladder.m              ablation + macro trend check
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Run_Measurement_Validation.m       calibrate/validate split
+&#9474;   &#9474;   &#9500;&#9472;&#9472; Run_Adaptation_Sensitivity.m       anti-overfitting sweep
+&#9474;   &#9474;   &#9500;&#9472;&#9472; verify_interfaces.m                no-leak verification
+&#9474;   &#9474;   &#9492;&#9472;&#9472; make_figures.m                     regenerates the figure pack
+&#9474;   &#9500;&#9472;&#9472; benchmark_comparison/                  standalone docking benchmark
+&#9474;   &#9474;   &#9500;&#9472;&#9472; run_benchmark.m                    reproduces every output
+&#9474;   &#9474;   &#9492;&#9472;&#9472; models/                            SD-only, Q-PRIMA, hybrid arms
+&#9474;   &#9492;&#9472;&#9472; diagrams/                              CLD + UML (Mermaid, Graphviz, Vensim)
+&#9500;&#9472;&#9472; website/                                   collaborator site (this AYA page)
+&#9492;&#9472;&#9472; .github/workflows/deploy-pages.yml         auto-deploy to GitHub Pages
+</pre>
+            </div>
+        </section>
+
+        <!-- CORE SCRIPTS -->
+        <section>
+            <h2>Core Scripts</h2>
+            <div class="scripts-grid">
+                <div class="script-card">
+                    <h4>AYA_MVP_Coupled.m</h4>
+                    <p>The coupled tri-layer model: 100 heterogeneous agents, an evolving support network,
+                    and a system-dynamics service queue exchanging state through six switchable interfaces
+                    over a 24-month, diagnosis-anchored horizon.</p>
+                </div>
+                <div class="script-card">
+                    <h4>coupling_switches.m</h4>
+                    <p>The six interface switches (SW_NA, SW_SA, SW_AS, SW_NS, SW_SN, SW_AN) and the
+                    ablation cells they define. Every coupling can be turned off independently.</p>
+                </div>
+                <div class="script-card">
+                    <h4>verify_interfaces.m</h4>
+                    <p>No-leak verification: proves each off switch removes exactly one effect, so the
+                    ablation ladder cleanly measures the contribution of each layer.</p>
+                </div>
+                <div class="script-card">
+                    <h4>Run_Ablation_Ladder.m</h4>
+                    <p>Runs the ablation ladder across coupling cells plus a macro trend check,
+                    the evidence that each layer earns inclusion.</p>
+                </div>
+                <div class="script-card">
+                    <h4>Run_Measurement_Validation.m</h4>
+                    <p>Observation layer with a calibrate/validate split against empirical anchors
+                    (EORTC QLQ-C30 reference values and AYA cohort patterns).</p>
+                </div>
+                <div class="script-card">
+                    <h4>run_benchmark.m</h4>
+                    <p>Standalone docking benchmark against pre-existing models (SD-only, Q-PRIMA,
+                    ancestor hybrid). Full coupled model: 7.0% validation error (seeds 1-20).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODEL SPECIFICATION -->
+        <section>
+            <h2>Model Specification</h2>
+            <div class="code-structure">
+<pre style="margin: 0;">
+Agents            100 heterogeneous AYA patients (age, diagnosis, HRQoL state)
+Time              0 to +730 days (24 months), anchored at diagnosis (t = 0)
+Network           Watts-Strogatz; mean degree drawn PER RUN from the empirical
+                  AYA support-network distribution (Cloyes 2022):
+                  mean 6, SD 2.22, range 2-10 -> even values {2,4,6,8,10}
+Service layer     1 SD service stock with queue + per-agent states
+Coupling          6 switchable interfaces: SW_NA SW_SA SW_AS SW_NS SW_SN SW_AN
+Reproducibility   deterministic under fixed seed; independent RNG stream for
+                  the network-size draw (a run drawing k = 6 reproduces the
+                  previous fixed-6 result exactly)
+Provenance        every parameter Cited / Derived / flagged Assumption
+</pre>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+                <a href="assets/aya/AYA_parameters_and_equations.xlsx" class="btn btn-primary" download>
+                    <i class="fas fa-file-excel"></i> Parameters &amp; Equations Workbook
+                </a>
+                <a href="aya-hrqol-model.html#equations" class="btn btn-secondary">
+                    <i class="fas fa-square-root-variable"></i> Equations on the Model Site
+                </a>
+            </div>
+        </section>
+
+        <!-- VERIFICATION & VALIDATION WORKFLOW -->
+        <section>
+            <h2>Verification &amp; Validation Workflow</h2>
+            <div class="scripts-grid">
+                <div class="script-card">
+                    <h4>1. No-leak verification</h4>
+                    <p>Each interface switch removes exactly one effect, verified across all six interfaces.</p>
+                </div>
+                <div class="script-card">
+                    <h4>2. Ablation ladder</h4>
+                    <p>Layer-by-layer contribution measurement across coupling cells.</p>
+                </div>
+                <div class="script-card">
+                    <h4>3. Measurement validation</h4>
+                    <p>Calibrate/validate split against EORTC QLQ-C30 anchors and AYA cohort patterns.</p>
+                </div>
+                <div class="script-card">
+                    <h4>4. Adaptation sensitivity</h4>
+                    <p>Anti-overfitting sensitivity sweep over adaptation parameters.</p>
+                </div>
+                <div class="script-card">
+                    <h4>5. Stress scenarios</h4>
+                    <p>Network stress tests (isolation, reduced ties) with degree-matched comparisons.</p>
+                </div>
+                <div class="script-card">
+                    <h4>6. Benchmark docking</h4>
+                    <p>Structural docking against SD-only and Q-PRIMA arms; seed-robustness table (20 seeds).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- REQUIREMENTS -->
+        <section>
+            <h2>Requirements</h2>
+            <ul style="list-style: none; display: grid; gap: 0.5rem;">
+                <li><i class="fas fa-check" style="color: var(--success); margin-right: 0.5rem;"></i> MATLAB R2024b</li>
+                <li><i class="fas fa-check" style="color: var(--success); margin-right: 0.5rem;"></i> No external toolboxes required</li>
+                <li><i class="fas fa-check" style="color: var(--success); margin-right: 0.5rem;"></i> Deterministic: fixed seeds reproduce every figure and table</li>
+            </ul>
+        </section>
+
+        <!-- DATA SOURCES -->
+        <section>
+            <h2>Empirical Anchors</h2>
+            <div class="tablewrap">
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 2rem;">
+                <thead>
+                    <tr style="background: var(--bg-tertiary);">
+                        <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid var(--border);">Data</th>
+                        <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid var(--border);">Source</th>
+                        <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid var(--border);">Citation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">Incidence / Survival</td>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">SEER</td>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">seer.cancer.gov</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">HRQoL Norms</td>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">EORTC QLQ-C30</td>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">Hinz (2014), Eur J Cancer</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">Support-Network Size</td>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">AYA cohort</td>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">Cloyes (2022), mean 6, range 2 to 10</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">Network Effects</td>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">Meta-analysis</td>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">Pinquart (2010), 87 studies</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">Unmet Needs</td>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">AYA HOPE Study</td>
+                        <td style="padding: 0.75rem; border-bottom: 1px solid var(--border);">Keegan (2012)</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <p style="color: var(--text-muted);">
+                Full provenance, every parameter traced to a source or a flagged assumption, is
+                documented in the repository (<code>docs/PARAMETER_PROVENANCE.md</code>) and summarized on the
+                <a href="aya-hrqol-model.html#data" style="color: var(--gold);">model site</a>.
+            </p>
+        </section>
+    </main>
+
+    <footer class="research-footer">
+        <p>&copy; 2026 Joseph Blochberger | PhD Research | Johns Hopkins University</p>
+        <div class="footer-links">
+            <a href="https://github.com/joeblochberger" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/josephblochberger/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+</body>
+</html>

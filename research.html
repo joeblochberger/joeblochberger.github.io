@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | AYA Cancer HRQoL</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/research-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="research-nav">
+        <a href="index.html">Home</a>
+        <a href="research.html" class="active">Research</a>
+        <a href="aya-hrqol-model.html">AYA Model</a>
+        <a href="abm-gallery.html">ABM Models</a>
+        <a href="dissertation-progress.html">Progress</a>
+        <a href="publications.html">Publications</a>
+        <a href="code.html">Code</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+    </nav>
+
+    <main class="research-main">
+        <!-- HERO SECTION -->
+        <section class="research-hero">
+            <div class="hero-content">
+                <span class="research-badge">PhD Research</span>
+                <h1>Health-Related Quality of Life in Adolescent & Young Adult Cancer</h1>
+                <p class="subtitle">A Hybrid System Dynamics, Agent-Based, and Network Modeling Approach</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">944</span>
+                        <span class="stat-label">Records Triaged</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">237</span>
+                        <span class="stat-label">Relevant Papers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">9</span>
+                        <span class="stat-label">Prior Works w/ Bidirectional Coupling</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="aya-hrqol-model.html" class="btn btn-primary">
+                        <i class="fas fa-diagram-project"></i> Explore the Model Site
+                    </a>
+                    <a href="dissertation-progress.html" class="btn btn-secondary">
+                        <i class="fas fa-tasks"></i> Track Progress
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESEARCH OVERVIEW -->
+        <section class="research-overview">
+            <h2>Research Overview</h2>
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="card-icon"><i class="fas fa-question-circle"></i></div>
+                    <h3>The Problem</h3>
+                    <p>AYA cancer patients (ages 15&ndash;39) report health-related quality of life
+                    <strong>below general-population norms for years</strong> after treatment, with the largest and
+                    longest-lasting shortfalls in <strong>physical and emotional functioning</strong>
+                    (Smith 2013, AYA HOPE; Husson 2017). Observational studies sample only a few time points and
+                    cannot represent how heterogeneity, support, and services evolve together.</p>
+                </div>
+                <div class="overview-card">
+                    <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>The Gap</h3>
+                    <p>A structured triage of <strong>944 records</strong> (237 relevant) confirms established use of
+                    system-dynamics, agent-based, network, and complex-systems methods in oncology
+                    (for example, Kenzie 2023; Stephan 2024). Yet only <strong>9 works show bidirectional cross-method
+                    coupling</strong>, and none combine an agent-based patient model, a social-support network, and
+                    system dynamics for AYA HRQoL.</p>
+                </div>
+                <div class="overview-card">
+                    <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>The Solution</h3>
+                    <p>A <strong>tri-layer hybrid architecture</strong>: System Dynamics (population and services),
+                    Agent-Based Modeling (individual heterogeneity), and an evolving social Network (peer support),
+                    coupled through six formally specified, independently switchable interfaces.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- THREE-LAYER ARCHITECTURE -->
+        <section class="architecture-section">
+            <h2>Tri-Layer Hybrid Architecture</h2>
+            <div class="architecture-diagram">
+                <div class="layer layer-macro">
+                    <h4><i class="fas fa-globe"></i> MACRO: System Dynamics</h4>
+                    <p>Population feedback loops, service queue, resource constraints</p>
+                    <code>dX/dt = f(X, &alpha;<sub>macro</sub>)</code>
+                </div>
+                <div class="layer-connector">
+                    <i class="fas fa-arrows-alt-v"></i>
+                    <span>SW_SA / SW_AS interfaces</span>
+                </div>
+                <div class="layer layer-meso">
+                    <h4><i class="fas fa-users"></i> MESO: Agent-Based Model</h4>
+                    <p>Individual patients, heterogeneous attributes, behavioral rules</p>
+                    <code>Agent<sub>i</sub> = {age, dx, HRQoL<sub>i</sub>(t)}</code>
+                </div>
+                <div class="layer-connector">
+                    <i class="fas fa-arrows-alt-v"></i>
+                    <span>SW_NA / SW_AN interfaces</span>
+                </div>
+                <div class="layer layer-micro">
+                    <h4><i class="fas fa-project-diagram"></i> MICRO: Network Layer</h4>
+                    <p>Evolving peer-support ties; per-run network size drawn from AYA evidence (Cloyes 2022)</p>
+                    <code>G = (V, E, w<sub>ij</sub>)</code>
+                </div>
+            </div>
+            <p style="margin-top: 1.5rem; color: var(--text-secondary);">
+                The methodological contribution is the <strong>formally specified, verified, bidirectionally
+                coupled architecture</strong> of six switchable interfaces (SW_NA, SW_SA, SW_AS, SW_NS, SW_SN, SW_AN),
+                plus an ablation protocol showing each layer earns inclusion. A "no-leak" verification proves each
+                off switch removes exactly one effect.
+            </p>
+        </section>
+
+        <!-- KEY FINDINGS PREVIEW -->
+        <section class="findings-section">
+            <h2>Key Results</h2>
+            <div class="findings-grid">
+                <div class="finding-card">
+                    <div class="finding-value">7.2%</div>
+                    <div class="finding-label">Full three-layer model docking error versus single-method models (v6)</div>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-value">R&sup2; &gt; 0.99</div>
+                    <div class="finding-label">Q-PRIMA VenSim &rarr; MATLAB translation accuracy</div>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-value">6 / 6</div>
+                    <div class="finding-label">Coupling interfaces pass no-leak verification</div>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-value">2&ndash;10</div>
+                    <div class="finding-label">Support-network size drawn per run (mean 6, Cloyes 2022)</div>
+                </div>
+            </div>
+            <p class="findings-caveat">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span><strong>Note:</strong> Verification is complete. Behavioral validity is pattern-oriented.
+                Predictive validity against an external cohort remains open under a pre-registered EORTC data
+                request (see <a href="publications.html">Publications</a>). The model is a theory and
+                decision-support scaffold rather than a tool for individual prognosis.</span>
+            </p>
+        </section>
+
+        <!-- LITERATURE CORPUS -->
+        <section class="findings-section">
+            <h2>Literature Corpus</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                The gap claim rests on a structured, SHA-256&ndash;verified triage of the working corpus: every
+                count below is drawn from the triage audit, and every audited source path matches the hash
+                frozen in the corpus record.
+            </p>
+            <div class="findings-grid">
+                <div class="finding-card">
+                    <div class="finding-value">944</div>
+                    <div class="finding-label">Bibliographic records triaged (902 canonical after de-duplication)</div>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-value">237 / 234</div>
+                    <div class="finding-label">Relevant / Marginal (473 out of scope)</div>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-value">245</div>
+                    <div class="finding-label">Source paths deep-audited (SHA-256 verified)</div>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-value">9</div>
+                    <div class="finding-label">Records with bidirectional cross-method coupling</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Nearest prior art (cited)</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                The closest partial precedents from the triage, each using one or more of the same methods yet
+                missing the AYA-HRQoL domain or confirmed bidirectional coupling.
+            </p>
+            <div class="publications-list">
+                <div class="publication-card">
+                    <span class="pub-type">Relevant &bull; SD review</span>
+                    <h3>System dynamics modeling for cancer prevention and control: A systematic review</h3>
+                    <p class="pub-authors">Kenzie E, et al.</p>
+                    <p class="pub-venue">PLoS ONE, 2023</p>
+                </div>
+                <div class="publication-card">
+                    <span class="pub-type">Relevant &bull; ABM in oncology</span>
+                    <h3>Agent-based approaches for biological modeling in oncology: A literature review</h3>
+                    <p class="pub-authors">Stephan D, et al.</p>
+                    <p class="pub-venue">Artificial Intelligence in Medicine, 2024</p>
+                </div>
+                <div class="publication-card">
+                    <span class="pub-type">Relevant &bull; Complex systems</span>
+                    <h3>An Introduction to Complex Systems Science and Its Applications</h3>
+                    <p class="pub-authors">Siegenfeld AF, Bar-Yam Y</p>
+                    <p class="pub-venue">Complexity, 2020</p>
+                </div>
+                <div class="publication-card">
+                    <span class="pub-type">Marginal &bull; ABM in epidemiology</span>
+                    <h3>Formalizing the role of agent-based modeling in causal inference and epidemiology</h3>
+                    <p class="pub-authors">Marshall BDL, Galea S</p>
+                    <p class="pub-venue">American Journal of Epidemiology, 2014</p>
+                </div>
+                <div class="publication-card">
+                    <span class="pub-type">Marginal &bull; Systems thinking</span>
+                    <h3>Systems science and systems thinking for public health</h3>
+                    <p class="pub-authors">Carey G, et al.</p>
+                    <p class="pub-venue">BMJ Open, 2015</p>
+                </div>
+            </div>
+            <p class="findings-caveat" style="margin-top: 1.5rem;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span><strong>Scope note:</strong> Counts reflect the working corpus triage as of July 2026 and
+                describe the current state of the literature. The full corpus and the triage records live in the
+                literature-review folder of the project.</span>
+            </p>
+        </section>
+
+        <!-- QUICK LINKS -->
+        <section class="quick-links">
+            <h2>Explore Further</h2>
+            <div class="links-grid">
+                <a href="aya-hrqol-model.html" class="link-card">
+                    <i class="fas fa-diagram-project"></i>
+                    <h4>Model Site</h4>
+                    <p>Full model card, equations, figures, animations, references</p>
+                </a>
+                <a href="dissertation-progress.html" class="link-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Dissertation Progress</h4>
+                    <p>Timeline, milestones, chapter status</p>
+                </a>
+                <a href="publications.html" class="link-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h4>Publications</h4>
+                    <p>Preprint, whitepaper, papers in preparation</p>
+                </a>
+                <a href="code.html" class="link-card">
+                    <i class="fas fa-code"></i>
+                    <h4>MATLAB Code</h4>
+                    <p>Repository layout, quickstart, verification workflow</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="research-footer">
+        <p>&copy; 2026 Joseph Blochberger | PhD Research | Johns Hopkins University</p>
+        <div class="footer-links">
+            <a href="https://github.com/joeblochberger" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/josephblochberger/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+</body>
+</html>

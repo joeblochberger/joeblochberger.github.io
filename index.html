@@ -1,716 +1,813 @@
 <!DOCTYPE html>
-<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<html lang="en">
 <head>
-
-   <!--- Basic Page Needs
-   ================================================== -->
-   <meta charset="utf-8">
-	<title>Joe Blochberger</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
-
-   <!-- Mobile Specific Metas
-   ================================================== -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<!-- CSS
-    ================================================== -->
-   <link rel="stylesheet" href="css/default.css">
-	<link rel="stylesheet" href="css/layout.css">
-   <link rel="stylesheet" href="css/media-queries.css">
-   <link rel="stylesheet" href="css/magnific-popup.css">
-
-   <!-- Script
-   ================================================== -->
-	<script src="js/modernizr.js"></script>
-
-   <!-- Favicons
-	================================================== -->
-	<link rel="shortcut icon" href="favicon.ico" >
-
+    <meta charset="utf-8">
+    <title>Joe Blochberger</title>
+    <meta name="description" content="Joe Blochberger, PE: engineer at JHU/APL and PhD candidate in Civil and Systems Engineering at Johns Hopkins. Engineering acoustics, systems modeling, and AYA cancer HRQoL research.">
+    <meta name="author" content="Joseph Blochberger">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/research-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
 
-   <!-- Header
-   ================================================== -->
-   <header id="home">
+    <nav class="research-nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="research.html">Research</a>
+        <a href="aya-hrqol-model.html">AYA Model</a>
+        <a href="abm-gallery.html">ABM Analytics</a>
+        <a href="dissertation-progress.html">Progress</a>
+        <a href="publications.html">Publications</a>
+        <a href="code.html">Code</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+    </nav>
 
-      <nav id="nav-wrap">
+    <main class="research-main">
 
-         <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
-	      <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+        <!-- HERO -->
+        <section class="research-hero hub-hero" id="home">
+            <div class="hero-content">
+                <span class="research-badge">Engineer &bull; Analyst &bull; PhD Candidate &bull; Scientist</span>
+                <h1>Joe Blochberger, PE</h1>
+                <p class="tagline">
+  Chief Scientist, Engineering Assistant Program Manager, and Senior Professional Staff II at the
+  <a href="https://www.jhuapl.edu/">Johns Hopkins University Applied Physics Laboratory</a>,
+  and PhD candidate in Civil and Systems Engineering at Johns Hopkins, affiliated with the
+  <a href="https://systems.jhu.edu/">Johns Hopkins Center for Systems Science and Engineering</a>.
+  Research spans signal and systems analysis, engineering decomposition methods, and
+  applied machine learning / artificial intelligence use cases in acoustics.  Avid researcher translating over a decade of traditional engineering experience into exploring patterns from data in cancer care,
+  computational systems modeling, public health, and economics.
+</p>
 
-         <ul id="nav" class="nav">
-            <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
-            <li><a class="smoothscroll" href="#about">About</a></li>
-	        <li><a class="smoothscroll" href="#resume">Resume</a></li>
-            <li><a class="smoothscroll" href="#portfolio">Portfolio</a></li>
-			<li><a class="smoothscroll" href="#call-to-action">Contact</a></li>
-         </ul> <!-- end #nav -->
+                <div class="social-row">
+                    <a href="https://www.linkedin.com/in/josephblochberger/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/joeblochberger/" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+                <div class="hero-buttons">
+                    <a href="research.html" class="btn btn-primary">
+                        <i class="fas fa-flask"></i> PhD Research
+                    </a>
+                    <a href="assets/pdfs/Blochberger_CV_Dec2022.pdf" class="btn btn-secondary" target="_blank">
+                        <i class="fas fa-download"></i> Download CV (Dec 2022)
+                    </a>
+                </div>
+            </div>
+        </section>
 
-      </nav> <!-- end #nav-wrap -->
+        <!-- RESEARCH SPOTLIGHT -->
+        <section id="research-spotlight">
+            <div class="featured-banner">
+                <h3><i class="fas fa-heart-pulse"></i> Featured: Health-Related Quality of Life Modeling of Adolescent &amp; Young Adult (AYA) Cancer Patients</h3>
+                <p>
+                    A tri-layer hybrid simulation, agent-based plus social network plus system dynamics,
+                    of how health-related quality of life evolves from diagnosis through survivorship in
+                    adolescent and young adult cancer patients. Verified six-interface coupling architecture
+                    with a pre-registered external-validation data request.
+                </p>
+                <a href="aya-hrqol-model.html" class="btn btn-primary"><i class="fas fa-diagram-project"></i> Explore the Model</a>
+            </div>
+            <div class="links-grid">
+                <a href="#research-portfolio" class="link-card">
+                    <i class="fas fa-layer-group"></i>
+                    <h4>Research Portfolio</h4>
+                    <p>Eight projects, most recent first, with figures</p>
+                </a>
+                <a href="research.html" class="link-card">
+                    <i class="fas fa-flask"></i>
+                    <h4>Research Overview</h4>
+                    <p>Problem, gap, and the tri-layer solution</p>
+                </a>
+                <a href="dissertation-progress.html" class="link-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Dissertation Progress</h4>
+                    <p>Timeline, chapters, milestones, updates</p>
+                </a>
+                <a href="publications.html" class="link-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h4>Publications</h4>
+                    <p>Preprint, whitepaper, papers in preparation</p>
+                </a>
+                <a href="code.html" class="link-card">
+                    <i class="fas fa-code"></i>
+                    <h4>Code</h4>
+                    <p>MATLAB model, verification workflow</p>
+                </a>
+                <a href="gallery.html" class="link-card">
+                    <i class="fas fa-images"></i>
+                    <h4>Gallery</h4>
+                    <p>Reproducible model figures</p>
+                </a>
+                <a href="blog.html" class="link-card">
+                    <i class="fas fa-blog"></i>
+                    <h4>Blog</h4>
+                    <p>Updates from the PhD journey</p>
+                </a>
+            </div>
+        </section>
 
-      <div class="row banner">
-         <div class="banner-text">
-            <h1 class="responsive-headline">Joe Blochberger, PE.</h1>
-            <h3>I am a professional engineer working at <a href="https://www.jhuapl.edu/">The Johns Hopkins University Applied Physics Laboratory</a> with a background in engineering acoustics. 
-			Currently, I am also a PhD candidate in Civil & Systems Engineering at <a href="https://engineering.jhu.edu/case/">Johns Hopkins</a>.
-			My research lies at the intersection between signal processing, engineering analysis, data-driven insights using machine learning techniques, and exploring traditionally non-engineering topics.
-			Lastly, my aim is to collaborate and extend my impact to fields involving operations research, the social sciences, public health, and/or medicine.</h3>
-            <hr />
-            <ul class="social">
-               <li><a href="https://www.linkedin.com/in/josephblochberger/"><i class="fa fa-linkedin"></i></a></li>
-               <li><a href="https://github.com/joeblochberger/"><i class="fa fa-github"></i></a></li>
-            </ul>
-         </div>
-      </div>
-
-      <p class="scrolldown">
-         <a class="smoothscroll" href="#about"><i class="icon-down-circle"></i></a>
-      </p>
-
-   </header> <!-- Header End -->
-
-
-   <!-- About Section
-   ================================================== -->
-   <section id="about">
-
-      <div class="row">
-
-         <div class="three columns">
-
-            <img class="profile-pic"  src="images/profilepic_2.png" alt="" />
-
-         </div>
-
-         <div class="nine columns main-col">
-
+        <!-- ABOUT -->
+        <section id="about">
             <h2>About Me</h2>
+            <div class="about-grid">
+                <div>
+                    <img class="profile-pic" src="assets/images/Joe-Blochberger.png" alt="Joe Blochberger">
+                    <div class="contact-card">
+                        <h4 style="margin-bottom: .5rem;">Contact</h4>
+                        <p>
+                            Joseph Blochberger<br>
+                            Department of Civil &amp; Systems Engineering<br>
+                            The Johns Hopkins University<br>
+                            3400 N. Charles St.<br>
+                            Baltimore, MD 21218<br>
+                            <a href="mailto:jblochb2@jhu.edu" style="color: var(--gold);">jblochb2@jhu.edu</a>
+                        </p>
+                    </div>
+                </div>
+                <div>
+<p>
+  Professional service includes chairing an annual
+  <a href="https://www.asme.org/">American Society of Mechanical Engineers</a>
+  (ASME) session on analytical, computational, and machine-learning methods in
+  dynamics, vibration, and acoustics; committee service on the
+  <a href="https://www.asme.org/get-involved/groups-sections-and-technical-divisions/technical-divisions/technical-divisions-community-page">ASME Technical Committee on Vibration and Sound</a> and <a href="https://www.asme.org/get-involved/groups-sections-and-technical-divisions/technical-divisions/technical-divisions-community-page">ASME Noise Control and Acoustics Division</a>;
+  and service as a reviewer for
+  <a href="https://ieee-sensors.org/">IEEE Sensors</a>
+  and other professional societies.
+</p>
+                    <p style="margin-top: 1rem;">
+                        <b>Research Interests</b>: Creativity in Engineering Design, Operations Research,
+                        Predictive Analytics, Probability &amp; Stochastic Processes, Signal Processing,
+                        Systems Engineering, Systems Science
+                    </p>
+                </div>
+            </div>
+        </section>
 
-            <p>
-			I am a multidisciplinary engineering analyst and manager with over a decade of professional experience in engineering acoustics, analyzing sensor data, and systems engineering.  
-			I also chair an annual session for the American Society of Mechanical Engineers (ASME) for Analytical, Computational, Artificial Intelligence, and Machine Learning in Dynamics, Vibrations, and Acoustics and serve as a member of the Technical Committee on Vibration and Sound.  I also provide peer review for publications for IEEE Sensors and a variety of other professional societies.
-			At the moment, I am a part of collaborative research projects that involve predictive analytics, complex systems, and operations research. 
-			My intent is to creatively apply my engineering insights to tackle a wide variety of non-traditional multidisciplinary problems (such as those in the public health, medical, and economic domains) as well as learn about best practices from fields outside of engineering. 
+        <!-- BACKGROUND / RESUME -->
+        <section id="resume">
+            <h2>Background</h2>
+
+            <div class="resume-block">
+                <h3 style="color: var(--gold-light); margin-bottom: 1rem;"><i class="fas fa-graduation-cap"></i> Education</h3>
+                <div class="resume-item">
+                    <h4>The Johns Hopkins University</h4>
+                    <p class="info">PhD Candidate, Civil &amp; Systems Engineering</p>
+                    <p>PhD candidate advised by Professor Tak Igusa, while working full-time at JHU/APL. Research
+                    includes an agent-based model of emergent segregation patterns, machine-learning post-simulation
+                    analysis, and dynamic analysis for energy systems and topology optimization projects. Active
+                    contributor to the JHU Center for Systems Science and Engineering (CSSE).</p>
+                </div>
+                <div class="resume-item">
+                    <h4>The Johns Hopkins University</h4>
+                    <p class="info">Post-Masters Certificate, Electrical &amp; Computer Engineering</p>
+                    <p>Graduate study in signal processing, machine learning, applied probability and stochastic
+                    processes, and detection and estimation theory, while working full-time as an engineering
+                    project manager.</p>
+                </div>
+                <div class="resume-item">
+                    <h4>The Pennsylvania State University (Penn State)</h4>
+                    <p class="info">Master of Science, Mechanical Engineering</p>
+                    <p>Graduate study in computational mechanics (linear and nonlinear finite element analysis),
+                    mechanical vibration, and engineering acoustics, while working full-time as an engineer.</p>
+                </div>
+                <div class="resume-item">
+                    <h4>Virginia Polytechnic Institute and State University (Virginia Tech)</h4>
+                    <p class="info">Bachelor of Science, Mechanical Engineering</p>
+                    <p>Two engineering internships, at Kollmorgen Motors Division and General Dynamics Electric Boat,
+                    while working part-time at the Virginia Tech Bookstore and Math Emporium. Undergraduate research
+                    under Professor Lei Zuo on energy-harvesting shock absorbers, and under Professor Chris Fuller on an
+                    autonomous acoustic monitoring system for the NASA Langley Research Center. Minor in Engineering
+                    Science and Mechanics.</p>
+                </div>
+                <div class="resume-item">
+                    <h4>Virginia Department of Professional and Occupational Regulation</h4>
+                    <p class="info">Licensed Professional Engineer</p>
+                </div>
+            </div>
+
+            <div class="resume-block">
+                <h3 style="color: var(--gold-light); margin-bottom: 1rem;"><i class="fas fa-briefcase"></i> Work</h3>
+                <div class="resume-item">
+                    <h4>The Johns Hopkins University Applied Physics Laboratory (JHU/APL)</h4>
+                    <p class="info">Assistant Program Manager &bull; Engineering Analyst</p>
+                    <ul>
+                        <li>Appointed Assistant Program Manager for technical expertise in acoustic and engineering systems analysis and demonstrated leadership.</li>
+                        <li>Guides five project managers and technical staff across laboratory test and evaluation, sonar performance analysis, database and tool management, data inventory, and financial analysis.</li>
+                        <li>Experience spans engineering acoustics, systems engineering, noise control engineering, naval shipbuilding design, project management, and test and evaluation of sonar systems and capabilities.</li>
+                        <li>Technical depth in engineering acoustics includes finite element modeling of structural vibration, structure-borne sound radiation, end-to-end sonar system evaluation, and signal processing.</li>
+                    </ul>
+                </div>
+                <div class="resume-item">
+                    <h4>The Johns Hopkins University Department of Civil &amp; Systems Engineering (JHU CaSE)</h4>
+                    <p class="info">Graduate Student</p>
+                    <ul>
+                        <li>Service to the American Society of Mechanical Engineers (ASME) Noise Control &amp; Acoustics Division includes independent peer review of publication submissions, topic organizer for the International Mechanical Engineering Congress &amp; Exposition (IMECE), and session chair at IMECE.</li>
+                    </ul>
+                </div>
+                <div class="resume-item">
+                    <h4>General Dynamics Electric Boat (GDEB)</h4>
+                    <p class="info">Signatures Engineer</p>
+                    <ul>
+                        <li>Cognizant signatures engineer for the general arrangement and detailed design phase of engineering drawing development.</li>
+                        <li>Coordinated with engineering departments and shipyard operations to meet submarine stealth requirements throughout the product lifecycle.</li>
+                        <li>Developed a variety of analytical and computational models, augmented and refined by empirical data, to understand the physics of sound, of structures, and of the interaction between the two.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="resume-block">
+                <h3 style="color: var(--gold-light); margin-bottom: 1rem;"><i class="fas fa-toolbox"></i> Proficiencies</h3>
+                <div class="resume-item">
+                    <p><b><i>Languages</i></b>: MATLAB, MySQL, Mathematica, Octave, R, Python, CSS, HTML, Javascript</p>
+                    <p style="margin-top: .5rem;"><b><i>Skills</i></b>: Acoustics, Analyzing Sensor Data, Applied Probability / Statistics,
+                    Test &amp; Evaluation, Mechanical Engineering, Noise Control, Project Management, Sonar, Signal Processing,
+                    Systems Engineering, Vibrations</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO -->
+        <section id="portfolio">
+            <h2>Portfolio</h2>
+
+            <!-- RESEARCH PORTFOLIO -->
+            <div class="portfolio-group" id="research-portfolio">
+                <h3><i class="fas fa-flask"></i> Research Portfolio</h3>
+                <p class="group-note">Active and recent research, most recent first. Expand a card for method, results,
+                and figures. Figures are reproduced from the manuscript or generated from the analysis code.</p>
+                <div class="project-grid">
+
+                    <!-- 1. AYA HRQoL (featured) -->
+                    <div class="project-card research-card is-featured card-dark">
+                        <img src="assets/aya/banner.png" alt="Tri-layer AYA cancer HRQoL model banner" loading="lazy">
+                        <div class="project-body">
+                            <div class="project-meta">
+                                <span class="project-year">2025&ndash;2026</span>
+                                <span class="project-venue">PhD dissertation research &bull; Johns Hopkins</span>
+                            </div>
+                            <h4>Quality of Life After Cancer, Simulated Layer by Layer</h4>
+                            <p class="blurb">A tri-layer hybrid simulation of health-related quality of life from diagnosis
+                            through survivorship in adolescent and young adult cancer, coupling agent-based patients, an
+                            evolving peer-support network, and system-dynamics services through six independently
+                            switchable interfaces.</p>
+                            <div class="project-stats">
+                                <div class="project-stat"><b>944</b><span>Records triaged</span></div>
+                                <div class="project-stat"><b>237</b><span>Judged relevant</span></div>
+                                <div class="project-stat"><b>6 / 6</b><span>Interfaces pass no-leak verification</span></div>
+                                <div class="project-stat"><b>9</b><span>Prior works with bidirectional coupling</span></div>
+                            </div>
+                            <details>
+                                <summary>Details (2025&ndash;2026, in progress)</summary>
+                                <p>Health-related quality of life (HRQoL) among patients diagnosed between ages 15 and 39
+                                stays below general-population norms for years after treatment, and the deepest, most
+                                persistent shortfalls appear in physical and emotional functioning. Observational cohorts
+                                sample a handful of time points, so the joint evolution of heterogeneity, social support,
+                                and service capacity stays outside what such designs can represent.</p>
+                                <p>A structured triage of 944 bibliographic records, of which 237 were judged relevant,
+                                confirms established use of system-dynamics, agent-based, and network methods in oncology.
+                                Only 9 works exhibit bidirectional cross-method coupling, and none combine an agent-based
+                                patient model, a social-support network, and system dynamics for the adolescent and young
+                                adult population.</p>
+                                <p>The response is a tri-layer architecture with six formally specified, independently
+                                switchable interfaces, an ablation protocol under which every layer has to earn inclusion,
+                                and a no-leak verification proving that each disabled switch removes exactly one effect.
+                                Verification is complete. Behavioral validity is pattern-oriented, and predictive validity
+                                against an external cohort remains open under a pre-registered data request, so the model
+                                serves as a theory and decision-support scaffold rather than an individual prognostic tool.</p>
+                            </details>
+                            <div class="project-links">
+                                <a href="aya-hrqol-model.html"><i class="fas fa-diagram-project"></i> Model Site</a>
+                                <a href="research.html"><i class="fas fa-flask"></i> Research Overview</a>
+                                <a href="dissertation-progress.html"><i class="fas fa-chart-line"></i> Progress</a>
+                                <a href="publications.html"><i class="fas fa-file-alt"></i> Publications</a>
+                                <a href="code.html"><i class="fas fa-code"></i> Code</a>
+                                <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Guitar magnetic damping -->
+                    <div class="project-card research-card">
+                        <img src="assets/images/research/guitar-fig3-decay-vs-harmonic.png"
+                             alt="Decay constant versus harmonic number across eight pickup clearances" loading="lazy">
+                        <div class="project-body">
+                            <div class="project-meta">
+                                <span class="project-year">2026</span>
+                                <span class="project-venue">ASME IMECE2026-192643</span>
+                            </div>
+                            <h4>The Electric Guitar Pickup as a Magnetic Damper</h4>
+                            <p class="blurb">Direct-inject recordings across an eight-step clearance sweep quantify how a
+                            single-coil magnet removes energy from individual harmonics of a ferromagnetic guitar string,
+                            and where magnetic damping overtakes mechanical damping.</p>
+                            <div class="project-stats">
+                                <div class="project-stat"><b>3.8&times;</b><span>Rise in fourth-harmonic decay, 5.0 to 2.5 mm</span></div>
+                                <div class="project-stat"><b>2.8&times;</b><span>Magnetic over mechanical damping at 2.5 mm</span></div>
+                                <div class="project-stat"><b>p &asymp; 1.0</b><span>Power-law frequency scaling</span></div>
+                                <div class="project-stat"><b>74 / 80</b><span>Takes passing quality control</span></div>
+                            </div>
+                            <details>
+                                <summary>Details (2026, accepted for November 2026)</summary>
+                                <p>Digital waveguide synthesis and the Karplus&ndash;Strong algorithm assume ideal boundary
+                                conditions and uniform exponential decay across every harmonic. A real electric guitar
+                                places a permanent magnet within millimeters of a ferromagnetic string, so the string
+                                carries a position-dependent force on top of the tension-based restoring force.</p>
+                                <p>An unwound G string was recorded through a direct-inject path at clearances from 5.00 mm
+                                down to 1.50 mm. Onset detection by amplitude envelope time-aligns the takes,
+                                short-time Fourier analysis resolves decay per harmonic, and a calibrated
+                                Karplus&ndash;Strong reference isolates the magnetic contribution by subtraction. Bootstrap
+                                resampling over 2000 iterations supplies nonparametric 95 percent confidence intervals.</p>
+                                <p>Damping proves strongly harmonic-selective. The fundamental changes by a factor of 1.3
+                                to 1.6 across the sweep, while the fourth harmonic changes by a factor of 3.8, and the
+                                equivalent T60 of the fourth harmonic falls from 5.0 s to 1.3 s, an audible loss of
+                                high-harmonic sustain. Magnetic and mechanical contributions become equal for the fourth
+                                harmonic near 3.0 to 3.5 mm, and the magnetic term reaches 2.8 times the mechanical term at
+                                2.5 mm. One-way analysis of variance resolves significant clearance effects for three of the
+                                four harmonics. The fitted power-law exponent clusters near 1.0 and rises to 1.48 at 2.5 mm,
+                                well above the frequency-independent eddy-current prediction and below the jerk-dominated
+                                limit of 2. A localized reversal at 2.0 mm is retained in every table and excluded from
+                                trend fitting.</p>
+                            </details>
+                            <div class="project-links">
+                                <a href="assets/images/research/guitar-fig1-experimental-geometry.png" target="_blank"><i class="fas fa-image"></i> Geometry</a>
+                                <a href="assets/images/research/guitar-fig2-stft-spectrograms.png" target="_blank"><i class="fas fa-image"></i> Spectrograms</a>
+                                <a href="assets/images/research/guitar-fig3-decay-vs-harmonic.png" target="_blank"><i class="fas fa-image"></i> Decay Constants</a>
+                                <a href="assets/images/research/guitar-fig4-karplus-strong-comparison.png" target="_blank"><i class="fas fa-image"></i> Synthesis Reference</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Underwater blind source separation -->
+                    <div class="project-card research-card">
+                        <img src="assets/images/research/underwater-fig2-bss-outputs.png"
+                             alt="Blind source separation estimates overlaid on aligned reference sources" loading="lazy">
+                        <div class="project-body">
+                            <div class="project-meta">
+                                <span class="project-year">2026</span>
+                                <span class="project-venue">ASME IMECE2026-192617</span>
+                            </div>
+                            <h4>Blind Source Separation of Ship Noise and Whale Calls</h4>
+                            <p class="blurb">Four unsupervised separation methods are compared on a shipping and fin-whale
+                            mixture, first at the matched-model ceiling and then under noise and multipath, where every
+                            ceiling collapses.</p>
+                            <div class="project-stats">
+                                <div class="project-stat"><b>+38.2 dB</b><span>Mean SI-SDR, independent component analysis</span></div>
+                                <div class="project-stat"><b>+24.9 dB</b><span>Mean SI-SDR, time-delay DMD</span></div>
+                                <div class="project-stat"><b>&minus;31 dB</b><span>Ceiling lost under convolutive mixing</span></div>
+                                <div class="project-stat"><b>1680</b><span>Monte Carlo runs</span></div>
+                            </div>
+                            <details>
+                                <summary>Details (2026, accepted for November 2026)</summary>
+                                <p>Principal component analysis, independent component analysis, singular spectrum analysis,
+                                and time-delay dynamic mode decomposition are applied to a two-source instantaneous mixture
+                                built from a NOAA Ship Ronald H. Brown recording and a fin whale recording. Kurtosis
+                                separates the two sources by two orders of magnitude, and the leading principal component
+                                explains 80 to 82 percent of the variance in every analysis domain, so variance
+                                concentration is close to domain-invariant for a rank-2 mixture.</p>
+                                <p>Under matched instantaneous mixing, independent component analysis leads every metric with
+                                a source-averaged scale-invariant signal-to-distortion ratio of 38.25 dB over 30 random
+                                mixing matrices, followed by time-delay dynamic mode decomposition at 24.95 dB. Principal
+                                component analysis saturates near 1.6 dB and singular spectrum analysis stays negative.</p>
+                                <p>A robustness study of 1680 runs across seven signal-to-noise levels and both mixing models
+                                changes the picture. Under convolutive mixing the independent-component ceiling falls from
+                                38.2 dB to 7.1 dB even without noise, and the time-delay ceiling falls to 1.5 dB because a
+                                minimal delay embedding cannot span echoes of 5 to 50 ms. The high instantaneous figures are
+                                therefore matched-model ceilings rather than expected field performance. Embedding depth
+                                trades separation accuracy against modal interpretability: a depth of 2 separates best, while
+                                a depth of 12 exposes a complex-conjugate eigenvalue pair near the unit circle at 19.0 Hz.</p>
+                            </details>
+                            <div class="project-links">
+                                <a href="assets/images/research/underwater-fig1-waveforms-spectrograms.png" target="_blank"><i class="fas fa-image"></i> Sources</a>
+                                <a href="assets/images/research/underwater-fig2-bss-outputs.png" target="_blank"><i class="fas fa-image"></i> Separation Outputs</a>
+                                <a href="assets/images/research/underwater-fig3-sisdr-vs-snr.png" target="_blank"><i class="fas fa-image"></i> Robustness</a>
+                                <a href="assets/images/research/underwater-fig4-parameter-sensitivity.png" target="_blank"><i class="fas fa-image"></i> Sensitivity</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Schelling multi-scale modal decomposition -->
+                    <div class="project-card research-card">
+                        <img src="assets/images/research/schelling-fig-lattice-evolution.png"
+                             alt="Schelling lattice evolving from random initial state to a frozen segregated state" loading="lazy">
+                        <div class="project-body">
+                            <div class="project-meta">
+                                <span class="project-year">2026</span>
+                                <span class="project-venue">IEEE Trans. Computational Social Systems &bull; draft</span>
+                            </div>
+                            <h4>Two Order Parameters for the Schelling Segregation Model</h4>
+                            <p class="blurb">Sparsity-promoting and multi-resolution dynamic mode decomposition are coupled
+                            to extract a ranked, multi-scale modal hierarchy from Schelling lattice simulations, supplying
+                            order parameters that a single segregation index cannot provide.</p>
+                            <div class="project-stats">
+                                <div class="project-stat"><b>0.75&ndash;0.76</b><span>Tolerance at the transition</span></div>
+                                <div class="project-stat"><b>30</b><span>Seeds per ensemble average</span></div>
+                                <div class="project-stat"><b>50 &times; 50</b><span>Toroidal lattice, density 0.95</span></div>
+                                <div class="project-stat"><b>4</b><span>Boundary geometries compared</span></div>
+                            </div>
+                            <details>
+                                <summary>Details (2026, manuscript in preparation)</summary>
+                                <p>The segregation model of Schelling links micro-level preference to macro-level structure,
+                                yet the spatiotemporal record has been summarized mainly through scalar indices measured near
+                                the absorbing state. A hybrid pipeline couples sparsity-promoting dynamic mode decomposition,
+                                which supplies an energy ranking through L1-regularized amplitudes solved by the
+                                alternating-direction method of multipliers, with multi-resolution dynamic mode
+                                decomposition, which separates rapid initial relaxation from slow patch coarsening.</p>
+                                <p>Two complementary order parameters emerge. The modal-energy fraction decreases
+                                monotonically with tolerance, while the neighbor-based spatial correlation is non-monotonic,
+                                deepening in segregation just below the frustration threshold and collapsing beyond it.
+                                Divergence between the two resolves three regimes that no single index can distinguish:
+                                convergent segregation, a critical band of slow but strong segregation, and frustrated
+                                mixing. Both parameters place the transition at the discrete Moore-neighborhood tolerance of
+                                0.75 to 0.76.</p>
+                                <p>Boundary geometry decides what survives the transition. Regular periodic
+                                compartmentalization retains modal structure deep in the frustrated regime, because each
+                                enclosed compartment sustains a locally segregated pocket. The open torus, a digitized 1941
+                                Baltimore slum-clearance boundary, and scattered random obstacles all collapse to a
+                                structureless field. One limitation is stated plainly in the manuscript: the modal hierarchy
+                                characterizes the transition without anticipating it.</p>
+                            </details>
+                            <div class="project-links">
+                                <a href="assets/images/research/schelling-fig-order-parameters.png" target="_blank"><i class="fas fa-image"></i> Order Parameters</a>
+                                <a href="assets/images/research/schelling-fig-convergence.png" target="_blank"><i class="fas fa-image"></i> Convergence</a>
+                                <a href="assets/images/research/schelling-fig-constraints.png" target="_blank"><i class="fas fa-image"></i> Geometries</a>
+                                <a href="assets/images/research/schelling-fig-mode-hierarchy.png" target="_blank"><i class="fas fa-image"></i> Mode Hierarchy</a>
+                                <a href="assets/images/research/schelling-fig-spdmd-baltimore.png" target="_blank"><i class="fas fa-image"></i> Baltimore Case</a>
+                                <a href="https://github.com/joeblochberger/ABM-Schelling" target="_blank"><i class="fab fa-github"></i> Simulator</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Agent-based modeling and engineering decomposition -->
+                    <div class="project-card research-card">
+                        <img src="assets/abm/analysis/preypredator_decomposition.png"
+                             alt="Six-panel engineering decomposition of the predator-prey lattice" loading="lazy">
+                        <div class="project-body">
+                            <div class="project-meta">
+                                <span class="project-year">2024&ndash;2026</span>
+                                <span class="project-venue">Analysis project &bull; MATLAB</span>
+                            </div>
+                            <h4>Time-Resolved Decomposition of Agent-Based Model Dynamics</h4>
+                            <p class="blurb">Eleven canonical agent-based models spanning four structural classes are put
+                            through one decomposition pipeline, and every decomposition is rendered as a movie that advances
+                            in step with the simulation that produced it.</p>
+                            <div class="project-stats">
+                                <div class="project-stat"><b>11</b><span>Models across four structural classes</span></div>
+                                <div class="project-stat"><b>4</b><span>Decomposition methods per model</span></div>
+                                <div class="project-stat"><b>22</b><span>Synchronized animations</span></div>
+                                <div class="project-stat"><b>6</b><span>Panels per decomposition</span></div>
+                            </div>
+                            <details>
+                                <summary>Details (2024&ndash;2026, ongoing)</summary>
+                                <p>Decomposition methods matured in fluid mechanics and structural dynamics, where the state
+                                is a field sampled on a grid. An agent-based model produces the same kind of high-dimensional
+                                spatiotemporal record, so the tooling transfers whenever the simulation layer is reproducible
+                                and the state can be written as a snapshot matrix.</p>
+                                <p>None of the four methods is new. Continuous wavelet analysis of an order parameter,
+                                radially averaged spatial power spectra, normalized cross-correlation, and phase portraits
+                                are all standard, and each carries an established history on systems of exactly this class.
+                                The contribution is treatment rather than method: decompositions are time-resolved and shown
+                                against the generating simulation instead of reported at a single instant, one pipeline spans
+                                lattice, continuous-space, network, and profile models, and spectra are computed on indicator
+                                fields rather than on categorical state codes.</p>
+                                <p>The analysis frame is selected by maximum lag-1 spatial autocorrelation rather than
+                                defaulting to the final state, which is frequently degenerate: a burnt-out forest or a fully
+                                diffused field carries no spatial structure left to transform.</p>
+                            </details>
+                            <div class="project-links">
+                                <a href="abm-gallery.html"><i class="fas fa-film"></i> Open the Gallery</a>
+                                <a href="assets/abm/analysis/preypredator_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static Figure</a>
+                                <a href="https://github.com/joeblochberger/ABM-Schelling" target="_blank"><i class="fab fa-github"></i> Schelling Code</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. DMD video background and foreground separation -->
+                    <div class="project-card research-card card-dark">
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/dmd/dmd-quad-poster.png"
+                               src="assets/dmd/dmd-quad.mp4"
+                               aria-label="Traffic video split into original, foreground, background, and reconstruction panels"></video>
+                        <div class="project-body">
+                            <div class="project-meta">
+                                <span class="project-year">2022, revised 2026</span>
+                                <span class="project-venue">JHU 525.746 Image Engineering</span>
+                            </div>
+                            <h4>Foreground/Background Separation with Dynamic Mode Decomposition: Pulling a Moving Car Out of a Static Road</h4>
+                            <p class="blurb">One MATLAB program separates slowly varying video background from moving
+                            foreground using ordinary, sparsity-promoting, multi-resolution, and hybrid dynamic mode
+                            decomposition, all sharing a single video read and a common set of metrics.</p>
+                            <div class="project-stats">
+                                <div class="project-stat"><b>4</b><span>Methods, one video read</span></div>
+                                <div class="project-stat"><b>X = B + F</b><span>Exact signed split</span></div>
+                                <div class="project-stat"><b>ADMM</b><span>Sparse amplitude solver with debiasing</span></div>
+                                <div class="project-stat"><b>0 %</b><span>Baseline for relative comparison</span></div>
+                            </div>
+                            <details>
+                                <summary>Details (2022, toolkit revised 2026)</summary>
+                                <p>Grayscale frames form a snapshot matrix, and the standard reduced-order construction
+                                supplies modes, eigenvalues, and amplitudes. Modes with a continuous-time frequency below a
+                                threshold constitute the background, and the signed remainder becomes the foreground, so the
+                                two parts reconstruct the source exactly.</p>
+                                <p>Four variants share the same core. Ordinary decomposition fits amplitudes from the first
+                                frame. Sparsity-promoting decomposition solves the L1-regularized amplitude problem by the
+                                alternating-direction method of multipliers and then removes shrinkage bias by refitting on
+                                the retained support. Multi-resolution decomposition bisects the time horizon into a binary
+                                tree and extracts slow modes at every level. The hybrid applies the sparsity-promoting step
+                                inside each node of the tree, combining temporal localization with sparse modal support.</p>
+                                <p>Calling the toolkit with the comparison option returns all four result structures together
+                                with a summary figure covering runtime, retained and background mode counts, tree size,
+                                visible foreground percentage, foreground magnitude, and background temporal variation, with
+                                ordinary decomposition serving as the zero-percent baseline.</p>
+                            </details>
+                            <div class="project-links">
+                                <a href="assets/dmd/dmd-quad.mp4" target="_blank"><i class="fas fa-film"></i> Separation Video</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Equity seasonality -->
+                    <div class="project-card research-card card-dark">
+                        <img src="assets/images/research/finance-seasonality-radar.png"
+                             alt="Polar charts of average monthly percent change for four equity benchmarks" loading="lazy">
+                        <div class="project-body">
+                            <div class="project-meta">
+                                <span class="project-year">2026</span>
+                                <span class="project-venue">Independent analysis &bull; January 2026</span>
+                            </div>
+                            <h4>Financial Data Meets Engineering Analysis: Calendar Risk Across Four Equity Benchmarks</h4>
+                            <p class="blurb">Daily closing series are grouped by calendar month to measure average
+                            within-month percent change, testing how far a familiar seasonality pattern holds across
+                            large-cap, small-cap, and developed-international benchmarks.</p>
+                            <div class="project-stats">
+                                <div class="project-stat"><b>461</b><span>Month-years, Russell 2000</span></div>
+                                <div class="project-stat"><b>38 yr</b><span>Longest coverage in the set</span></div>
+                                <div class="project-stat"><b>4 / 4</b><span>Benchmarks negative in September</span></div>
+                                <div class="project-stat"><b>+4.15 %</b><span>Strongest month mean, November</span></div>
+                            </div>
+                            <details>
+                                <summary>Details (January 2026)</summary>
+                                <p>Each daily closing series is grouped by calendar month, the percent change is taken
+                                between the first and last observation of each month-year, and the mean is formed across
+                                years. The polar layout places January at the top and marks zero change with a dashed ring,
+                                so any month with a negative mean falls inside the ring.</p>
+                                <p>Coverage differs by benchmark and is read from the files rather than assumed. The Russell
+                                2000 supplies the longest record at 461 month-years from September 1987, MSCI EAFE
+                                contributes 294 month-years from August 2001, the NASDAQ small-cap series contributes 169
+                                month-years from May 2011, and the FRED S&amp;P 500 series reaches back only to January 2016
+                                for 121 month-years.</p>
+                                <p>September carries a negative mean in all four benchmarks, ranging from &minus;0.40 percent
+                                for the Russell 2000 to &minus;2.03 percent for the NASDAQ small-cap series. November is
+                                positive in all four and is the strongest month in three of them. The short S&amp;P 500
+                                window is the weakest evidence in the set: a seasonality claim resting on ten years of
+                                coverage is far more fragile than one resting on thirty-eight.</p>
+                            </details>
+                            <div class="project-links">
+                                <a href="assets/images/research/finance-seasonality-radar.png" target="_blank"><i class="fas fa-image"></i> Seasonality Charts</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Musical instrument classification -->
+                    <div class="project-card research-card">
+                        <img src="assets/images/research/instrument-confusion-late-fusion.png"
+                             alt="Confusion matrix for the late-fusion instrument classifier" loading="lazy">
+                        <div class="project-body">
+                            <div class="project-meta">
+                                <span class="project-year">2022</span>
+                                <span class="project-venue">JHU 525.670 Machine Learning for Signal Processing</span>
+                            </div>
+                            <h4>Late Fusion of Convolutional and Wavelet Scattering Classifiers</h4>
+                            <p class="blurb">A two-dimensional convolutional network trained on mel spectrograms and a
+                            wavelet scattering ensemble are combined at the decision stage. Every classification metric
+                            on the NSynth instrument families improves over either classifier used alone.</p>
+                            <div class="project-stats">
+                                <div class="project-stat"><b>95 %</b><span>Accuracy, late fusion</span></div>
+                                <div class="project-stat"><b>75 %</b><span>F1 score</span></div>
+                                <div class="project-stat"><b>97 %</b><span>Specificity</span></div>
+                                <div class="project-stat"><b>3 %</b><span>False-positive rate</span></div>
+                            </div>
+                            <details>
+                                <summary>Details (2022)</summary>
+                                <p>Ten NSynth instrument families supply the label set. Mel spectrograms computed with a
+                                2048-sample Hann window, 50 percent overlap, a 4096-point transform, and 512 bands serve as
+                                image input to a two-dimensional convolutional network, while a wavelet scattering ensemble
+                                works on the same audio through a complementary representation. The two classifiers are
+                                combined at the decision stage rather than at the feature stage.</p>
+                                <p>Fusion outperforms every single-model approach attempted on the project. Accuracy reaches
+                                95 percent against 90 percent for the Python two-dimensional network, 88 percent for the
+                                one-dimensional network, and 91 percent for principal component analysis with a support
+                                vector machine. The gap widens on the metrics that matter for an imbalanced label set: an F1
+                                score of 75 percent against 58, 40, and 57 percent, and a false-positive rate of 3 percent.</p>
+                                <p>Ten-fold cross-validation returns 95 percent accuracy in every fold, with precision
+                                between 73 and 75 percent, so the result is stable rather than a fortunate split. Audio
+                                recorded by team members outside the dataset classifies far less well, which reflects the
+                                controlled and idealized character of NSynth rather than a defect in the fusion rule.</p>
+                            </details>
+                            <div class="project-links">
+                                <a href="assets/images/research/instrument-confusion-late-fusion.png" target="_blank"><i class="fas fa-image"></i> Late Fusion</a>
+                                <a href="assets/images/research/instrument-confusion-2dcnn.png" target="_blank"><i class="fas fa-image"></i> Convolutional Network</a>
+                                <a href="assets/images/research/instrument-confusion-wavelet-scattering.png" target="_blank"><i class="fas fa-image"></i> Wavelet Scattering</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ENGINEERING PROJECTS -->
+            <div class="portfolio-group" id="engineering-portfolio">
+                <h3><i class="fas fa-gears"></i> Engineering Projects</h3>
+                <p class="group-note">Earlier engineering work spanning acoustics, signal processing, and design.
+                Expand each card for details.</p>
+                <div class="project-grid">
+
+                <div class="project-card">
+                    <img src="assets/images/portfolio/ABM.png" alt="Agent-based modeling" loading="lazy">
+                    <div class="project-body">
+                        <h4>Agent-Based Modeling</h4>
+                        <p class="blurb">An iterative MATLAB implementation of the Schelling segregation model, exploring emergent pattern formation from local preference rules.</p>
+                        <details>
+                            <summary>Details (2020&ndash;2021)</summary>
+                            <p>Simulates an iterative adaptation of
+                            <a href="https://www.stat.berkeley.edu/~aldous/157/Papers/Schelling_Seg_Models.pdf" target="_blank">the Schelling segregation model</a>
+                            in MATLAB. Code available for private study or as a teaching tool.</p>
+                        </details>
+                        <div class="project-links">
+                            <a href="https://github.com/joeblochberger/ABM-Schelling" target="_blank"><i class="fab fa-github"></i> Code</a>
+                            <a href="assets/pdfs/ABMSchelling_QuadChart.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Quad Chart</a>
+                            <a href="assets/images/portfolio/modals/m-ABM.png" target="_blank"><i class="fas fa-image"></i> Full Figure</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="assets/images/portfolio/eig.png" alt="Eigenfaces" loading="lazy">
+                    <div class="project-body">
+                        <h4>Eigenfaces</h4>
+                        <p class="blurb">Singular value decomposition applied to face image data in MATLAB.</p>
+                        <details>
+                            <summary>Details (2020&ndash;2021)</summary>
+                            <p>Applies singular value decomposition to the
+                            <a href="https://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html" target="_blank">Olivetti dataset</a>
+                            to identify common features of the human face.</p>
+                        </details>
+                        <div class="project-links">
+                            <a href="assets/images/portfolio/modals/m-EIG.png" target="_blank"><i class="fas fa-image"></i> Full Figure</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="assets/images/portfolio/Modes.png" alt="Computational ocean acoustics" loading="lazy">
+                    <div class="project-body">
+                        <h4>Computational Ocean Acoustics</h4>
+                        <p class="blurb">Modeling of acoustic propagation in the ocean environment.</p>
+                        <details>
+                            <summary>Details (2021)</summary>
+                            <p>Project-management work leading teams of PhD-level acoustic modeling experts motivated a
+                            study of MATLAB implementations across several ocean acoustic propagation techniques. Shown
+                            here is the Normal Modes method: as a guitar string sums vibrational modes to form a note,
+                            the same approach sums a finite number of modes under ocean boundary conditions to obtain
+                            the pressure field, visualized as a contour plot. Code modified from
+                            <a href="https://oalib-acoustics.org/Other/demo/MatMod.pdf" target="_blank">oalib-acoustics.org</a>.</p>
+                        </details>
+                        <div class="project-links">
+                            <a href="assets/images/portfolio/modals/m-Modes.png" target="_blank"><i class="fas fa-image"></i> Full Figure</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="assets/images/portfolio/DSP.png" alt="Digital signal processing" loading="lazy">
+                    <div class="project-body">
+                        <h4>Digital Signal Processing</h4>
+                        <p class="blurb">Applying concepts in MATLAB to build intuition.</p>
+                        <details>
+                            <summary>Details (2020)</summary>
+                            <p>At least seven electrical engineering textbooks introduce convolution solely as an applied
+                            mathematics algorithm (flip, shift, multiply, sum). A mechanical-engineering path through
+                            graduate signal processing motivated a concrete link: convolution applied in MATLAB to
+                            simulate the reverberation effect used in digital audio workstation software. Demo available
+                            for private study or teaching.</p>
+                        </details>
+                        <div class="project-links">
+                            <a href="https://github.com/joeblochberger/ConvolutionReverbProject" target="_blank"><i class="fab fa-github"></i> Code</a>
+                            <a href="assets/pdfs/Reverb_QuadChart.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Quad Chart</a>
+                            <a href="assets/images/portfolio/modals/m-DSP.png" target="_blank"><i class="fas fa-image"></i> Full Figure</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="assets/images/portfolio/IMECE.png" alt="Structural acoustics research" loading="lazy">
+                    <div class="project-body">
+                        <h4>Structural Acoustics Research</h4>
+                        <p class="blurb">Analyzing periodic structures using the finite element method.</p>
+                        <details>
+                            <summary>Details (2018)</summary>
+                            <p>Periodic structures are common across industries. Finite element and wavenumber
+                            transform analysis quantified the structural acoustic performance of a clamped plate over
+                            stiffener thickness and plate thickness as design variables. Performed during part-time MSME
+                            study at Penn State, advised by Professor Alok Sinha, and published in ASME IMECE 2019
+                            conference proceedings.</p>
+                        </details>
+                        <div class="project-links">
+                            <a href="https://doi.org/10.1115/IMECE2019-10259" target="_blank"><i class="fas fa-external-link-alt"></i> DOI</a>
+                            <a href="assets/pdfs/PSU_QuadChart.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Quad Chart</a>
+                            <a href="assets/images/portfolio/modals/m-IMECE.png" target="_blank"><i class="fas fa-image"></i> Full Figure</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="assets/images/portfolio/Wolfram.png" alt="Wolfram demonstration" loading="lazy">
+                    <div class="project-body">
+                        <h4>Performance of Reactive Acoustic Mufflers</h4>
+                        <p class="blurb">An interactive Mathematica demonstration for the Wolfram Demonstrations Project.</p>
+                        <details>
+                            <summary>Details (2016)</summary>
+                            <p>An undergraduate path through a graduate engineering acoustics course on noise control
+                            raised a specific question: how cross-sectional area in expansion chamber and quarter-wave
+                            resonator designs affects acoustic performance. A Mathematica demonstration answered it and
+                            was accepted to the Wolfram Demonstrations Project in 2016.</p>
+                        </details>
+                        <div class="project-links">
+                            <a href="https://demonstrations.wolfram.com/PerformanceOfReactiveAcousticMufflers/" target="_blank"><i class="fas fa-external-link-alt"></i> Demonstration</a>
+                            <a href="assets/pdfs/WolframDemo_QuadChart.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Quad Chart</a>
+                            <a href="assets/images/portfolio/modals/m-WOLFRAM.png" target="_blank"><i class="fas fa-image"></i> Full Figure</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="assets/images/portfolio/SAMS.png" alt="Smart acoustic monitoring system" loading="lazy">
+                    <div class="project-body">
+                        <h4>Smart Acoustic Monitoring System</h4>
+                        <p class="blurb">Sponsored by the NASA Langley Research Center.</p>
+                        <details>
+                            <summary>Details (2014&ndash;2015)</summary>
+                            <p>A senior capstone project, advised by Professor Chris Fuller at Virginia Tech, designed a
+                            faster deployment method for the acoustic phased arrays that NASA Langley Research Center
+                            uses outdoors to characterize the acoustic signatures of small aircraft and unmanned aerial
+                            systems. Awarded "Best in Innovation &amp; Creativity" at the 2015 Capstone Realization of
+                            Engineering and Technology (CREATE) Exposition at Virginia Tech.</p>
+                        </details>
+                        <div class="project-links">
+                            <a href="https://youtu.be/0nKAHMkX3tY" target="_blank"><i class="fab fa-youtube"></i> Video</a>
+                            <a href="assets/pdfs/SAMS_QuadChart.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Quad Chart</a>
+                            <a href="assets/images/portfolio/modals/m-SAMS.png" target="_blank"><i class="fas fa-image"></i> Full Figure</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="assets/images/portfolio/EHSA.png" alt="Energy harvesting shock absorber" loading="lazy">
+                    <div class="project-body">
+                        <h4>Energy Harvesting Shock Absorber</h4>
+                        <p class="blurb">Performed for the Center for Energy Harvesting Materials and Systems at Virginia Tech.</p>
+                        <details>
+                            <summary>Details (2015)</summary>
+                            <p>Advised by Professor Lei Zuo, with guidance from Dr. Lirong Wang and Dr. Lin Xu at Virginia
+                            Tech, the project designed a method for recovering dissipated energy in a conventional
+                            automobile shock absorber retrofitted onto a Hummer H2. Preliminary designs and findings
+                            carried into a subsequent senior design project, "2015-2016 Senior Design: Energy Harvesting
+                            from Suspension."</p>
+                        </details>
+                        <div class="project-links">
+                            <a href="assets/pdfs/EHSA_QuadChart.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Quad Chart</a>
+                            <a href="assets/images/portfolio/modals/m-EHSA.png" target="_blank"><i class="fas fa-image"></i> Full Figure</a>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT / DISCLAIMER -->
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <p>Questions? Comments? Feedback? Kindly reach out to
+                <a href="mailto:jblochb2@jhu.edu" style="color: var(--gold);">jblochb2@jhu.edu</a>.
             </p>
-
-            <p>
-			<b>Research Interests</b>: Creativity in Engineering Design, Operations Research, Predictive Analytics, Probability & Stochastic Processes, Signal Processing, Systems Engineering, Systems Science 
+            <p class="disclaimer">
+                The views, opinions, and content on this website belong to Joseph Blochberger and do not necessarily
+                reflect the positions of either the Johns Hopkins University Applied Physics Laboratory, the General
+                Dynamics Corporation (together with any subsidiary of the corporation), or any other educational
+                institution or company.
             </p>
-
-            <div class="row">
-
-               <div class="columns contact-details">
-
-                  <h2>Contact Details</h2>
-                  <p class="address">
-						   <span>Joseph Blochberger</span><br>
-						   <span>Department of Civil & Systems Engineering<br>
-						   <span>The Johns Hopkins University<br>
-						   <span>3400 N. Charles St.<br>
-						   <span>Baltimore, MD 21218<br>
-						   <span>jblochb2@jhu.edu</span>
-					   </p>
-
-               </div>
-
-               <div class="columns download">
-                  <p>
-                     <a href="https://docs.google.com/viewer?url=https://github.com/joeblochberger/joeblochberger.github.io/raw/main/pdfs/Blochberger_CV_Dec2022.pdf" class="button"><i class="fa fa-download"></i>Download CV</a>
-                  </p>
-               </div>
-
-            </div> <!-- end row -->
-
-         </div> <!-- end .main-col -->
-
-      </div>
-
-   </section> <!-- About Section End-->
-
-
-   <!-- Resume Section
-   ================================================== -->
-   <section id="resume">
-
-      <!-- Education
-      ----------------------------------------------- -->
-      <div class="row education">
-
-         <div class="three columns header-col">
-            <h1><span>Education</span></h1>
-         </div>
-
-         <div class="nine columns main-col">
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>The Johns Hopkins University</h3>
-                  <p class="info">Post-Masters Certificate, Electrical & Computer Engineering</p>
-
-                  <p>
-					Enrolled as a graduate student while working as a full-time engineering project manager.  
-					Concentrated in signal processing, machine learning, applied probability & stochastic processes, and detection & estimation theory.
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-			
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Virginia Department of Professional and Occupational Regulation</h3>
-                  <p class="info">Licensed Professional Engineer</p>
-
-               </div>
-
-            </div> <!-- item end -->
-			
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>The Pennsylvania State University (Penn State)</h3>
-                  <p class="info">Master of Science, Mechanical Engineering</p>
-
-                  <p>
-					Enrolled as a graduate student while working as a full-time engineer.  
-					Concentrated in computational mechanics (linear and nonlinear finite element analysis), mechanical vibrations, and engineering acoustics.
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Virginia Polytechnic Institute and State University (Virginia Tech)</h3>
-                  <p class="info">Bachelor of Science, Mechanical Engineering</p>
-
-                  <p>
-                  Enrolled as a full-time student while managing part-time student jobs (Virginia Tech Bookstore & Virginia Tech Math Emporium).  
-				  Completed two engineering internships (with Kollmorgen Motors Division and General Dynamics Electric Boat, respectively).  
-				  Performed undergraduate research under the guidance of Prof. Lei Zuo on energy-harvesting shock absorbers, built an autonomous acoustic monitoring system for the NASA Langley Research Center under the guidance of Prof. Chris Fuller, and completed a minor in Engineering Science and Mechanics.
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-         </div> <!-- main-col end -->
-
-      </div> <!-- End Education -->
-
-
-      <!-- Work
-      ----------------------------------------------- -->
-      <div class="row work">
-
-         <div class="three columns header-col">
-            <h1><span>Work</span></h1>
-         </div>
-
-         <div class="nine columns main-col">
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>The Johns Hopkins University Applied Physics Laboratory (JHU/APL)</h3>
-                  <p class="info">Assistant Program Manager <span>&bull;</span> Engineering Analyst</p>
-
-                  <p>
-				  <ul>
-                  <li><span>&bull;</span> Appointed as Assistant Program Manager based on technical expertise in acoustic systems analysis, engineering analysis, and demonstrated leadership.</li>
-				  <li><span>&bull;</span> Provides guidance to five project managers and technical professional staff members involving laboratory-based test & evaluation, sonar system performance analysis, database & tool management, data inventory, and financial analysis.</li>
-				  <li><span>&bull;</span> Broad experience includes engineering acoustics, systems engineering, noise control engineering, naval shipbuilding design, project management, and test & evaluation of sonar systems and capabilities.</li>  
-				  <li><span>&bull;</span> Technical depth in engineering acoustics encompasses finite element modeling of structural vibrations, structureborne sound radiation, end-to-end sonar system evaluation, and signal processing.  </li>
-				  </ul>
-				  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-			
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>The Johns Hopkins University Department of Civil & Systems Engineering (JHU CaSE)</h3>
-                  <p class="info">Graduate Student</p>
-
-                  <p>
-				  <ul>
-                  <li><span>&bull;</span> Doctor of Philosophy (PhD) candidate advised by Prof. Tak Igusa while working full-time at JHU/APL.</li>
-				  <li><span>&bull;</span> Developed an agent-based model for analyzing patterns of emergence in segregation, employed machine learning techniques to post-simulation analysis, and provided dynamic analysis for energy systems and topology optimization projects.</li>
-				  <li><span>&bull;</span> Currently an active participant and contributor to the JHU Center for Systems Science and Engineering (CSSE).</li>
-				  <li><span>&bull;</span> Service to the American Society of Mechanical Engineers (ASME) Noise Control & Acoustics Division includes providing independent peer review of publication submissions, serving as a topic organizer for the International Mechanical Engineering Congress & Exposition (IMECE), and serving as a session chair at IMECE.</li>
-                  </ul>
-				  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>General Dynamics Electric Boat (GDEB)</h3>
-                  <p class="info">Signatures Engineer</p>
-
-                  <p>
-				  <ul>
-                  <li><span>&bull;</span> Served as the cognizant signatures engineer guiding the general arrangement and detailed design phase of engineering drawing development.</li>  
-				  <li><span>&bull;</span> Provided communication to relevant engineering departments and shipyard operations to ensure products meet a submarine's challenging stealth requirements throughout its product lifecycle.</li> 
-				  <li><span>&bull;</span> Developed a variety of analytical and computational models, augmented and refined by empirical data, to understand the physics of sound, structures, and their interactions.</li>
-				  </ul>
-				  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-         </div> <!-- main-col end -->
-
-      </div> <!-- End Work -->
-
-
-      <!-- Skills
-      ----------------------------------------------- -->
-      <div class="row skill">
-
-         <div class="three columns header-col">
-            <h1><span>Proficiencies</span></h1>
-         </div>
-
-         <div class="nine columns main-col">
-
-            <p>
-			<b><i>Languages</i></b>: MATLAB, MySQL, Mathematica, Octave, R, Python, CSS, HTML, Javascript
-            </p>
-
-            <p>
-			<b><i>Skills</i></b>: Acoustics, Analyzing Sensor Data, Applied Probability / Statistics, Test & Evaluation, Mechanical Engineering, Noise Control, Project Management, Sonar, Signal Processing, Systems Engineering, Vibrations
-            </p>
-			</div> <!-- main-col end -->
-
-      </div> <!-- End skills -->
-
-   </section> <!-- Resume Section End-->
-
-
-   <!-- Portfolio Section
-   ================================================== -->
-   <section id="portfolio">
-
-      <div class="row">
-
-         <div class="twelve columns collapsed">
-
-            <h1>My Portfolio.</h1>
-
-            <!-- portfolio-wrapper -->
-            <div id="portfolio-wrapper" class="bgrid-quarters s-bgrid-thirds cf">
-
-               <div class="columns portfolio-item">
-                  <div class="item-wrap">
-
-                     <a href="#modal-01" title="">
-                        <img alt="" src="images/portfolio/ABM.png">
-                        <div class="overlay">
-                           <div class="portfolio-item-meta">
-          					      <h5>Current Projects: Agent-Based Modeling</h5>
-                              <p>Implementations in MATLAB help explore the application of engineering analysis techniques</p>
-          					   </div>
-                        </div>
-                        <div class="link-icon"><i class="icon-plus"></i></div>
-                     </a>
-
-                  </div>
-          		</div> <!-- item end -->
-				
-               <div class="columns portfolio-item">
-                  <div class="item-wrap">
-
-                     <a href="#modal-02" title="">
-                        <img alt="" src="images/portfolio/eig.png">
-                        <div class="overlay">
-                           <div class="portfolio-item-meta">
-          					      <h5>Current Projects: Eigenfaces</h5>
-                              <p>Analyzing face datasets in MATLAB using singular value decomposition based image processing</p>
-          					   </div>
-                        </div>
-                        <div class="link-icon"><i class="icon-plus"></i></div>
-                     </a>
-
-                  </div>
-          		</div> <!-- item end -->
-				
-               <div class="columns portfolio-item">
-                  <div class="item-wrap">
-
-                     <a href="#modal-03" title="">
-                        <img alt="" src="images/portfolio/Modes.png">
-                        <div class="overlay">
-                           <div class="portfolio-item-meta">
-          					      <h5>Current Projects: Computational Ocean Acoustics</h5>
-                              <p>Modeling of acoustic propagation in the ocean environment</p>
-          					   </div>
-                        </div>
-                        <div class="link-icon"><i class="icon-plus"></i></div>
-                     </a>
-
-                  </div>
-          		</div> <!-- item end -->
-
-               <div class="columns portfolio-item">
-                  <div class="item-wrap">
-
-                     <a href="#modal-04" title="">
-                        <img alt="" src="images/portfolio/DSP.png">
-                        <div class="overlay">
-                           <div class="portfolio-item-meta">
-          					      <h5>Current Projects: Digital Signal Processing</h5>
-                              <p>Applying concepts in MATLAB to build intuition</p>
-          					   </div>
-                        </div>
-                        <div class="link-icon"><i class="icon-plus"></i></div>
-                     </a>
-
-                  </div>
-          		</div> <!-- item end -->
-
-               <div class="columns portfolio-item">
-                  <div class="item-wrap">
-
-                     <a href="#modal-05" title="">
-                        <img alt="" src="images/portfolio/IMECE.png">
-                        <div class="overlay">
-                           <div class="portfolio-item-meta">
-          					      <h5>Structural Acoustics Research</h5>
-                              <p>Analyzing periodic structures using the finite element method</p>
-          					   </div>
-                        </div>
-                        <div class="link-icon"><i class="icon-plus"></i></div>
-                     </a>
-
-                  </div>
-          		</div> <!-- item end -->
-
-               <div class="columns portfolio-item">
-                  <div class="item-wrap">
-
-                     <a href="#modal-06" title="">
-                        <img alt="" src="images/portfolio/Wolfram.png">
-                        <div class="overlay">
-                           <div class="portfolio-item-meta">
-          					      <h5>Wolfram Demonstrations Project: Performance of Reactive Acoustic Mufflers</h5>
-                              <p>Creating an intuitive demo in Mathematica</p>
-          					   </div>
-                        </div>
-                        <div class="link-icon"><i class="icon-plus"></i></div>
-                     </a>
-
-                  </div>
-          		</div> <!-- item end -->
-
-          	   <div class="columns portfolio-item">
-                  <div class="item-wrap">
-
-                     <a href="#modal-07" title="">
-                        <img alt="" src="images/portfolio/SAMS.png">
-                        <div class="overlay">
-                           <div class="portfolio-item-meta">
-          					      <h5>Smart Acoustic Monitoring System</h5>
-                              <p>Sponsored by the NASA Langley Research Center</p>
-          					   </div>
-                        </div>
-                        <div class="link-icon"><i class="icon-plus"></i></div>
-                     </a>
-
-                  </div>
-          		</div> <!-- item end -->
-				
-          	   <div class="columns portfolio-item">
-                  <div class="item-wrap">
-
-                     <a href="#modal-08" title="">
-                        <img alt="" src="images/portfolio/EHSA.png">
-                        <div class="overlay">
-                           <div class="portfolio-item-meta">
-          					      <h5>Energy Harvesting Shock Absorber</h5>
-                              <p>Performed for the Center for Energy Harvesting Materials and Systems at Virginia Tech</p>
-          					   </div>
-                        </div>
-                        <div class="link-icon"><i class="icon-plus"></i></div>
-                     </a>
-
-                  </div>
-          		</div> <!-- item end -->
-
-            </div> <!-- portfolio-wrapper end -->
-
-         </div> <!-- twelve columns end -->
-
-         <!-- Modal Popup
-	      --------------------------------------------------------------- -->
-
-         <div id="modal-01" class="popup-modal mfp-hide">
-
-		      <img class="scale-with-grid" src="images/portfolio/modals/m-ABM.png" alt="" />
-
-		      <div class="description-box">
-			      <h4>Continuing Projects (2020-2021)</h4>
-			      <p>
-				  This project simulates an iterative adaptation of <a href="https://www.stat.berkeley.edu/~aldous/157/Papers/Schelling_Seg_Models.pdf" target="_blank">Schelling's Segregation Model</a> in MATLAB.
-				  MATLAB <a href="https://github.com/joeblochberger/ABM-Schelling" target="_blank">code</a> is available for use in private study or as a teaching tool.
-				  </p>
-               <span class="categories"><i class="fa fa-tag"></i>Engineering</span>
-		      </div>
-
-            <div class="link-box">
-               <a href="https://docs.google.com/viewer?url=https://github.com/joeblochberger/joeblochberger.github.io/raw/main/pdfs/ABMSchelling_QuadChart.pdf" target="_blank">Quad</a>
-		         <a class="popup-modal-dismiss">Close</a>
-            </div>
-
-	      </div><!-- modal-01 End -->
-		  
-         <div id="modal-02" class="popup-modal mfp-hide">
-
-		      <img class="scale-with-grid" src="images/portfolio/modals/m-EIG.png" alt="" />
-
-		      <div class="description-box">
-			      <h4>Continuing Projects (2020-2021)</h4>
-			      <p>
-				  This project uses the <a href="https://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html" target="_blank">Olivetti dataset</a> to explore the use of singular value decomposition to identify common features of the human face. 
-				  </p>
-               <span class="categories"><i class="fa fa-tag"></i>Engineering</span>
-		      </div>
-
-            <div class="link-box">
-               <a href="" target="_blank">Quad</a>
-		         <a class="popup-modal-dismiss">Close</a>
-            </div>
-
-	      </div><!-- modal-02 End -->
-
-         <div id="modal-03" class="popup-modal mfp-hide">
-
-		      <img class="scale-with-grid" src="images/portfolio/modals/m-Modes.png" alt="" />
-
-		      <div class="description-box">
-			      <h4>Computational Ocean Acoustics (2021)</h4>
-			      <p>
-				  In my experience as an engineering project manager, I have led teams of PhD-level staff who are experts in acoustic modeling.
-				  In an effort to get smarter on the subject, I am currently exploring MATLAB implementations of a variety of acoustic modeling techniques.
-				  Shown on this website are realizations of a modal summation approach to modeling acoustic propagation in the ocean.
-				  Specifically, the method I am demonstrating here is known as the method of Normal Modes.
-				  Analogous to how notes on a guitar string are the sum of multiple modes of vibration, this approach assumes top and bottom boundary conditions of an ocean environment and sums over a finite amount of modes to obtain the pressure field visualized as a contour plot.
-				  Original code modified from: <a href="https://oalib-acoustics.org/Other/demo/MatMod.pdf" target="_blank">https://oalib-acoustics.org/Other/demo/MatMod.pdf</a>
-				  </p>
-               <span class="categories"><i class="fa fa-tag"></i>Engineering</span>
-		      </div>
-
-            <div class="link-box">
-               <a href="" target="_blank">Quad</a>
-		         <a class="popup-modal-dismiss">Close</a>
-            </div>
-
-	      </div><!-- modal-03 End -->	
-
-         <div id="modal-04" class="popup-modal mfp-hide">
-
-		      <img class="scale-with-grid" src="images/portfolio/modals/m-DSP.png" alt="" />
-
-		      <div class="description-box">
-			      <h4>MATLAB Digital Signal Processing (2020)</h4>
-			      <p>
-				  In my anecdotal experience, I have identified at least seven electrical engineering textbooks which introduce and discuss the concept of convolution solely from an applied mathematics or algorithm perspective (Flip, Shift, Multiply, Sum).
-				  As a mechanical engineer taking graduate-level courses in signal processing, I felt the need to connect the convolution operation to a practical application found in digital audio workstation software.
-				  This project involves the application of the convolution operation to simulate a reverberation effect on a recorded signal in MATLAB.
-				  I also wrote a MATLAB demo with <a href="https://github.com/joeblochberger/ConvolutionReverbProject" target="_blank">code</a> available for use in private study or as a teaching tool.
-				  </p>
-               <span class="categories"><i class="fa fa-tag"></i>Engineering</span>
-		      </div>
-
-            <div class="link-box">
-               <a href="https://docs.google.com/viewer?url=https://github.com/joeblochberger/joeblochberger.github.io/raw/main/pdfs/Reverb_QuadChart.pdf" target="_blank">Quad</a>
-		         <a class="popup-modal-dismiss">Close</a>
-            </div>
-
-	      </div><!-- modal-04 End -->		  
-
-         <div id="modal-05" class="popup-modal mfp-hide">
-
-		      <img class="scale-with-grid" src="images/portfolio/modals/m-IMECE.png" alt="" />
-
-		      <div class="description-box">
-			      <h4>Structural Acoustics Research (2018)</h4>
-			      <p>
-				  Periodic structures are commonplace in multiple industries.  
-				  My research, using the finite element method and wavenumber transform analysis, quantified the structural acoustic performance of a clamped plate when considering stiffener thickness and plate thickness as design variables.  
-				  This research was performed while I was a part-time MSME student at Penn State (advised by Prof. Alok Sinha) and subsequently published in ASME IMECE 2019 conference proceedings (available <a href="https://doi.org/10.1115/IMECE2019-10259">here</a>).  
-				  </p>
-               <span class="categories"><i class="fa fa-tag"></i>Engineering</span>
-		      </div>
-
-            <div class="link-box">
-               <a href="https://docs.google.com/viewer?url=https://github.com/joeblochberger/joeblochberger.github.io/raw/main/pdfs/PSU_QuadChart.pdf" target="_blank">Quad</a>
-		         <a class="popup-modal-dismiss">Close</a>
-            </div>
-
-	      </div><!-- modal-05 End -->
-
-         <div id="modal-06" class="popup-modal mfp-hide">
-
-		      <img class="scale-with-grid" src="images/portfolio/modals/m-WOLFRAM.png" alt="" />
-
-		      <div class="description-box">
-			      <h4>Performance of Reactive Acoustic Mufflers - Wolfram Demonstrations Project (2016)</h4>
-			      <p>
-				  As an undergraduate, I took a graduate-level engineering acoustics course on engineering noise control.  
-				  Throughout the course, I had a tough time developing my intuition with how the cross-sectional areas of expansion chamber designs and quarter-wave resonators affect acoustic performance.  
-				  Therefore, I created this demonstration in Mathematica.  
-				  This demonstration was created towards the end of my undergraduate studies and accepted for publication on the Wolfram Demonstrations Project website in 2016 (available <a href="https://demonstrations.wolfram.com/PerformanceOfReactiveAcousticMufflers/">here</a>).
-				  </p>
-               <span class="categories"><i class="fa fa-tag"></i>Engineering</span>
-		      </div>
-
-            <div class="link-box">
-               <a href="https://docs.google.com/viewer?url=https://github.com/joeblochberger/joeblochberger.github.io/raw/main/pdfs/WolframDemo_QuadChart.pdf" target="_blank">Quad</a>
-		         <a class="popup-modal-dismiss">Close</a>
-            </div>
-
-	      </div><!-- modal-06 End -->
-
-         <div id="modal-07" class="popup-modal mfp-hide">
-
-		      <img class="scale-with-grid" src="images/portfolio/modals/m-SAMS.png" alt="" />
-
-		      <div class="description-box">
-			      <h4>Smart Acoustic Monitoring System Project (September 2014- May 2015)</h4>
-			      <p>
-				  Advised by Prof. Chris Fuller at Virginia Tech, the team behind the Smart Acoustic Monitoring System senior capstone project sought to design and implement a novel method for easier deployment of an acoustic phased array for the NASA Langley Research Center in Hampton, VA.  
-				  NASA deploys these arrays in outdoor settings in order to characterize the acoustic signatures of small aircraft and unmanned aerial systems, with their current focus mainly on the latter.  
-				  Current methods for deploying these arrays are lengthy, cumbersome, and labor intensive.  
-				  It was the team's intent to make this process easier in the Fall 2014 and Spring 2015 semesters as part of their undergraduate senior design capstone project at Virginia Tech.  
-				  This project received the "Best in Innovation & Creativity" award at the 2015 Capstone Realization of Engineering and Technology (CREATE) Exposition at Virginia Tech.  
-				  A video describing the project in detail is available <a href="https://youtu.be/0nKAHMkX3tY">here</a>.  
-				  </p>
-               <span class="categories"><i class="fa fa-tag"></i>Engineering</span>
-		      </div>
-
-            <div class="link-box">
-               <a href="https://docs.google.com/viewer?url=https://github.com/joeblochberger/joeblochberger.github.io/raw/main/pdfs/SAMS_QuadChart.pdf" target="_blank">Quad</a>
-		         <a class="popup-modal-dismiss">Close</a>
-            </div>
-
-	      </div><!-- modal-07 End -->
-		  
-         <div id="modal-08" class="popup-modal mfp-hide">
-
-		      <img class="scale-with-grid" src="images/portfolio/modals/m-EHSA.png" alt="" />
-
-		      <div class="description-box">
-			      <h4>Energy Harvesting Shock Absorber (January 2015 - May 2015)</h4>
-			      <p>
-				  Advised by Prof. Lei Zuo at Virginia Tech, along with guidance from Dr. Lirong Wang and Dr. Lin Xu, the team behind the Energy Harvesting Shock Absorber project sought to design and implement a novel method for recovering dissipated energy in a conventional automobile shock absorber.  
-				  Designing an energy harvesting shock absorber is a technical challenge, especially if it is planned to be retrofitted onto a vehicle such as a Hummer H2 automobile.  
-				  This project captured preliminary designs for an automotive energy harvesting shock absorber and findings were translated into a future senior design project for mechanical engineering students at Virginia Tech.  
-				  Ultimately, one year after I graduated from Virginia Tech, a team of 6 undergraduates completed their own undergraduate capstone project titled, "2015-2016 Senior Design: Energy Harvesting from Suspension."  
-				  </p>
-               <span class="categories"><i class="fa fa-tag"></i>Engineering</span>
-		      </div>
-
-            <div class="link-box">
-               <a href="https://docs.google.com/viewer?url=https://github.com/joeblochberger/joeblochberger.github.io/raw/main/pdfs/EHSA_QuadChart.pdf" target="_blank">Quad</a>
-		         <a class="popup-modal-dismiss">Close</a>
-            </div>
-
-	      </div><!-- modal-08 End -->
-
-      </div> <!-- row End -->
-
-   </section> <!-- Portfolio Section End-->
-
-
-   <!-- Call-To-Action Section
-   ================================================== -->
-   <section id="call-to-action">
-
-      <div class="row">
-
-         <div class="two columns header-col">
-
-            <h1><span></span></h1>
-
-         </div>
-
-         <div class="seven columns">
-
-            <h2><span class="lead">Questions? Comments? Feedback? Kindly reach out to jblochb2@jhu.edu</span></h2>
-            <p><span class="lead">The views, opinions, and content on this website belong to Joseph Blochberger and do not necessarily reflect the positions of either the Johns Hopkins University Applied Physics Laboratory, the General Dynamics Corporation (and its subsidiaries), or any other educational institution or company.</span></p>
-
-         </div>
-
-         <div class="three columns action">
-
-
-
-         </div>
-
-      </div>
-
-   </section> <!-- Call-To-Action Section End-->
-
-   <!-- footer
-   ================================================== -->
-   <footer>
-
-      <div class="row">
-
-         <div class="twelve columns">
-
-            <ul class="social-links">
-               <li><a href="https://www.linkedin.com/in/josephblochberger/"><i class="fa fa-linkedin"></i></a></li>
-               <li><a href="https://github.com/joeblochberger/"><i class="fa fa-github"></i></a></li>
-            </ul>
-
-            <ul class="copyright">
-               <li>&copy; Copyright © Joseph Blochberger 2021-2024.  All rights reserved.</li>
-            </ul>
-
-         </div>
-
-         <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a></div>
-
-      </div>
-
-   </footer> <!-- Footer End-->
-
-   <!-- Java Script
-   ================================================== -->
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-   <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
-   <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
-
-   <script src="js/jquery.flexslider.js"></script>
-   <script src="js/waypoints.js"></script>
-   <script src="js/jquery.fittext.js"></script>
-   <script src="js/magnific-popup.js"></script>
-   <script src="js/init.js"></script>
+        </section>
+
+    </main>
+
+    <footer class="research-footer">
+        <p>&copy; Joseph Blochberger 2021&ndash;2026. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/josephblochberger/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/joeblochberger/" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
 
 </body>
-
 </html>

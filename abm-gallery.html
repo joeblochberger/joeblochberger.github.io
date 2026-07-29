@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABM Decompositions | Joe Blochberger</title>
+    <meta name="description" content="Eleven canonical agent-based models analyzed with four signal and systems decomposition methods, rendered as animation synchronized with the simulation that produced them.">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/research-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="research-nav">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="aya-hrqol-model.html">AYA Model</a>
+        <a href="abm-gallery.html" class="active">ABM Models</a>
+        <a href="dissertation-progress.html">Progress</a>
+        <a href="publications.html">Publications</a>
+        <a href="code.html">Code</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+    </nav>
+
+    <main class="research-main">
+
+        <!-- HERO -->
+        <section class="research-hero">
+            <div class="hero-content">
+                <span class="research-badge">Analysis Project</span>
+                <h1>Time-Resolved Decomposition of Agent-Based Model Dynamics</h1>
+                <p class="subtitle">Eleven canonical models, four decomposition methods, one pipeline</p>
+                <div class="hero-stats">
+                    <div class="stat"><span class="stat-number">11</span><span class="stat-label">Models</span></div>
+                    <div class="stat"><span class="stat-number">4</span><span class="stat-label">Methods</span></div>
+                    <div class="stat"><span class="stat-number">4</span><span class="stat-label">Structural Classes</span></div>
+                    <div class="stat"><span class="stat-number">22</span><span class="stat-label">Animations</span></div>
+                </div>
+                <div id="abm-play-fallback" class="hero-buttons" style="display: none; margin-top: 1.5rem;">
+                    <button type="button" id="abm-play-all" class="btn btn-primary">
+                        <i class="fas fa-play"></i> Play All Animations
+                    </button>
+                    <span style="align-self: center; color: var(--text-secondary); font-size: 0.85rem;">
+                        The browser paused automatic playback; one click starts every animation below.
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- OVERVIEW -->
+        <section>
+            <h2>Overview</h2>
+            <p style="color: var(--text-secondary); max-width: 78ch;">
+                An analysis project standing apart from any model library or companion publication. Eleven
+                agent-based models serve as test systems across four structural classes: lattice,
+                continuous space, network, and profile. Each model runs through the same decomposition
+                pipeline, rendered as a movie that advances in step with the simulation that produced
+                it, so spectral and correlation structure can be watched forming beside the
+                simulation.
+            </p>
+            <p style="color: var(--text-secondary); max-width: 78ch; margin-top: 1rem;">
+                Models are cited to the sources below. Rules come from the reference implementations
+                by Cuevas et al.
+            </p>
+        </section>
+
+        <!-- METHODS -->
+        <section>
+            <h2>The four decompositions</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; max-width: 78ch;">
+                Four measurements are computed for every model, adapted to the structural class of
+                the model but never substituted for something easier.
+            </p>
+            <div class="overview-grid grid-2x2">
+                <div class="overview-card">
+                    <div class="card-icon"><i class="fas fa-wave-square"></i></div>
+                    <h3>Wavelet transform</h3>
+                    <p>A continuous transform with an analytic Morlet wavelet, applied to the order parameter, resolving when a timescale appears and whether it drifts. The transform is computed once over the full record and revealed behind an advancing cursor, which avoids the edge artifacts that a transform recomputed on truncated data would introduce at every frame.</p>
+                </div>
+                <div class="overview-card">
+                    <div class="card-icon"><i class="fas fa-chart-area"></i></div>
+                    <h3>Wavenumber transform</h3>
+                    <p>The radially averaged power spectral density of the two-dimensional discrete Fourier transform for a lattice, averaged over the annulus of constant wavenumber magnitude. On a network the operator is replaced by the graph Fourier transform, projecting node state onto the eigenvectors of the Laplacian, where the eigenvalue is the analog of squared wavenumber. Recomputed at every frame.</p>
+                </div>
+                <div class="overview-card">
+                    <div class="card-icon"><i class="fas fa-grip-lines"></i></div>
+                    <h3>Cross-correlation</h3>
+                    <p>Normalized circular cross-correlation by way of the correlation theorem: between species for the predator-prey lattice, between agent categories for segregation, and frame to frame otherwise. A network instead receives a node-by-node correlation matrix ordered by the Fiedler vector. Recomputed at every frame.</p>
+                </div>
+                <div class="overview-card">
+                    <div class="card-icon"><i class="fas fa-circle-nodes"></i></div>
+                    <h3>Phase portrait</h3>
+                    <p>A trajectory in a two-dimensional state space. Natural coordinate pairs are used wherever a model supplies them, such as prey against predator or prevalence against incidence, and a delay embedding is used otherwise, with the delay taken at the first minimum of the autocorrelation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCOPE -->
+        <section>
+            <h2>Scope</h2>
+            <p class="findings-caveat">
+                Continuous wavelet analysis of an order parameter, radially averaged spatial power
+                spectra, normalized cross-correlation, and phase portraits are all standard analysis
+                methods. Spectral analysis of cellular automata is in developed literature, alongside
+                graph signal processing applications to network epidemic states.
+            </p>
+            <p style="color: var(--text-secondary); max-width: 78ch; margin-top: 1.25rem;">
+                However, these methods often report on a single instant. In this gallery, decompositions are time-resolved and
+                shown against the generating simulation instead of reported at a single instant. One
+                pipeline spans four structural classes, with the wavenumber operator exchanged for the
+                graph Fourier transform for the network domain. Spectra are computed on indicator
+                fields rather than on categorical state codes as a lattice storing labels would
+                otherwise be transformed to treat labels as magnitudes, making a predator coded
+                as 2 twice a prey coded as 1. The analysis frame is selected by maximum lag-1 spatial
+                autocorrelation rather than defaulting to the final state, which is frequently degenerate.
+            </p>
+        </section>
+
+        <!-- PANELS -->
+        <section>
+            <h2>The six panels</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.25rem; max-width: 78ch;">
+                Panels 4 and 5 are re-evaluated at every frame. Panels 2, 3, and 6 are
+                progressive reveals of quantities defined over the whole record, which is marked in each
+                panel title rather than left for a viewer to assume.
+            </p>
+            <div class="tablewrap">
+            <table class="abm-table">
+                <thead><tr><th>Panel</th><th>Content</th><th>Behavior</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>Model state</td><td>The rendered simulation frame</td></tr>
+                    <tr><td>2</td><td>Order parameter</td><td>Revealed to the current time, with a marker at the cursor</td></tr>
+                    <tr><td>3</td><td>Wavelet scalogram</td><td>Revealed to the current time behind a cursor</td></tr>
+                    <tr><td>4</td><td>Wavenumber spectrum</td><td>Recomputed at every frame</td></tr>
+                    <tr><td>5</td><td>Cross-correlation</td><td>Recomputed at every frame</td></tr>
+                    <tr><td>6</td><td>Phase portrait</td><td>Revealed to the current time, with the current point marked</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </section>
+
+        <!-- MODELS -->
+        <section>
+            <h2>Models and analyses</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; max-width: 78ch;">
+                On the left, the simulation. On the right, the six-panel decomposition advancing in step
+                with it. Every animation starts as the page opens and loops continuously, so any pair
+                can be compared against any other without a click. Readings under each pair are computed
+                from the state file shipped with the model.
+            </p>
+            <article class="abm-model" id="gameoflife">
+                <header class="abm-model-head">
+                    <h3>Game of Life</h3>
+                    <span class="project-year">Alg. 7.1</span>
+                    <span class="project-venue">Lattice</span>
+                </header>
+                <p class="blurb">The cellular automaton of Conway on a 50 by 50 lattice with a cut-off boundary. The order parameter is the live-cell count.</p>
+                <div class="abm-pair">
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Simulation</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/gameoflife.png"
+                               src="assets/abm/mp4/gameoflife.mp4"
+                               aria-label="Game of Life simulation"></video>
+                    </div>
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Decomposition, evolving in time</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/gameoflife_decomposition.png"
+                               src="assets/abm/mp4/gameoflife_decomposition.mp4"
+                               aria-label="Game of Life decomposition"></video>
+                    </div>
+                </div>
+                <ul class="abm-takeaways">
+                    <li>Live-cell count falls from 658 to a plateau near 222, where the standard deviation across the final fifth of the run is 16.</li>
+                    <li>Frame-to-frame correlation measures 0.64 at the analysis frame and decays below 0.5 by a lag of 5 steps, which bounds the lifetime of a typical structure.</li>
+                    <li>The wavenumber spectrum spans barely 1.3 decades at a slope near &minus;1.2, so no single patch size dominates.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="assets/abm/mp4/gameoflife.mp4" download><i class="fas fa-film"></i> Simulation</a>
+                    <a href="assets/abm/mp4/gameoflife_decomposition.mp4" download><i class="fas fa-film"></i> Decomposition</a>
+                    <a href="assets/abm/analysis/gameoflife_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static figure</a>
+                    <a href="assets/abm/data/gameoflife_state.mat" download><i class="fas fa-database"></i> State data</a>
+                </div>
+            </article>
+            <article class="abm-model" id="wildfire">
+                <header class="abm-model-head">
+                    <h3>Fire and percolation</h3>
+                    <span class="project-year">Alg. 7.2</span>
+                    <span class="project-venue">Lattice</span>
+                </header>
+                <p class="blurb">Fire spreading through a randomly seeded forest. A burning cell never extinguishes, which makes the process monotone percolation.</p>
+                <div class="abm-pair">
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Simulation</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/wildfire.png"
+                               src="assets/abm/mp4/wildfire.mp4"
+                               aria-label="Fire and percolation simulation"></video>
+                    </div>
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Decomposition, evolving in time</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/wildfire_decomposition.png"
+                               src="assets/abm/mp4/wildfire_decomposition.mp4"
+                               aria-label="Fire and percolation decomposition"></video>
+                    </div>
+                </div>
+                <ul class="abm-takeaways">
+                    <li>Burnt-cell count rises monotonically to 17460 and then holds exactly constant, the signature of an absorbing state.</li>
+                    <li>The dominant wavelet band peaks at step 143 of 250, which places the fastest advance of the fire front near the middle of the run.</li>
+                    <li>Frame-to-frame correlation reaches 0.994 and never falls below 0.5 through a lag of 20, because burning is irreversible.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="assets/abm/mp4/wildfire.mp4" download><i class="fas fa-film"></i> Simulation</a>
+                    <a href="assets/abm/mp4/wildfire_decomposition.mp4" download><i class="fas fa-film"></i> Decomposition</a>
+                    <a href="assets/abm/analysis/wildfire_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static figure</a>
+                    <a href="assets/abm/data/wildfire_state.mat" download><i class="fas fa-database"></i> State data</a>
+                </div>
+            </article>
+            <article class="abm-model" id="heroescowards">
+                <header class="abm-model-head">
+                    <h3>Heroes and cowards</h3>
+                    <span class="project-year">Alg. 7.3</span>
+                    <span class="project-venue">Continuous space</span>
+                </header>
+                <p class="blurb">Agents position themselves relative to an assigned friend and an assigned enemy in continuous two-dimensional space.</p>
+                <div class="abm-pair">
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Simulation</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/heroescowards.png"
+                               src="assets/abm/mp4/heroescowards.mp4"
+                               aria-label="Heroes and cowards simulation"></video>
+                    </div>
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Decomposition, evolving in time</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/heroescowards_decomposition.png"
+                               src="assets/abm/mp4/heroescowards_decomposition.mp4"
+                               aria-label="Heroes and cowards decomposition"></video>
+                    </div>
+                </div>
+                <ul class="abm-takeaways">
+                    <li>Swarm spread collapses from 7.1 to 0.48 by step 376, then re-expands to 8.9 by step 868.</li>
+                    <li>Wavelet energy migrates toward lower frequency as the run proceeds, and the strongest band arrives in the final 200 steps.</li>
+                    <li>The swarm centroid returns to within 15 percent of the starting separation, so circulation occurs with no net drift.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="assets/abm/mp4/heroescowards.mp4" download><i class="fas fa-film"></i> Simulation</a>
+                    <a href="assets/abm/mp4/heroescowards_decomposition.mp4" download><i class="fas fa-film"></i> Decomposition</a>
+                    <a href="assets/abm/analysis/heroescowards_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static figure</a>
+                    <a href="assets/abm/data/heroescowards_state.mat" download><i class="fas fa-database"></i> State data</a>
+                </div>
+            </article>
+            <article class="abm-model" id="economy">
+                <header class="abm-model-head">
+                    <h3>Wealth exchange</h3>
+                    <span class="project-year">Alg. 7.4</span>
+                    <span class="project-venue">Profile</span>
+                </header>
+                <p class="blurb">Random pairwise transfer of one unit of currency, converging to a Boltzmann-Gibbs wealth distribution.</p>
+                <div class="abm-pair">
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Simulation</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/economy.png"
+                               src="assets/abm/mp4/economy.mp4"
+                               aria-label="Wealth exchange simulation"></video>
+                    </div>
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Decomposition, evolving in time</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/economy_decomposition.png"
+                               src="assets/abm/mp4/economy_decomposition.mp4"
+                               aria-label="Wealth exchange decomposition"></video>
+                    </div>
+                </div>
+                <ul class="abm-takeaways">
+                    <li>The Gini coefficient climbs from 0.011 and settles near 0.408, varying by 1.5 percent across the final fifth of 3000 sweeps.</li>
+                    <li>Wavelet energy occupies the lowest frequency band and decays steadily, the mark of one slow transient with no periodic component.</li>
+                    <li>Two panels stay empty for a profile model, since a wealth distribution carries no spatial layout to correlate.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="assets/abm/mp4/economy.mp4" download><i class="fas fa-film"></i> Simulation</a>
+                    <a href="assets/abm/mp4/economy_decomposition.mp4" download><i class="fas fa-film"></i> Decomposition</a>
+                    <a href="assets/abm/analysis/economy_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static figure</a>
+                    <a href="assets/abm/data/economy_state.mat" download><i class="fas fa-database"></i> State data</a>
+                </div>
+            </article>
+            <article class="abm-model" id="segregation">
+                <header class="abm-model-head">
+                    <h3>Segregation</h3>
+                    <span class="project-year">Alg. 7.5</span>
+                    <span class="project-venue">Continuous space</span>
+                </header>
+                <p class="blurb">Relocation driven by counts of same-category neighbors, after Schelling. Reproduced as published, including a neighbor-selection defect.</p>
+                <div class="abm-pair">
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Simulation</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/segregation.png"
+                               src="assets/abm/mp4/segregation.mp4"
+                               aria-label="Segregation simulation"></video>
+                    </div>
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Decomposition, evolving in time</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/segregation_decomposition.png"
+                               src="assets/abm/mp4/segregation_decomposition.mp4"
+                               aria-label="Segregation decomposition"></video>
+                    </div>
+                </div>
+                <ul class="abm-takeaways">
+                    <li>The segregation index locks at 0.7389 by step 8 and then holds to machine precision for the remaining 62 steps.</li>
+                    <li>Cross-correlation between the two categories stays within 0.05 of zero at every offset, so the groups hold independent territory.</li>
+                    <li>Frame-to-frame correlation remains above 0.5 through a lag of 20, the expected result once relocation stops.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="assets/abm/mp4/segregation.mp4" download><i class="fas fa-film"></i> Simulation</a>
+                    <a href="assets/abm/mp4/segregation_decomposition.mp4" download><i class="fas fa-film"></i> Decomposition</a>
+                    <a href="assets/abm/analysis/segregation_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static figure</a>
+                    <a href="assets/abm/data/segregation_state.mat" download><i class="fas fa-database"></i> State data</a>
+                </div>
+            </article>
+            <article class="abm-model" id="diffusion1d">
+                <header class="abm-model-head">
+                    <h3>One-dimensional diffusion</h3>
+                    <span class="project-year">Alg. 7.6</span>
+                    <span class="project-venue">Profile</span>
+                </header>
+                <p class="blurb">Explicit finite-difference scheme at the stability limit, D = 0.5, with stochastic rounding.</p>
+                <div class="abm-pair">
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Simulation</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/diffusion1d.png"
+                               src="assets/abm/mp4/diffusion1d.mp4"
+                               aria-label="One-dimensional diffusion simulation"></video>
+                    </div>
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Decomposition, evolving in time</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/diffusion1d_decomposition.png"
+                               src="assets/abm/mp4/diffusion1d_decomposition.mp4"
+                               aria-label="One-dimensional diffusion decomposition"></video>
+                    </div>
+                </div>
+                <ul class="abm-takeaways">
+                    <li>Peak concentration decays from 239 to 134 across 2000 iterations, and no single step increases.</li>
+                    <li>The wavenumber spectrum falls at a slope near &minus;1.1 across 9.6 decades, the widest dynamic range in the gallery.</li>
+                    <li>The delay embedding traces an open arc that never revisits an earlier state, as irreversible spreading requires.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="assets/abm/mp4/diffusion1d.mp4" download><i class="fas fa-film"></i> Simulation</a>
+                    <a href="assets/abm/mp4/diffusion1d_decomposition.mp4" download><i class="fas fa-film"></i> Decomposition</a>
+                    <a href="assets/abm/analysis/diffusion1d_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static figure</a>
+                    <a href="assets/abm/data/diffusion1d_state.mat" download><i class="fas fa-database"></i> State data</a>
+                </div>
+            </article>
+            <article class="abm-model" id="diffusion2d">
+                <header class="abm-model-head">
+                    <h3>Two-dimensional diffusion</h3>
+                    <span class="project-year">Alg. 7.7</span>
+                    <span class="project-venue">Lattice</span>
+                </header>
+                <p class="blurb">Explicit five-point scheme at the two-dimensional stability limit, D = 0.25.</p>
+                <div class="abm-pair">
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Simulation</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/diffusion2d.png"
+                               src="assets/abm/mp4/diffusion2d.mp4"
+                               aria-label="Two-dimensional diffusion simulation"></video>
+                    </div>
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Decomposition, evolving in time</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/diffusion2d_decomposition.png"
+                               src="assets/abm/mp4/diffusion2d_decomposition.mp4"
+                               aria-label="Two-dimensional diffusion decomposition"></video>
+                    </div>
+                </div>
+                <ul class="abm-takeaways">
+                    <li>Peak concentration decays from 251 to 223 over 100 steps without a single increase.</li>
+                    <li>The spectrum steepens to a slope of &minus;2.6, the sharpest roll-off among the lattice models, because the field stays smooth.</li>
+                    <li>Frame-to-frame correlation holds at 1.000 through a lag of 20, so the field evolves far more slowly than the frame interval.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="assets/abm/mp4/diffusion2d.mp4" download><i class="fas fa-film"></i> Simulation</a>
+                    <a href="assets/abm/mp4/diffusion2d_decomposition.mp4" download><i class="fas fa-film"></i> Decomposition</a>
+                    <a href="assets/abm/analysis/diffusion2d_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static figure</a>
+                    <a href="assets/abm/data/diffusion2d_state.mat" download><i class="fas fa-database"></i> State data</a>
+                </div>
+            </article>
+            <article class="abm-model" id="preypredator">
+                <header class="abm-model-head">
+                    <h3>Predator and prey</h3>
+                    <span class="project-year">Alg. 7.9</span>
+                    <span class="project-venue">Lattice</span>
+                </header>
+                <p class="blurb">Energy-driven predation, reproduction, and death on a lattice. The prey-predator plane traces one orbit within the captured run.</p>
+                <div class="abm-pair">
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Simulation</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/preypredator.png"
+                               src="assets/abm/mp4/preypredator.mp4"
+                               aria-label="Predator and prey simulation"></video>
+                    </div>
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Decomposition, evolving in time</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/preypredator_decomposition.png"
+                               src="assets/abm/mp4/preypredator_decomposition.mp4"
+                               aria-label="Predator and prey decomposition"></video>
+                    </div>
+                </div>
+                <ul class="abm-takeaways">
+                    <li>Prey count completes one boom and collapse inside 100 steps, rising from 256 at step 5 to 8155 at step 33.</li>
+                    <li>The two species reach maximum anti-correlation at zero spatial offset, &minus;0.408, so predators and prey hold mutually exclusive ground.</li>
+                    <li>The phase portrait traces a single orbit in the prey-predator plane before predator numbers fall to zero.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="assets/abm/mp4/preypredator.mp4" download><i class="fas fa-film"></i> Simulation</a>
+                    <a href="assets/abm/mp4/preypredator_decomposition.mp4" download><i class="fas fa-film"></i> Decomposition</a>
+                    <a href="assets/abm/analysis/preypredator_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static figure</a>
+                    <a href="assets/abm/data/preypredator_state.mat" download><i class="fas fa-database"></i> State data</a>
+                </div>
+            </article>
+            <article class="abm-model" id="voter">
+                <header class="abm-model-head">
+                    <h3>Voter model</h3>
+                    <span class="project-year">Alg. 7.10</span>
+                    <span class="project-venue">Network</span>
+                </header>
+                <p class="blurb">Opinion dynamics on the karate club network of Zachary, push variant.</p>
+                <div class="abm-pair">
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Simulation</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/voter.png"
+                               src="assets/abm/mp4/voter.mp4"
+                               aria-label="Voter model simulation"></video>
+                    </div>
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Decomposition, evolving in time</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/voter_decomposition.png"
+                               src="assets/abm/mp4/voter_decomposition.mp4"
+                               aria-label="Voter model decomposition"></video>
+                    </div>
+                </div>
+                <ul class="abm-takeaways">
+                    <li>The majority fraction wanders between 0.53 and 0.97 across 4000 updates, and consensus stays out of reach.</li>
+                    <li>Graph Fourier energy concentrates at mode 13 of 34 (&lambda; = 2), which carries 45 percent of the total.</li>
+                    <li>Node-node correlation reaches &minus;0.62 between opposing blocs, and Fiedler ordering separates the club into two camps.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="assets/abm/mp4/voter.mp4" download><i class="fas fa-film"></i> Simulation</a>
+                    <a href="assets/abm/mp4/voter_decomposition.mp4" download><i class="fas fa-film"></i> Decomposition</a>
+                    <a href="assets/abm/analysis/voter_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static figure</a>
+                    <a href="assets/abm/data/voter_state.mat" download><i class="fas fa-database"></i> State data</a>
+                </div>
+            </article>
+            <article class="abm-model" id="epidemic">
+                <header class="abm-model-head">
+                    <h3>SIS epidemic</h3>
+                    <span class="project-year">Alg. 7.11</span>
+                    <span class="project-venue">Network</span>
+                </header>
+                <p class="blurb">Susceptible-infected-susceptible spreading on the same network, under a Greenwood force of infection that is independent of the number of exposures.</p>
+                <div class="abm-pair">
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Simulation</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/epidemic.png"
+                               src="assets/abm/mp4/epidemic.mp4"
+                               aria-label="SIS epidemic simulation"></video>
+                    </div>
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Decomposition, evolving in time</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/epidemic_decomposition.png"
+                               src="assets/abm/mp4/epidemic_decomposition.mp4"
+                               aria-label="SIS epidemic decomposition"></video>
+                    </div>
+                </div>
+                <ul class="abm-takeaways">
+                    <li>Prevalence fluctuates between 6 and 16 infected nodes across the final fifth of the run, and the infection never dies out.</li>
+                    <li>Outbreak peaks recur at irregular spacings between 66 and 164 steps, so the process carries no fixed period.</li>
+                    <li>Graph Fourier energy spreads across the spectrum, and the largest single mode holds only 15 percent.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="assets/abm/mp4/epidemic.mp4" download><i class="fas fa-film"></i> Simulation</a>
+                    <a href="assets/abm/mp4/epidemic_decomposition.mp4" download><i class="fas fa-film"></i> Decomposition</a>
+                    <a href="assets/abm/analysis/epidemic_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static figure</a>
+                    <a href="assets/abm/data/epidemic_state.mat" download><i class="fas fa-database"></i> State data</a>
+                </div>
+            </article>
+            <article class="abm-model" id="netdiffusion">
+                <header class="abm-model-head">
+                    <h3>Network diffusion</h3>
+                    <span class="project-year">Alg. 7.12</span>
+                    <span class="project-venue">Network</span>
+                </header>
+                <p class="blurb">Graph-Laplacian diffusion converging to consensus.</p>
+                <div class="abm-pair">
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Simulation</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/netdiffusion.png"
+                               src="assets/abm/mp4/netdiffusion.mp4"
+                               aria-label="Network diffusion simulation"></video>
+                    </div>
+                    <div class="abm-pane">
+                        <span class="abm-pane-label">Decomposition, evolving in time</span>
+                        <video autoplay loop muted playsinline preload="auto"
+                               poster="assets/abm/poster/netdiffusion_decomposition.png"
+                               src="assets/abm/mp4/netdiffusion_decomposition.mp4"
+                               aria-label="Network diffusion decomposition"></video>
+                    </div>
+                </div>
+                <ul class="abm-takeaways">
+                    <li>Spread decays monotonically from 30.6 to 0.05 over 10000 steps, and no step increases.</li>
+                    <li>The graph Fourier transform collapses onto the Fiedler mode (&lambda; = 0.469), which retains 100 percent of the energy.</li>
+                    <li>Across the three models sharing this 34-node graph, low-mode energy separates the dynamics cleanly: 100 percent for diffusion, 5 percent for the epidemic, and 3 percent for the voter model.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="assets/abm/mp4/netdiffusion.mp4" download><i class="fas fa-film"></i> Simulation</a>
+                    <a href="assets/abm/mp4/netdiffusion_decomposition.mp4" download><i class="fas fa-film"></i> Decomposition</a>
+                    <a href="assets/abm/analysis/netdiffusion_decomposition.png" target="_blank"><i class="fas fa-image"></i> Static figure</a>
+                    <a href="assets/abm/data/netdiffusion_state.mat" download><i class="fas fa-database"></i> State data</a>
+                </div>
+            </article>
+        </section>
+
+        <!-- REFERENCES -->
+        <section>
+            <h2>References</h2>
+            <ol class="abm-refs">
+                <li>Cuevas, E., Avila, K., Islas Toski, M., and Escobar, H. (2025). <em>Agent-Based Models with MATLAB</em>. Morgan Kaufmann and Elsevier. Source of the model rules used here.</li>
+                <li>Li, W. <em>Power Spectra of Regular Languages and Cellular Automata</em>. Complex Systems.</li>
+                <li>Ninagawa, S. <em>Power Spectral Analysis of Elementary Cellular Automata</em>. Complex Systems, 17(4).</li>
+                <li><em>Infection Analysis on Irregular Networks through Graph Signal Processing</em> (2018). arXiv:1808.04879.</li>
+                <li>Shuman, D. I., Narang, S. K., Frossard, P., Ortega, A., and Vandergheynst, P. <em>The Emerging Field of Signal Processing on Graphs</em>. IEEE Signal Processing Magazine.</li>
+                <li>Schelling, T. C. (1971). Dynamic models of segregation. <em>Journal of Mathematical Sociology</em>, 1(2), 143&ndash;186.</li>
+                <li>Dragulescu, A., and Yakovenko, V. M. (2000). Statistical mechanics of money. <em>European Physical Journal B</em>, 17(4), 723&ndash;729.</li>
+                <li>Zachary, W. W. (1977). An information flow model for conflict and fission in small groups. <em>Journal of Anthropological Research</em>, 33, 452&ndash;473. Contact network for the voter, epidemic, and network-diffusion models.</li>
+                <li>Allen, L. J. S. <em>An Introduction to Stochastic Epidemic Models</em>. Greenwood and Reed-Frost chain-binomial formulations.</li>
+            </ol>
+        </section>
+
+    </main>
+
+    <footer class="research-footer">
+        <p>&copy; Joseph Blochberger 2021&ndash;2026. Original analysis. This page is not affiliated with,
+        endorsed by, or a companion to any of the works cited above.</p>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/josephblochberger/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/joeblochberger/" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+
+    <script>
+    // Every animation is meant to be running whenever the page is open. The
+    // autoplay attribute starts them on its own in most browsers; everything
+    // below exists only to cover the cases the attribute alone does not:
+    // a browser that declines autoplay until the reader interacts, a player
+    // whose first play() call fires before the file is ready, and a player a
+    // power-saving heuristic suspends while it sits off screen. Nothing here
+    // ever pauses a video that is already running.
+    (function () {
+        var videos = Array.prototype.slice.call(document.querySelectorAll('video'));
+        var fallback = document.getElementById('abm-play-fallback');
+        var blockedCount = 0;
+
+        function markBlocked(v) {
+            v.controls = true;              // native play button on this one player
+            blockedCount += 1;
+            if (fallback) { fallback.style.display = 'flex'; }
+        }
+
+        function start(v) {
+            if (!v.paused) { return; }
+            try {
+                var p = v.play();
+                if (p && p.catch) {
+                    p.catch(function () { markBlocked(v); });
+                }
+            } catch (err) {
+                markBlocked(v);
+            }
+        }
+
+        function startAll() { videos.forEach(start); }
+
+        startAll();
+        window.addEventListener('load', startAll);
+
+        // A player whose play() call raced its own metadata gets a second try
+        // the moment it reports itself ready, independent of every other path.
+        videos.forEach(function (v) {
+            ['loadedmetadata', 'canplay', 'canplaythrough'].forEach(function (evt) {
+                v.addEventListener(evt, function () { start(v); });
+            });
+        });
+
+        // A blocked autoplay policy clears on the first genuine interaction.
+        ['pointerdown', 'keydown', 'touchstart'].forEach(function (evt) {
+            window.addEventListener(evt, function once() {
+                startAll();
+                ['pointerdown', 'keydown', 'touchstart'].forEach(function (e2) {
+                    window.removeEventListener(e2, once);
+                });
+            }, { passive: true });
+        });
+
+        // Resume anything a power-saving heuristic suspended while off screen.
+        if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) { start(entry.target); }
+                });
+            }, { rootMargin: '400px 0px' });
+            videos.forEach(function (v) { observer.observe(v); });
+        }
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) { startAll(); }
+        });
+
+        // Guaranteed fallback: a direct click is a real user gesture, which no
+        // autoplay policy blocks, so this always starts every player.
+        var playAllButton = document.getElementById('abm-play-all');
+        if (playAllButton) {
+            playAllButton.addEventListener('click', function () {
+                videos.forEach(function (v) {
+                    v.controls = false;
+                    var p = v.play();
+                    if (p && p.catch) { p.catch(function () {}); }
+                });
+                if (fallback) { fallback.style.display = 'none'; }
+            });
+        }
+    })();
+    </script>
+</body>
+</html>
