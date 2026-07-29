@@ -1,0 +1,48 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="Model activity" id="activity">
+    <mxGraphModel dx="900" dy="760" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="820" pageHeight="740" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="AYA tri-layer model: simulation activity (one run)" style="text;html=1;fontSize=16;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="180" y="8" width="460" height="24" as="geometry"/></mxCell>
+        <mxCell id="legend" value="Legend" style="text;html=1;fontSize=11;fontStyle=1;align=left;" vertex="1" parent="1"><mxGeometry x="560" y="24" width="120" height="16" as="geometry"/></mxCell>
+        <mxCell id="lg1" value="" style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="560" y="44" width="16" height="12" as="geometry"/></mxCell>
+        <mxCell id="lg2" value="" style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="560" y="60" width="16" height="12" as="geometry"/></mxCell>
+        <mxCell id="lg3" value="" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1"><mxGeometry x="560" y="76" width="16" height="12" as="geometry"/></mxCell>
+        <mxCell id="lg1t" value="ABM (patient clinical &amp; wellbeing)" style="text;html=1;fontSize=10;align=left;" vertex="1" parent="1"><mxGeometry x="582" y="42" width="220" height="16" as="geometry"/></mxCell>
+        <mxCell id="lg2t" value="Network (support ties)" style="text;html=1;fontSize=10;align=left;" vertex="1" parent="1"><mxGeometry x="582" y="58" width="220" height="16" as="geometry"/></mxCell>
+        <mxCell id="lg3t" value="System dynamics (services)" style="text;html=1;fontSize=10;align=left;" vertex="1" parent="1"><mxGeometry x="582" y="74" width="220" height="16" as="geometry"/></mxCell>
+
+        <mxCell id="start" value="" style="ellipse;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="355" y="40" width="28" height="28" as="geometry"/></mxCell>
+        <mxCell id="init" value="Initialize agents, Watts-Strogatz network, SD stocks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1"><mxGeometry x="269" y="90" width="200" height="48" as="geometry"/></mxCell>
+        <mxCell id="dT" value="more steps?  (t &#8804; T)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="314" y="168" width="110" height="68" as="geometry"/></mxCell>
+        <mxCell id="clin" value="Clinical update: tumor, side effects, financial toxicity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="269" y="270" width="200" height="46" as="geometry"/></mxCell>
+        <mxCell id="supp" value="N&#8594;A support &#183; S&#8594;A stress &#183; response-shift adaptation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="269" y="340" width="200" height="46" as="geometry"/></mxCell>
+        <mxCell id="updQ" value="Update wellbeing P, &#968; &#8594; HRQoL Q" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="269" y="410" width="200" height="40" as="geometry"/></mxCell>
+        <mxCell id="dM" value="month boundary?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="314" y="474" width="110" height="66" as="geometry"/></mxCell>
+        <mxCell id="sd" value="System dynamics: referral queue (inflow demand &#8594; served &#8804; capacity)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1"><mxGeometry x="540" y="478" width="220" height="52" as="geometry"/></mxCell>
+        <mxCell id="net" value="Network: form ties (S&#8594;N) &#183; dissolve ties (A&#8594;N)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="540" y="548" width="220" height="48" as="geometry"/></mxCell>
+        <mxCell id="mrg" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="349" y="560" width="40" height="40" as="geometry"/></mxCell>
+        <mxCell id="store" value="Store HRQoL, stocks, mean degree" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1"><mxGeometry x="269" y="640" width="200" height="40" as="geometry"/></mxCell>
+        <mxCell id="pkg" value="Package outputs: trajectories, stocks, network" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1"><mxGeometry x="40" y="180" width="170" height="46" as="geometry"/></mxCell>
+        <mxCell id="final" value="" style="ellipse;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;" vertex="1" parent="1"><mxGeometry x="111" y="258" width="28" height="28" as="geometry"/></mxCell>
+        <mxCell id="finaldot" value="" style="ellipse;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="117" y="264" width="16" height="16" as="geometry"/></mxCell>
+
+        <mxCell id="e0" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="start" target="init"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="init" target="dT"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" value="yes" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="dT" target="clin"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" value="no" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="dT" target="pkg"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="pkg" target="final"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="clin" target="supp"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="supp" target="updQ"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="updQ" target="dM"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e8" value="yes" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="dM" target="sd"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e9" value="no" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="dM" target="mrg"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="sd" target="net"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="net" target="mrg"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="mrg" target="store"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e13" value="next step" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="store" target="dT"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="790" y="660"/><mxPoint x="790" y="202"/></Array></mxGeometry></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
