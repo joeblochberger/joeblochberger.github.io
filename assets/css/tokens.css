@@ -1,0 +1,92 @@
+/* ============================================================
+   DESIGN TOKENS — single source of truth
+   Spotify Wrapped dark theme. Every page and stylesheet reads
+   its color, radius, and font values from the variables below.
+   No raw brand color should live outside this file.
+
+   Font note: "Circular" is a proprietary Spotify typeface and is
+   not present in this repository. The stacks fall back to Inter
+   (loaded below) and then to system-ui, so text renders in Inter.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    /* Backgrounds */
+    --bg-primary: #121212;
+    --bg-elevated: #181818;
+
+    /* Text */
+    --text-primary: #FFFFFF;
+    --text-secondary: #B3B3B3;
+
+    /* Johns Hopkins identity colors. Heritage Blue is the primary brand color,
+       reserved for surfaces (hero, icon tiles) because it is too dark to read as
+       text on this background. Gold is the bright on-dark accent; Spirit Blue is
+       the secondary. Red is a Hopkins secondary used for a distinct category. */
+    --jhu-heritage: #002D72;
+    --jhu-gold: #F1C400;
+    --jhu-spirit: #68ACE5;
+    --jhu-red: #CF4520;
+
+    /* Accents — use only on CTAs, active states, tags, links, chart highlights.
+       Keep to one or two per screen. Primary accent is Gold. */
+    --accent-green: var(--jhu-gold);    /* primary accent (name kept for compatibility) */
+    --accent-pink: var(--jhu-red);      /* distinct category and error state */
+    --accent-blue: var(--jhu-spirit);   /* secondary accent */
+    --accent-yellow: var(--jhu-gold);   /* gold, for warnings and highlights */
+
+    /* Shape and type */
+    --radius-card: 10px;
+    --font-display: "Circular Black", "Inter", system-ui, sans-serif;
+    --font-body: "Circular", "Inter", system-ui, sans-serif;
+
+    /* Supporting tokens, all derived from the values above so that no
+       raw color is duplicated anywhere outside this file. */
+    --border: color-mix(in srgb, var(--text-secondary) 22%, transparent);
+    --border-strong: color-mix(in srgb, var(--text-secondary) 34%, transparent);
+    --overlay: rgba(0, 0, 0, 0.6);
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.60);
+    --shadow-accent: 0 4px 20px color-mix(in srgb, var(--accent-green) 18%, transparent);
+    --glow-accent: 0 0 20px color-mix(in srgb, var(--accent-green) 24%, transparent);
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+
+    /* Code block surface (a touch darker than the base). */
+    --code-surface: color-mix(in srgb, var(--bg-primary) 88%, #000);
+
+    /* Figure image surface: a light frame behind figure images. Model figures
+       are matplotlib PNGs that render on white, so the frame stays light for
+       legibility. This is the one deliberately light surface in the theme. */
+    --figure-mount: #f6f9fc;
+    --figure-ink: #0c141d;
+    --figure-muted: #3a4754;
+    --figure-link: #1b4f8a;
+
+    /* Legacy aliases: existing rules keep working and resolve to the
+       tokens above, so no rule needs a hardcoded value. */
+    --bg-secondary: var(--bg-elevated);
+    --bg-card: var(--bg-elevated);
+    --bg-tertiary: var(--bg-elevated);
+    --text-muted: var(--text-secondary);
+    --text-accent: var(--jhu-gold);
+    --gold: var(--jhu-gold);
+    --gold-light: color-mix(in srgb, var(--jhu-gold) 72%, var(--text-primary));
+    --gold-muted: color-mix(in srgb, var(--jhu-gold) 80%, #000);
+    --navy: var(--jhu-heritage);                                   /* hero + icon tiles: Heritage Blue surface */
+    --burgundy: color-mix(in srgb, var(--jhu-heritage) 62%, #000); /* deep Heritage Blue gradient stop */
+    --burgundy-light: var(--jhu-heritage);
+    --emerald: var(--jhu-spirit);
+    --success: var(--jhu-spirit);                                  /* completion shown in Spirit Blue (no green) */
+    --warning: var(--jhu-gold);
+    --danger: var(--jhu-red);
+    --info: var(--jhu-spirit);
+    --border-light: var(--border-strong);
+    --border-accent: var(--jhu-gold);
+    --shadow-gold: var(--shadow-accent);
+    --glow-gold: var(--glow-accent);
+    --radius: var(--radius-card);
+    --radius-lg: var(--radius-card);
+    --font-serif: var(--font-display);
+    --font-sans: var(--font-body);
+}

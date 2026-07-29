@@ -1,0 +1,1476 @@
+/* ============================================
+   PORTFOLIO STYLES
+   All color, radius, and font values come from tokens.css
+   (single source of truth). No raw hex lives in this file.
+   ============================================ */
+@import url("tokens.css");
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle texture overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Navigation - Editorial masthead style */
+.research-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.25rem 2rem;
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.research-nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.research-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.research-nav a:hover {
+    color: var(--text-primary);
+}
+
+.research-nav a:hover::after,
+.research-nav a.active::after {
+    width: 60%;
+}
+
+.research-nav a.active {
+    color: var(--gold);
+}
+
+/* Main Content */
+.research-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+/* Hero Section - Magazine cover feel */
+.research-hero {
+    text-align: center;
+    padding: 5rem 3rem;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--navy) 50%, var(--burgundy) 100%);
+    border-radius: var(--radius-lg);
+    margin-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-accent);
+    box-shadow: var(--shadow-gold);
+}
+
+.research-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top, color-mix(in srgb, var(--accent-green) 10%, transparent) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.research-badge {
+    display: inline-block;
+    background: color-mix(in srgb, var(--accent-green) 15%, transparent);
+    border: 1px solid var(--gold-muted);
+    color: var(--gold-light);
+    padding: 0.375rem 1.25rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.research-hero h1 {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.research-hero .subtitle {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Buttons - Refined elegance */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.03em;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-muted) 100%);
+    color: var(--bg-primary);
+    box-shadow: var(--shadow-gold);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--glow-gold);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+}
+
+.btn-secondary:hover {
+    border-color: var(--gold-muted);
+    color: var(--gold);
+    background: color-mix(in srgb, var(--accent-green) 5%, transparent);
+}
+
+/* Section Headers - Editorial typography */
+section h2 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+/* Overview Cards - Library card catalog feel */
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.overview-card {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.overview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--gold), var(--burgundy));
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.overview-card:hover {
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow);
+    transform: translateY(-4px);
+}
+
+.overview-card:hover::before {
+    opacity: 1;
+}
+
+.card-icon {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, var(--burgundy) 0%, var(--navy) 100%);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+}
+
+.overview-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.overview-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.overview-card strong {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+/* Architecture Section */
+.architecture-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 2rem;
+}
+
+.layer {
+    width: 100%;
+    max-width: 650px;
+    padding: 1.75rem 2rem;
+    border-radius: var(--radius);
+    text-align: center;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+.layer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+
+.layer h4 {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.layer p {
+    font-size: 0.875rem;
+    opacity: 0.85;
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.layer code {
+    background: rgba(0,0,0,0.3);
+    padding: 0.375rem 0.75rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--gold-light);
+}
+
+/* Three architecture layers, color-coded as a categorical diagram (chart highlight).
+   Cards stay elevated for AA-safe text; the layer accent shows as a top band. */
+.layer-macro {
+    background: var(--bg-elevated);
+    border-top: 3px solid var(--accent-blue);
+}
+.layer-meso {
+    background: var(--bg-elevated);
+    border-top: 3px solid var(--accent-pink);
+}
+.layer-micro {
+    background: var(--bg-elevated);
+    border-top: 3px solid var(--accent-green);
+}
+
+.layer-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 0.25rem 0;
+}
+
+.layer-connector i {
+    font-size: 1.25rem;
+    color: var(--gold-muted);
+}
+
+/* Findings Section */
+.findings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.finding-card {
+    background: var(--bg-card);
+    padding: 1.75rem;
+    border-radius: var(--radius);
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.finding-card:hover {
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-gold);
+}
+
+.finding-value {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.finding-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.findings-caveat {
+    background: color-mix(in srgb, var(--accent-yellow) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent-yellow) 30%, transparent);
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.findings-caveat i {
+    color: var(--warning);
+}
+
+/* Link Cards */
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+}
+
+.link-card {
+    display: block;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.link-card:hover {
+    border-color: var(--gold-muted);
+    box-shadow: var(--shadow-gold);
+    transform: translateY(-4px);
+}
+
+.link-card i {
+    font-size: 1.75rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.link-card h4 {
+    font-family: var(--font-serif);
+    margin-bottom: 0.375rem;
+    font-size: 1.1rem;
+}
+
+.link-card p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   PROGRESS PAGE
+   ============================================ */
+
+.progress-hero {
+    text-align: center;
+    padding: 3.5rem 2rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border);
+}
+
+.progress-hero h1 {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.progress-hero .subtitle {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.overall-progress {
+    max-width: 500px;
+    margin: 2.5rem auto 0;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.progress-percent {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.progress-bar-container {
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--gold-muted), var(--gold), var(--gold-light));
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--accent-green) 40%, transparent);
+}
+
+.progress-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
+    font-style: italic;
+}
+
+/* Tabs */
+.view-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    border-color: var(--gold-muted);
+    color: var(--text-primary);
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, var(--gold-muted), var(--gold));
+    color: var(--bg-primary);
+    border-color: var(--gold);
+    font-weight: 600;
+}
+
+.view-content {
+    display: none;
+}
+
+.view-content.active {
+    display: block;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    padding-left: 2.5rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), var(--border));
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+    padding-left: 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2.25rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+}
+
+.timeline-item.completed .timeline-marker {
+    background: var(--success);
+    color: var(--bg-primary);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--accent-green) 40%, transparent);
+}
+
+.timeline-item.current .timeline-marker {
+    background: var(--gold);
+    color: var(--bg-primary);
+    box-shadow: 0 0 15px color-mix(in srgb, var(--accent-green) 50%, transparent);
+}
+
+.timeline-item.upcoming .timeline-marker {
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border);
+    color: var(--text-muted);
+}
+
+.timeline-date {
+    font-size: 0.75rem;
+    color: var(--gold-muted);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.timeline-content h4 {
+    font-family: var(--font-serif);
+    margin: 0.375rem 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.timeline-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Chapter Cards */
+.chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+}
+
+.chapter-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.chapter-card:hover {
+    box-shadow: var(--shadow);
+}
+
+.chapter-card.complete {
+    border-left: 4px solid var(--success);
+}
+
+.chapter-card.in-progress {
+    border-left: 4px solid var(--gold);
+}
+
+.chapter-card.not-started {
+    border-left: 4px solid var(--border);
+}
+
+.chapter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.chapter-num {
+    background: var(--bg-tertiary);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--gold);
+    border: 1px solid var(--border);
+}
+
+.chapter-status {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.chapter-card.complete .chapter-status { color: var(--success); }
+.chapter-card.in-progress .chapter-status { color: var(--gold); }
+
+.chapter-card h4 {
+    font-family: var(--font-serif);
+    margin-bottom: 0.375rem;
+    font-size: 1.1rem;
+}
+
+.chapter-card p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.chapter-progress {
+    background: var(--bg-tertiary);
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.chapter-bar {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 3px;
+}
+
+.chapter-card.complete .chapter-bar { 
+    background: var(--success); 
+}
+
+.chapter-pages {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Milestones */
+.milestones-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.milestone-category {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.milestone-category h3 {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-primary);
+}
+
+.milestone-category h3 i {
+    color: var(--gold);
+}
+
+.milestone-list {
+    list-style: none;
+}
+
+.milestone-list li {
+    padding: 0.625rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.milestone-list li:last-child {
+    border-bottom: none;
+}
+
+.milestone-list li.done { color: var(--success); }
+.milestone-list li.in-progress { color: var(--gold); }
+.milestone-list li.pending { color: var(--text-muted); }
+
+/* Updates Feed */
+.updates-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.update-card {
+    display: flex;
+    gap: 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.update-card:hover {
+    border-color: var(--border-accent);
+}
+
+.update-date {
+    text-align: center;
+    min-width: 55px;
+}
+
+.update-date .day {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.update-date .month {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.update-content h4 {
+    font-family: var(--font-serif);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.update-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.update-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.625rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Code blocks */
+.code-structure {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    overflow-x: auto;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+}
+
+.code-structure pre {
+    margin: 0;
+}
+
+.code-structure span {
+    color: var(--gold);
+}
+
+/* Gallery */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    box-shadow: var(--shadow-gold);
+    transform: translateY(-4px);
+    border-color: var(--border-accent);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background: var(--bg-tertiary);
+    padding: 1rem;
+}
+
+.gallery-caption {
+    padding: 1.25rem;
+    border-top: 1px solid var(--border);
+}
+
+.gallery-caption h4 {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.gallery-caption p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Scripts grid */
+.scripts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.script-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.script-card:hover {
+    border-color: var(--border-accent);
+}
+
+.script-card h4 {
+    font-family: var(--font-mono);
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.script-card p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+thead tr {
+    background: var(--bg-tertiary);
+}
+
+th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+}
+
+tbody tr:hover {
+    background: var(--bg-secondary);
+}
+
+/* Publications */
+.publications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.publication-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: all 0.3s ease;
+}
+
+.publication-card:hover {
+    border-color: var(--border-accent);
+}
+
+.publication-card.in-progress {
+    border-left: 4px solid var(--gold);
+}
+
+.pub-type {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 0.625rem;
+}
+
+.publication-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.pub-authors {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.375rem;
+}
+
+.pub-venue {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.pub-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.pub-links a {
+    font-size: 0.875rem;
+    color: var(--gold);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.pub-links a:hover {
+    color: var(--gold-light);
+    text-decoration: underline;
+}
+
+/* A status marker carries no destination, so it reads as plain text rather
+   than a link that jumps back to the top of the page. */
+.pub-links .pub-status {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* Footer */
+.research-footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    margin-top: 5rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--gold);
+}
+
+/* Lightbox */
+.lightbox {
+    background: color-mix(in srgb, var(--bg-primary) 94%, transparent);
+    backdrop-filter: blur(10px);
+}
+
+.lightbox-close {
+    color: var(--gold);
+}
+
+.lightbox-caption {
+    font-family: var(--font-serif);
+    color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    /* Eight nav items cannot sit on one line at phone widths. Without a wrap
+       the flex row sets a minimum document width and every section below it
+       overflows horizontally. */
+    .research-nav {
+        gap: 0.25rem;
+        padding: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .research-nav a {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .research-hero {
+        padding: 3rem 1.5rem;
+    }
+    
+    .research-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .timeline {
+        padding-left: 2rem;
+    }
+    
+    .update-card {
+        flex-direction: column;
+    }
+    
+    .update-date {
+        display: flex;
+        gap: 0.5rem;
+        align-items: baseline;
+    }
+}
+
+/* Selection color */
+::selection {
+    background: color-mix(in srgb, var(--accent-green) 30%, transparent);
+    color: var(--text-primary);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: 5px;
+    border: 2px solid var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-muted);
+}
+
+/* ============================================
+   HUB EXTENSIONS (portfolio home page)
+   ============================================ */
+.hub-hero h1 { font-family: var(--font-serif); font-size: clamp(2.2rem, 5vw, 3.4rem); }
+.hub-hero .tagline { color: var(--text-secondary); max-width: 780px; margin: 1rem auto 1.5rem; }
+.hub-hero .tagline a { color: var(--gold); text-decoration: none; }
+.hub-hero .tagline a:hover { text-decoration: underline; }
+
+.social-row { display: flex; gap: 1.25rem; justify-content: center; margin: 1rem 0 1.5rem; }
+.social-row a { color: var(--text-secondary); font-size: 1.5rem; transition: color .2s; }
+.social-row a:hover { color: var(--gold); }
+
+.about-grid { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; align-items: start; }
+.profile-pic { width: 100%; border-radius: var(--radius-lg); border: 1px solid var(--border-accent); box-shadow: var(--shadow); }
+.contact-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
+.contact-card p { color: var(--text-secondary); }
+
+/* Prose links in the About section default to the browser's blue with no
+   rule of their own; gold matches every other link treatment on the site. */
+#about a { color: var(--gold); text-decoration: none; }
+#about a:hover { color: var(--gold-light); text-decoration: underline; }
+
+.resume-block { margin-bottom: 2rem; }
+.resume-item { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--gold-muted); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+.resume-item h4 { font-family: var(--font-serif); font-size: 1.1rem; margin-bottom: .25rem; }
+.resume-item .info { color: var(--gold-light); font-size: .9rem; margin-bottom: .5rem; }
+.resume-item p, .resume-item li { color: var(--text-secondary); font-size: .95rem; }
+.resume-item ul { margin: .5rem 0 0 1.1rem; }
+
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: transform .2s, box-shadow .2s, border-color .2s; }
+.project-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-gold); border-color: var(--border-accent); }
+.project-card img,
+.project-card video { width: 100%; height: 180px; object-fit: cover; display: block; border-bottom: 1px solid var(--border); background: #000; }
+.project-card .project-body { padding: 1rem 1.25rem 1.25rem; }
+.project-card h4 { font-family: var(--font-serif); margin-bottom: .35rem; }
+.project-card .blurb { color: var(--text-secondary); font-size: .9rem; }
+.project-card details { margin-top: .75rem; }
+.project-card summary { cursor: pointer; color: var(--gold); font-size: .9rem; font-weight: 600; }
+.project-card details p { color: var(--text-secondary); font-size: .9rem; margin-top: .5rem; }
+.project-card details a { color: var(--gold); }
+.project-links { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: .75rem; }
+.project-links a { color: var(--gold); font-size: .85rem; text-decoration: none; border: 1px solid var(--border-accent); padding: .25rem .6rem; border-radius: 999px; }
+.project-links a:hover { background: color-mix(in srgb, var(--accent-green) 10%, transparent); }
+
+.disclaimer { color: var(--text-muted); font-size: .8rem; border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top: 2rem; }
+
+.featured-banner { background: linear-gradient(135deg, var(--navy), var(--bg-tertiary)); border: 1px solid var(--border-accent); border-radius: var(--radius-lg); padding: 1.75rem 2rem; margin: 2rem 0; }
+.featured-banner h3 { font-family: var(--font-serif); color: var(--gold-light); margin-bottom: .5rem; }
+.featured-banner p { color: var(--text-secondary); margin-bottom: 1rem; }
+
+@media (max-width: 720px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .project-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   RESEARCH PORTFOLIO
+   Extends .project-card for publication figures. A figure is
+   authored on a white canvas and must be shown whole rather than
+   cropped, so the image sits uncropped on the light figure mount
+   defined in tokens.css. Cards whose graphic is already dark opt
+   out through .card-dark.
+   ============================================ */
+
+.portfolio-group { margin-bottom: 3.5rem; }
+.portfolio-group > h3 { font-family: var(--font-serif); color: var(--gold-light); font-size: 1.3rem; margin-bottom: .3rem; }
+.portfolio-group > .group-note { color: var(--text-muted); font-size: .9rem; margin-bottom: 1.5rem; }
+
+.project-card.research-card img {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    background: var(--figure-mount);
+    padding: .5rem;
+}
+.project-card.research-card.card-dark img { background: var(--bg-primary); }
+
+.project-meta { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; margin-bottom: .45rem; }
+.project-year {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: var(--gold);
+    border: 1px solid var(--gold-muted);
+    border-radius: 999px;
+    padding: .1rem .6rem;
+    white-space: nowrap;
+}
+.project-venue { font-size: .7rem; text-transform: uppercase; letter-spacing: .09em; color: var(--text-muted); }
+
+.project-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; margin-top: .9rem; }
+.research-card.is-featured .project-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.project-stat { background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius); padding: .55rem .4rem; text-align: center; }
+.project-stat b { display: block; font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.2; color: var(--gold); }
+.project-stat span { display: block; font-size: .68rem; line-height: 1.35; color: var(--text-secondary); margin-top: .15rem; }
+
+/* Featured card: spans the grid with the banner running full width above the
+   text. The banner is a 1832 x 504 artwork, so the ratio below shows it whole
+   with no letterboxing and no crop. */
+.project-card.research-card.is-featured {
+    grid-column: 1 / -1;
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-gold);
+}
+.project-card.research-card.is-featured img {
+    aspect-ratio: 1832 / 504;
+    padding: 0;
+    object-fit: cover;
+    background: var(--bg-primary);
+}
+.project-card.research-card.is-featured .project-body { padding: 1.35rem 1.75rem 1.75rem; }
+.project-card.research-card.is-featured h4 { font-size: 1.4rem; }
+.project-card.research-card.is-featured .blurb { font-size: 1rem; }
+
+@media (max-width: 900px) {
+    .research-card.is-featured .project-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* The sticky masthead would otherwise sit on top of a section jumped to by
+   anchor, so reserve the height of the masthead above each target. */
+#research-portfolio,
+#engineering-portfolio,
+.abm-model[id] { scroll-margin-top: 6rem; }
+
+/* ============================================
+   NARROW VIEWPORT CORRECTIONS
+   A fixed track minimum such as minmax(320px, 1fr) cannot shrink below the
+   stated floor, so on a 360 pixel phone the grid pushes past the viewport and
+   the whole page scrolls sideways. Capping each floor at 100 percent of the
+   available width keeps the intended desktop behaviour and removes the
+   overflow. The caveat banner is a flex row whose text needs permission to
+   wrap onto a second line.
+   ============================================ */
+
+.overview-grid { grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); }
+.findings-grid { grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); }
+.links-grid { grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
+.chapters-grid { grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
+.milestones-container { grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
+.gallery-grid { grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
+.scripts-grid { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+.project-grid { grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); }
+
+.findings-caveat { flex-wrap: wrap; align-items: flex-start; }
+.findings-caveat > i { margin-top: .25rem; }
+
+/* A long file name, identifier, or URL is one unbreakable token and will push a
+   paragraph past the viewport on a phone. Preformatted blocks keep the original
+   line breaks and scroll inside a dedicated box instead. */
+p, li, h1, h2, h3, h4, h5, h6, figcaption, td, th, dd, summary { overflow-wrap: break-word; }
+pre { overflow-x: auto; max-width: 100%; }
+
+/* A data table has a floor below which the columns stop being readable. Below
+   that floor the table scrolls inside a dedicated frame rather than widening
+   the page. The class name matches the one already used on the model page. */
+.tablewrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+}
+
+/* ============================================
+   AGENT-BASED MODEL GALLERY
+   Each entry pairs a simulation with the decomposition computed from it. The
+   simulation frame is square and the six-panel decomposition is wide, so the
+   two panes are given proportional widths rather than equal ones.
+   ============================================ */
+
+.abm-model {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.4rem 1.4rem;
+    margin-bottom: 1.75rem;
+    transition: border-color .2s, box-shadow .2s;
+}
+.abm-model:hover { border-color: var(--border-accent); box-shadow: var(--shadow-gold); }
+
+.abm-model-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem; margin-bottom: .3rem; }
+.abm-model-head h3 { font-family: var(--font-serif); font-size: 1.15rem; }
+
+.abm-pair {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr);
+    gap: 1rem;
+    margin-top: .9rem;
+}
+@media (max-width: 820px) { .abm-pair { grid-template-columns: 1fr; } }
+
+.abm-pane { min-width: 0; }
+.abm-pane-label {
+    display: block;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: var(--text-muted);
+    margin-bottom: .35rem;
+}
+.abm-pane video {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--figure-mount);
+}
+
+.abm-table { width: 100%; border-collapse: collapse; font-size: .9rem; min-width: 30rem; }
+.abm-table th, .abm-table td { padding: .6rem .75rem; text-align: left; border-bottom: 1px solid var(--border); }
+.abm-table th { color: var(--gold-light); font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; }
+.abm-table td { color: var(--text-secondary); }
+.abm-table td:first-child { color: var(--gold); font-family: var(--font-mono); }
+
+.abm-refs { color: var(--text-secondary); font-size: .9rem; padding-left: 1.3rem; max-width: 82ch; }
+.abm-refs li { margin-bottom: .55rem; }
+
+/* Measured takeaways sit under each model pair. The marker is drawn as a gold
+   glyph rather than a list bullet so the readings line up with the figure
+   captions used elsewhere on the site. */
+.abm-takeaways {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: .85rem 1rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold-muted);
+    border-radius: var(--radius);
+}
+.abm-takeaways li {
+    position: relative;
+    padding-left: 1.15rem;
+    margin-bottom: .5rem;
+    color: var(--text-secondary);
+    font-size: .875rem;
+    line-height: 1.6;
+}
+.abm-takeaways li:last-child { margin-bottom: 0; }
+.abm-takeaways li::before {
+    content: "\25B8";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+}
+
+/* Exactly four cards fall into a ragged three-plus-one under the auto-fit rule,
+   so this grid is pinned to two columns and reads as a deliberate pair of rows. */
+.overview-grid.grid-2x2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) { .overview-grid.grid-2x2 { grid-template-columns: 1fr; } }
