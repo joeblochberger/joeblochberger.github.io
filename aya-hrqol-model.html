@@ -215,10 +215,13 @@
      population and services. The three layers exchange information through six explicit interfaces, each
      of which can be disabled independently to measure the contribution of each interface. No prior model is known to couple
      all three layers for AYA HRQoL<sup class="cite">[<a href="#r16">16</a>, <a href="#r17">17</a>]</sup></p>
-  <p><span class="ablabel">Results.</span> Over 20 simulation seeds and a 24-month horizon, the model
-     reproduces patterns it was not fitted to, including a treatment nadir, persistent emotional deficits,
-     and a durable-remission fraction near 78% among treated agents, within the band anchored to AYA
-     5-year relative survival<sup class="cite">[<a href="#r1">1</a>, <a href="#r5">5</a>]</sup>
+  <p><span class="ablabel">Results.</span> Over 20 simulation seeds and a 24-month horizon, and given a
+     starting population configured from published sources, the model generates the timing and depth of a
+     treatment nadir, the height of a below-norm plateau, and the size and two-year persistence of the
+     vulnerable-subgroup gap. Quantities fixed by that configuration rather than produced by it (the baseline
+     deficit, the 20% vulnerable fraction, the durable-remission ceiling set by the 0.86 responder fraction
+     taken from AYA 5-year relative survival, and the small intervention effect) are not evidence about the
+     world<sup class="cite">[<a href="#r1">1</a>, <a href="#r5">5</a>]</sup>
      Each interface acts in the direction predicted by the governing mechanism, with effect sizes that differ sharply:
      social support dominates the outcome while the population-feedback loop is near-dormant under baseline
      parameters. All interface verification checks pass, including a no-leak test, a structural verification method used to ensure that stocks (accumulations) do not gain or lose material spontaneously. It checks that all inflows and outflows are properly accounted for and that no hidden or "leaking" flows exist<sup class="cite">[<a href="#r9">9</a>]</sup></p>
@@ -300,11 +303,11 @@
     </ul></figcaption></figure>
 
   <figure><img src="assets/aya/evidence_below_norm.png" alt="AYA HRQoL below population norms" loading="lazy">
-    <figcaption><b>AYA HRQoL is below population norms.</b> SF-12 physical and mental scores at diagnosis sit
+    <figcaption><b>AYA HRQoL is below population norms.</b> SF-36 physical and mental scores at diagnosis sit
     well under the general-population norm<sup class="cite">[<a href="#r1">1</a>]</sup>
     <ul class="find">
       <li>At diagnosis, AYA physical (PCS 38.7) and mental (MCS 42.9) scores fall far below the norms (52.8 / 48.9)<sup class="cite">[<a href="#r1">1</a>]</sup></li>
-      <li>The deficit persists to 24 months rather than resolving after treatment<sup class="cite">[<a href="#r2">2</a>]</sup></li>
+      <li>The deficit persists to 24 months and persist after treatment<sup class="cite">[<a href="#r2">2</a>]</sup></li>
       <li>AYAs score lower than pediatric and older-adult survivors with the same diagnoses (the AYA paradox)</li>
       <li>The below-norm pattern holds across diagnoses, which is the empirical case for an AYA-specific model</li>
     </ul></figcaption></figure>
@@ -327,7 +330,7 @@
       <li>High-survival, lower-intensity cancers (thyroid, testicular, melanoma) reach the highest HRQoL</li>
       <li>Low-survival or intensive-treatment cancers (leukemia, colorectal, sarcoma) reach the lowest</li>
       <li>The ordering emerges directly from the cited inputs, survival and treatment</li>
-      <li>Inputs are flagged estimates and survival stands in for durable remission, so the figure supports exploration rather than forecasting</li>
+      <li>Inputs are flagged estimates and survival stands in for durable remission, so the figure supports exploration and does not forecast</li>
     </ul></figcaption></figure>
 </div></section>
 
@@ -457,7 +460,7 @@
      diminishing returns implied by the dose-response between network size and
      outcomes<sup class="cite">[<a href="#r6">6</a>]</sup> The second, smaller part is
      <b>complex-contagion reinforcement</b>: wellbeing lifts only when several neighbors are
-     thriving, so the effect travels along clustered, wide-bridge ties rather than single shortcuts, the form social
+     thriving, so the effect travels along clustered, wide-bridge ties and not single shortcuts, the form social
      reinforcement takes for behavioral and psychosocial
      spread<sup class="cite">[<a href="#r58">58</a>, <a href="#r63">63</a>]</sup> Referral diffusion runs the
      opposite direction through brokerage: the N&rarr;S interface routes help-seeking along non-redundant broker ties,
@@ -468,7 +471,13 @@
      small: a typical support network holds roughly 2 to 10 members (mean about 6), about 40% family and 60%
      non-family, alongside 3 to 5 clinicians<sup class="cite">[<a href="#r70">70</a>, <a href="#r6">6</a>, <a href="#r20">20</a>]</sup>
      Each run draws a network size from this distribution (mean 6, SD 2.2, range 2 to 10), so the simulated
-     cohort spans sparsely to well connected patients rather than sharing one fixed degree. The current model
+     cohort spans sparsely to well connected patients instead of sharing one fixed degree. The draw is
+     clamped to the observed range and rounded to the nearest even value, since a Watts-Strogatz ring lattice
+     requires an even mean degree, so a realized network size is one of 2, 4, 6, 8, or 10 and the realized
+     between-run spread is about 1.6 instead of the published 2.2. A construct difference also applies: the
+     source distribution describes an ego network of family members, partners, and other care partners,
+     whereas the implemented graph connects the 100 patient agents to one another, so the draw transfers the
+     size and spread of a mixed support network onto a peer network standing in for it. The current model
      collapses family, peer, clinician, navigator, and digital ties into one homogeneous patient-peer tie
      type. Peer structure is the AYA-distinct, intervention-relevant channel, through peer-mentoring
      programs,<sup class="cite">[<a href="#r21">21</a>]</sup> so it is modeled first; a typed support network
@@ -512,7 +521,7 @@
     provider-type legend (center) and the population HRQoL distribution that emerges when emotional support is
     the type-weighted sum over the ties of a patient (right).
     <ul class="find">
-      <li>Tie strength now depends on relationship type rather than a single random weight: family (0.90) and partner (0.95) ties carry the most emotional support, clinician ties (0.45) the least</li>
+      <li>Tie strength now depends on relationship type instead of a single random weight: family (0.90) and partner (0.95) ties carry the most emotional support, clinician ties (0.45) the least</li>
       <li>Well-supported patients (more family, partner, and peer ties) reach HRQoL near 0.85; under-supported patients (few emotional ties, mostly clinicians) fall to about 0.48</li>
       <li>Across a simulated population, support composition alone produces a wide HRQoL distribution with about 10% below the Poor threshold, concentrated among under-supported patients</li>
       <li>Typed ties point to a concrete next step for intervention design: target the specific support type a patient lacks, instead of adding undifferentiated connections</li>
@@ -607,7 +616,7 @@
     parameter values, the number of anchor sources per category, and a triangulation example
     for financial toxicity.
     <ul class="find">
-      <li>About 28% of values are Cited, 28% Derived, and 44% disclosed assumptions, each justified in writing</li>
+      <li>Of the 54 traced values, 8 are Cited, 17 Derived, and 29 disclosed assumptions (15%, 31%, 54%), each justified in writing</li>
       <li>Triangulation example: a prevalence range, an effect size, and a care standard from three separate sources are reconciled into three model terms</li>
       <li>Six candidate sources were retrieved and checked from full text (author, year, and value confirmed) in the 2026-06 cycle</li>
     </ul></figcaption></figure>
@@ -661,7 +670,7 @@
      withdrawal reports,<sup class="cite">[<a href="#r31">31</a>]</sup> whereas the strongest longitudinal
      evidence finds networks net-expand after diagnosis,<sup class="cite">[<a href="#r68">68</a>]</sup> a
      pattern the model in fact reproduces. The equal-weight composite is a known simplification relative to
-     the regression-weighted SF-12 summary scores.</p>
+     the regression-weighted SF-36 and SF-12 component-summary scores.</p>
 </div></section>
 
 <section id="equations"><div class="wrap">
@@ -692,6 +701,14 @@
      event-anchored single-patient pure-SD model such as Q-PRIMA
      (Hasgul 2024)<sup class="cite">[<a href="#r16">16</a>]</sup> Full discussion and the
      complete equation listing are in <code>docs/MODEL_TIMELINE_AND_EQUATIONS.md</code>.</p>
+  <p><b>Attribution.</b> The within-patient wellbeing kernel is <b>adapted from Q-PRIMA</b>
+     (Hasgul 2024, 2025)<sup class="cite">[<a href="#r16">16</a>]</sup> The composite HRQoL as the mean of
+     physical and psychological wellbeing, the target-seeking form of each wellbeing stock, the reduction of
+     wellbeing by tumor burden and by treatment side effects, and the response-shift adaptation term all
+     follow the Q-PRIMA formulation, which was written for a single representative patient. The original
+     contribution of this work is the coupling of that kernel to an evolving support network and a
+     finite-capacity services layer through six switchable interfaces, not the patient-level wellbeing
+     equations.</p>
   <div class="tablewrap">
   <table>
     <tr><th>Dimension</th><th>This model</th><th>Q-PRIMA (Hasgul 2024)</th></tr>
@@ -827,7 +844,7 @@
       <tr><td><code>tx_resp</code> = 0.06</td><td>Pattern-oriented</td><td>Set with responder_fraction 0.86 so ~86% reach remission</td></tr>
       <tr><td><code>Q = (P+&Psi;)/2</code></td><td>Model precedent</td><td>Identical HRQoL definition published in Q-PRIMA; equal weighting flagged</td></tr>
       <tr><td>target-seeking forms, 21-d lag</td><td>Model precedent / Lit. mechanism</td><td>Homeostatic restoring (gap / adjustment time) as in Q-PRIMA</td></tr>
-      <tr><td><code>target_P</code>, <code>target_&Psi;</code> coeffs</td><td>Pattern-oriented / Lit. mechanism</td><td>Calibrated to SF-12 PCS/MCS anchors; emotional deficit (Smith 2013)</td></tr>
+      <tr><td><code>target_P</code>, <code>target_&Psi;</code> coeffs</td><td>Pattern-oriented / Lit. mechanism</td><td>Calibrated to SF-36 PCS/MCS anchors (Husson 2017); emotional deficit (Smith 2013)</td></tr>
       <tr><td><code>fin_accrual</code> = 0.02</td><td>Lit. mechanism / Pattern-oriented</td><td>Financial toxicity accrues over treatment (Thom 2019)</td></tr>
       <tr><td><code>beta_social</code> = 0.04</td><td>Lit. mechanism / Swept</td><td>Support dose-response (Pinquart 2010); calibrated to ablation; swept</td></tr>
       <tr><td><code>W</code> tie weights</td><td>Flagged limitation</td><td>Random placeholder; should be type-based (Wellman &amp; Wortley 1990)</td></tr>
@@ -842,7 +859,7 @@
      (baseline distribution, nadir timing, recovery plateau, persistent tail), the standard
      defense in pattern-oriented modeling<sup class="cite">[<a href="#r7">7</a>]</sup>
      <b>Swept</b> parameters carry a further protection: the conclusions hold across a range
-     of values rather than resting on one tuned number. Full write-up:
+     of values and does not rest on one tuned number. Full write-up:
      <code>docs/ASSUMPTION_JUSTIFICATIONS.md</code>.</p>
 </div></section>
 
@@ -913,8 +930,8 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
     <ul class="find">
       <li>Every cross-layer arrow maps to a named switch (SW_AS, SW_SA, SW_AN, SW_NA, SW_SN, SW_NS), which is what makes the ablation experiment a one-to-one test of each coupling</li>
       <li>Support reaches the patient through a single message (SW_NA), matching the no-leak design that lets the verification check separate the channels<sup class="cite">[<a href="#r9">9</a>]</sup></li>
-      <li>The referral queue integrates as a self-message on the system-dynamics lifeline (served = min of waiting and capacity): the stock lives inside the system-dynamics layer itself, rather than relabeling an agent count</li>
-      <li>Measurement is the last message: the latent state is projected onto QLQ-C30, SF-12, and PROMIS scales rather than read off directly<sup class="cite">[<a href="#r15">15</a>]</sup></li>
+      <li>The referral queue integrates as a self-message on the system-dynamics lifeline (served = min of waiting and capacity): the stock lives inside the system-dynamics layer itself, and does not relabel an agent count</li>
+      <li>Measurement is the last message: the latent state is projected onto QLQ-C30, SF-36, and PROMIS scales and is not read off directly<sup class="cite">[<a href="#r15">15</a>]</sup></li>
       <li>Editable source: <a href="assets/aya/diagrams/model_sequence.drawio">model_sequence.drawio</a> / <a href="assets/aya/diagrams/model_sequence.xml">.xml</a></li>
     </ul></figcaption></figure>
 
@@ -923,7 +940,7 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
     three layer sub-components and is configured by <code>coupling_switches</code>, driven by the experiment
     and verification harness, observed through the measurement layer, and read by the visualization code.
     <ul class="find">
-      <li>The tri-layer engine is one component with three internal parts, so the paradigms are coupled in a single integrator rather than chained as separate models</li>
+      <li>The tri-layer engine is one component with three internal parts, so the paradigms are coupled in a single integrator and are not chained as separate models</li>
       <li><code>coupling_switches</code> configures the engine and the experiment harness drives it, which keeps experiment definitions out of the model code</li>
       <li>The measurement layer reads instrument specifications and validates against held-out empirical targets, separating observation from dynamics</li>
       <li>The visualization component (<code>figure_code</code>) depends only on engine outputs, which is why every site figure regenerates from one master script without touching the model</li>
@@ -937,24 +954,25 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
     (Cpsy, about 8 per month, a flagged assumption). Service availability (served over demand) and a
     population macro-stressor feed back to patient psychological wellbeing through the S&rarr;A interface.
     <ul class="find">
-      <li>Wq is a true integrated stock: it accumulates unmet demand and drains only as fast as capacity allows, which is what makes this a system-dynamics layer rather than a per-step counter</li>
-      <li>A balancing loop (B) governs the backlog (serving reduces the queue); a reinforcing loop (R) is the overload feedback (a full queue lowers availability, which raises patient stress and distress, which raises demand)</li>
+      <li>Wq is a true integrated stock: it accumulates unmet demand and drains only as fast as capacity allows, which is what makes this a system-dynamics layer and not a per-step counter</li>
+      <li>The diagram follows stock-and-flow convention: the one rectangle is the one integrated state, auxiliaries are plain text because each holds no state, clouds mark the system boundary, heavy pipes with an hourglass valve are conserved flows of persons, and thin arrows are information links carrying a polarity</li>
+      <li>Two loops are drawn as circular arrows inside the cycle each one names. A balancing loop (B) governs the backlog (serving reduces the queue); a reinforcing loop (R) is the overload feedback, running demand &rarr; availability &rarr; stress &rarr; wellbeing &rarr; demand across four negative links</li>
       <li>At baseline the layer is near-dormant: the poor-fraction barely exceeds the 0.1 macro-stressor threshold and capacity is ample, so the R loop stays latent until a stress or low-capacity scenario activates it</li>
       <li>Capacity-bounded service is the one channel by which population-level load feeds back to individual wellbeing, matching the single S&rarr;A arrow in the sequence diagram</li>
-      <li>Editable source: <a href="assets/aya/diagrams/sd_stock_flow.drawio">sd_stock_flow.drawio</a> / <a href="assets/aya/diagrams/sd_stock_flow.xml">.xml</a></li>
+      <li>Reproduced by <code>model/figure_code/make_sd_stock_flow.m</code>; the earlier draw.io source was retired once the script became the only path to the figure</li>
     </ul></figcaption></figure>
 </div></section>
 
 <section id="results"><div class="wrap">
   <h2>Results</h2>
   <p class="muted">The model was run over 20 simulation seeds and a 24-month horizon. Inference operates
-     at the level of the simulation run rather than the individual agent.</p>
+     at the level of the simulation run and not the individual agent.</p>
 
   <div class="card">
     <b>How to read these results:</b>
     <ul style="margin:8px 0 4px">
       <li><b>Baseline</b> is the reference a result is compared against (a reduced configuration in the ablation, or the value at month 0 in a trajectory)</li>
-      <li><b>Emergent</b> is a pattern that arises from the rules of the model itself, rather than a value entered by hand or a target used in fitting</li>
+      <li><b>Emergent</b> is a pattern that arises from the rules of the model itself, and not a value entered by hand or a target used in fitting</li>
       <li><b>Held-out band</b> is a literature target range withheld from calibration, used afterward as an out-of-sample check</li>
       <li><b>Population norm</b> is where a healthy general population scores on the same instrument, drawn as a reference line</li>
     </ul>
@@ -973,7 +991,7 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
         <li>Social support (N&rarr;A) carries the largest effect: removing it lowers 20-seed mean HRQoL by about 0.020, and adding the network is what raises HRQoL above the agent-only baseline</li>
         <li>The population-feedback loop (S&rarr;A) shifts baseline HRQoL by under 0.002, because the poor-fraction barely exceeds the population-stress threshold; ABM-only and ABM+SD nearly coincide until stress or intervention scenarios activate it</li>
         <li>Structural feedback (A&rarr;N tie dissolution) and the network-population loop move the mean by about 0.001, within seed variation at baseline but mechanistically active during the distress peak</li>
-        <li>The ladder makes the contribution of each layer measurable, including where the baseline effect of a layer is small, which is itself a reported model finding rather than a hidden assumption</li>
+        <li>The ladder makes the contribution of each layer measurable, including where the baseline effect of a layer is small, which is itself a reported model finding and not a hidden assumption</li>
       </ul></figcaption></figure>
     <figure><img src="assets/aya/fig2_trajectory_nadir.png" alt="HRQoL trajectory">
       <figcaption><b>Trajectory shape.</b> HRQoL falls to a low point near month 4, then recovers
@@ -991,25 +1009,32 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
       <ul class="find">
         <li>Physical functioning recovers toward the population norm by 24 months</li>
         <li>Emotional functioning stays the deeper, persistent deficit<sup class="cite">[<a href="#r1">1</a>, <a href="#r2">2</a>]</sup></li>
-        <li>The physical-over-emotional ordering emerges independently rather than being fitted, which supports behavioral validity</li>
+        <li>The physical-over-emotional ordering follows from the specification and does not emerge from it:
+            the physical target is built around a near-norm constant of 0.90 against 0.75 for the
+            psychological target, the identity, fertility, and financial penalties enter the psychological
+            target only, and the psychological state relaxes over 21 days against about 8 days for the
+            physical state</li>
         <li>Reporting on a real instrument makes the simulation directly comparable to published cohorts</li>
       </ul></figcaption></figure>
-    <figure><img src="assets/aya/fig4_calibration_validation_v2.png" alt="Calibration and validation">
-      <figcaption><b>One simulation, several questionnaires.</b> The green bands are literature target ranges set aside from calibration; the emergent 24-month scores land inside them for QLQ-C30, SF-12, and
-      PROMIS<sup class="cite">[<a href="#r1">1</a>, <a href="#r3">3</a>, <a href="#r4">4</a>]</sup>
+    <figure><img src="assets/aya/fig4_calibration_validation.png" alt="Calibration and validation">
+      <figcaption><b>One simulation, several questionnaires.</b> The shaded bands are literature target ranges set aside from calibration; three of the four emergent 24-month scores land inside
+      them<sup class="cite">[<a href="#r1">1</a>, <a href="#r3">3</a>, <a href="#r4">4</a>]</sup>
       <ul class="find">
-        <li>All four held-out 24-month instrument targets fall inside literature-derived bands (4/4)</li>
+        <li><b>3 of 4</b> held-out 24-month instrument targets fall inside literature-derived bands. PROMIS
+            physical function (43.0) falls 3.0 points below its band of 46.0 to 48.0 and is drawn in red. Two
+            of the four bands were respecified in 2026 from published 24-month distributions so that they
+            became capable of failing; the four read two independent latent quantities</li>
         <li>One internal (not directly measured) trajectory reconciles the different United States and European questionnaires through the observation layer</li>
         <li>The targets are excluded from calibration, so agreement functions as a validity check rather than a fit</li>
         <li>The one early failure (emotional functioning) localized the missing adaptation mechanism</li>
       </ul></figcaption></figure>
   </div>
   <figure style="margin-top:24px"><img src="assets/aya/fig5_adaptation_sensitivity.png" alt="Adaptation sensitivity">
-    <figcaption><b>Not a narrowly tuned (i.e. knife-edge) fit.</b> The response-shift adaptation mechanism holds emotional
+    <figcaption><b>Not a narrowly tuned (that is, knife-edge) fit.</b> The response-shift adaptation mechanism holds emotional
     functioning in range across a wide parameter span, with the a-priori default near the middle of that
     band<sup class="cite">[<a href="#r10">10</a>, <a href="#r11">11</a>]</sup>
     <ul class="find">
-      <li>A response-shift adaptation mechanism brings emotional functioning from 1/4 to 4/4 targets in range<sup class="cite">[<a href="#r10">10</a>, <a href="#r11">11</a>]</sup></li>
+      <li>A response-shift adaptation mechanism brought emotional functioning from 1/4 to 4/4 targets in range under the bands in use at that time; under the bands respecified in 2026 the same model scores 3/4<sup class="cite">[<a href="#r10">10</a>, <a href="#r11">11</a>]</sup></li>
       <li>The result holds across a wide range of the adaptation strength, so it does not depend on one finely tuned value</li>
       <li>Theory set the parameters; the bands played no part in tuning them, which keeps the result non-circular</li>
       <li>Because the mechanism answered a failure, the bands are now development targets; predictive validation needs new data</li>
@@ -1019,11 +1044,11 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
     <figcaption><b>Where the third layer earns inclusion.</b> The ablation ladder shows the system-dynamics
     population-feedback interface (S&rarr;A) is near-dormant at baseline. This experiment varies the
     population-stress strength and the service capacity and measures the paired S&rarr;A ablation effect, so the
-    contribution of the SD layer is shown to depend on the scenario rather than being fixed.
+    contribution of the SD layer is shown to depend on the scenario instead of being fixed.
     <ul class="find">
       <li>At baseline the S&rarr;A interface accounts for under 0.001 HRQoL: the population-feedback loop sits genuinely dormant</li>
-      <li>As the population-stress strength rises from 0.4 to 4.0, the same interface accounts for up to about 0.32 HRQoL at baseline capacity</li>
-      <li>Constraining service capacity (8 to 4) amplifies the effect at every stress level, reaching about 0.35 HRQoL, because the referral queue backs up and service availability falls</li>
+      <li>As the population-stress strength rises from 0.4 to 4.0, the same interface accounts for up to 0.296 HRQoL at baseline capacity</li>
+      <li>Constraining service capacity (8 to 4) amplifies the effect at every stress level, reaching 0.349 HRQoL, because the referral queue backs up and service availability falls</li>
       <li>The SD layer is therefore a dormant amplifier that switches on under population stress and scarce capacity, the situations where decision support is most needed</li>
       <li>Model output: paired SW_SA ablation (full model minus SW_SA), common random seeds, 20 seeds</li>
     </ul></figcaption></figure>
@@ -1036,16 +1061,43 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
       <li>The spread is widest at the month-4 low point, when the fraction doing poorly peaks near 15%, so the mean understates how many agents are doing badly mid-treatment</li>
       <li>A vulnerable subgroup (~20%) forms a distinct lower mode that persists to 24 months, even as the population mean recovers to about 0.72</li>
       <li>By 24 months the resilient subgroup concentrates near 0.80 while the vulnerable subgroup stays lower and separate, a difference invisible in any mean trajectory</li>
-      <li>Differences in vulnerability and support produce this two-group split independently; no fixed split is imposed after initialization</li>
+      <li>The two modes are set at initialization: 20% of agents are labeled vulnerable at the start. What
+          the model produces is the size of the gap between the two groups and the persistence of that gap to
+          24 months, which runs 1.0 to 4.3 points across the six instruments</li>
     </ul></figcaption></figure>
 
   <h3>Headline results</h3>
   <ul>
-    <li>8 of 8 macro trend bands in range, with bands derived from the AYA HRQoL
-       literature<sup class="cite">[<a href="#r1">1</a>, <a href="#r2">2</a>, <a href="#r6">6</a>]</sup></li>
-    <li>4 of 4 held-out instrument targets in range across QLQ-C30, SF-12, and
-       PROMIS;<sup class="cite">[<a href="#r1">1</a>, <a href="#r3">3</a>, <a href="#r4">4</a>]</sup> the PROMIS band
-       rests on a low-confidence anchor flagged for source verification, so that one target is the weakest of the four</li>
+    <li>7 of 8 macro trend bands in range, with bands derived from the AYA HRQoL
+       literature<sup class="cite">[<a href="#r1">1</a>, <a href="#r2">2</a>, <a href="#r6">6</a>]</sup>
+       The band not met is long-term heterogeneity: between-agent spread in global health at 24 months is
+       about 5.6 points against a target of at least 8, so the model is under-dispersed at two years</li>
+    <li><b>3 of 4</b> held-out instrument targets in range across QLQ-C30, SF-36, and
+       PROMIS<sup class="cite">[<a href="#r1">1</a>, <a href="#r3">3</a>, <a href="#r4">4</a>]</sup>
+       Two of the four bands were respecified in 2026 from published 24-month young-adult distributions, so
+       that they became capable of failing. The PROMIS band is now the 95% confidence interval of the
+       24-month physical-function mean of Siembida 2021 (46.0 to 48.0), and the SF-36 mental-component band
+       is the 95% confidence interval of the 24-month mean of Husson 2017 (43.9 to 47.7). Emotional
+       functioning (59.1), global health (62.0), and the mental component (44.5) all fall inside the respective bands.
+       <b>PROMIS physical function (43.0) falls 3.0 points below the respecified band</b>, the one miss. The
+       shortfall is smaller than the 4.0-point minimally important difference for that domain, so it is
+       statistically outside the interval without being clinically meaningful, but the direction replicates
+       across instruments (see the physical-recovery note below)</li>
+    <li><b>How much of that count is the band and not the model, was measured.</b> Setting every
+       held-out band equal to the anchor interval of the instrument makes each band unfailable, because the
+       observation map confines a recovering trajectory to that interval by construction. Under that
+       geometry the identical simulation scores <b>4 of 4</b>; under bands drawn from published 24-month
+       distributions it scores <b>3 of 4</b>. The trajectory is the same in both runs, so the difference is
+       entirely the strength of the test. Recorded as parametric study PS4 on the model of record,
+       Version&nbsp;4</li>
+    <li><b>Physical recovery at 24 months is slower in the model than in published cohorts.</b> Three
+       independently sourced comparisons agree in direction and rough magnitude: the model recovers about 15%
+       of the available physical range by 24 months, where the respecified PROMIS band requires 51% to 76%
+       (Siembida 2021), where the 24-month SF-36 physical component of Husson 2017 implies about 45%, and
+       where the young-adult QLQ-C30 cohort of Wide 2024 reports physical function of 87.0 at 18 months and
+       90.6 at 36 months. Because the pattern holds across three instruments and three separate cohorts it is
+       unlikely to be an artefact of one anchor, and it is read as a calibration target for the patient layer
+       rather than a measurement problem</li>
     <li>About 78% of treated agents reach durable remission by 24 months (20-seed mean), near the lower
        bound of the band anchored to AYA 5-year relative survival (~86%)<sup class="cite">[<a href="#r5">5</a>]</sup></li>
     <li>The social-support interface dominates the outcome (about 0.020 HRQoL); the population-feedback
@@ -1142,9 +1194,13 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
     <div class="card ok"><b>Verification (established).</b> Every interface passes runnable checks,
       including a no-leak proof that disabling a coupling removes the associated
       influence<sup class="cite">[<a href="#r9">9</a>]</sup> <span class="tag done">DONE</span></div>
-    <div class="card ok"><b>Behavioral validity (partial).</b> The model reproduces several patterns it was
-      not fitted to: baseline deficits, the treatment nadir, durable remission near 78%, and a small
-      intervention effect. The approach is pattern-oriented modeling<sup class="cite">[<a href="#r7">7</a>]</sup>
+    <div class="card ok"><b>Behavioral validity (partial).</b> Given a configuration taken from published
+      sources, the model generates the timing and depth of the treatment nadir, the height of the below-norm
+      plateau, the size and two-year persistence of the vulnerable-subgroup gap, and the peer-count gradient
+      under stress. Quantities set by the configuration rather than produced by it (the baseline deficit, the
+      20% vulnerable fraction, the remission ceiling fixed by the 0.86 responder fraction, and the small
+      intervention effect fixed by the 0.13 input) are not evidence about the world. The approach is
+      pattern-oriented modeling<sup class="cite">[<a href="#r7">7</a>]</sup>
       <span class="tag done">PARTIAL</span></div>
     <div class="card ok"><b>Docking against other models (partial).</b> Reduced to the scope of those models, the model
       reproduces the population-feedback behavior of published system-dynamics HRQoL
@@ -1161,9 +1217,11 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
   <p>An early held-out instrument test failed on emotional functioning, passing 1 of 4 targets. The failure
      was diagnostic: it located a missing response-shift adaptation
      mechanism<sup class="cite">[<a href="#r10">10</a>, <a href="#r11">11</a>]</sup> Adding that one
-     theory-grounded mechanism brought the test to 4 of 4 across a wide parameter range. Because the
-     mechanism was added in response to the failure, those bands now serve as development targets rather
-     than independent validation. Genuine predictive validation requires new external data.</p>
+     theory-grounded mechanism brought the test to 4 of 4 across a wide parameter range, under the bands in
+     use at that time. Two of those bands were respecified in 2026 from published 24-month distributions so
+     that they became capable of failing, and under the current bands the same model scores 3 of 4. Because
+     the mechanism was added in response to the earlier failure, these bands serve as development targets
+     rather than independent validation. Genuine predictive validation requires new external data.</p>
 
   <h3>Objections and responses</h3>
   <div class="card obj"><b>"Predictive validation is impossible here, so the work is storytelling."</b><br>
@@ -1179,7 +1237,7 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
     sensitivity analysis and an exploratory-modeling stance<sup class="cite">[<a href="#r12">12</a>]</sup></div>
   <div class="card obj"><b>"The instruments are not equivalent."</b><br>
     For that reason the model includes an explicit observation layer with measurement error and a
-    calibration/validation split across United States (SF-12, PROMIS) and European (EORTC QLQ-C30)
+    calibration/validation split across United States (SF-36, PROMIS) and European (EORTC QLQ-C30)
     instruments<sup class="cite">[<a href="#r4">4</a>]</sup></div>
   <p class="muted">Full argument, all objections, and references:
      <code>MODEL_CREDIBILITY_AND_VALIDATION.md</code>.</p>
@@ -1209,7 +1267,8 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
 
   <figure><img src="assets/aya/bench_trajectory_comparison.png" alt="HRQoL trajectories: novel hybrid versus pre-existing models against the empirical anchor" loading="lazy">
     <figcaption><b>Trajectories against the empirical AYA envelope.</b> The pre-existing SD-only and
-    static-network models sit at 0.83&ndash;0.90 for the whole horizon, above the empirical AYA range; the
+    static-network models sit at 0.835&ndash;0.892 time-averaged, reaching 0.920 at 24 months, for the whole
+    horizon, above the empirical AYA range; the
     novel hybrid and the corresponding ABM-only ablation show the treatment low point and recover to a below-norm plateau near
     the matched EORTC baseline (0.6375).
     <ul class="find">
@@ -1230,11 +1289,11 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
     <tr><td>SD-only (common init)</td><td>0.889</td><td>39.5%</td></tr>
     <tr><td>ABM + static-network</td><td>0.835</td><td>30.9%</td></tr>
     <tr><td>ABM-only (C1)</td><td>0.668</td><td>4.8%</td></tr>
-    <tr><td>Full hybrid (novel, C4)</td><td>0.683</td><td>7.2%</td></tr>
+    <tr><td>Full hybrid (novel, C4)</td><td>0.682</td><td>7.0%</td></tr>
   </table>
   </div>
 
-  <figure><video autoplay loop muted playsinline preload="metadata" poster="assets/aya/bench_network_final.png"><source src="assets/aya/bench_network_evolution.mp4" type="video/mp4"></video>
+  <figure><video autoplay loop muted playsinline preload="metadata" poster="assets/aya/bench_network_last_frame.png"><source src="assets/aya/bench_network_evolution.mp4" type="video/mp4"></video>
     <figcaption><b>Support network over 24 months (benchmark run).</b> The evolving adjacency captured by
     the benchmark, nodes colored by HRQoL. The full N&times;N adjacency at each month is saved to
     <code>benchmark_comparison/mat/adjacency_over_time.mat</code>.</figcaption></figure>
@@ -1242,7 +1301,7 @@ v9 = (run_mean(cOn,1:15) - run_mean(cOff,1:15)) &gt; 1e-3;   <span class="cm">% 
   <div class="card">
     <b>Read with care.</b> The docking supports the model <i>family</i> over the pre-existing designs. It
     does not establish the full hybrid over the ABM-only ablation on this single mean-fit metric (ABM-only
-    4.8% versus full 7.2%); the added value of the full model stays with the ablation and distributional evidence in
+    4.8% versus full 7.0%); the added value of the full model stays with the ablation and distributional evidence in
     the Results and Validation sections. The empirical anchor is a construct-matched EORTC value that
     remains provenance-flagged, so the percentage column functions as a relative yardstick rather than a
     settled fit. The
